@@ -83,11 +83,6 @@ jobs:
         run: |
             ~/.elan/bin/lake exe checkdecls blueprint/lean_decls
 
-      - name: Remove unnecessary lake files from documentation in `home_page/docs`
-        run: |
-          find home_page/docs -name "*.trace" -delete
-          find home_page/docs -name "*.hash" -delete
-
       - name: Bundle dependencies
         uses: ruby/setup-ruby@v1
         with:
