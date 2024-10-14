@@ -1,0 +1,12 @@
+{"version": 6,
+ "packagesDir": "lake-packages",
+ "packages":
+ [{"git":
+   {"url": "https://github.com/PatrickMassot/checkdecls.git",
+    "subDir?": null,
+    "rev": "11fa569b1b52f987dc5dcea97fd80eaff95c2fce",
+    "opts": {},
+    "name": "checkdecls",
+    "inputRev?": null,
+    "inherited": false}}],
+ "name": "ComplexAnalysisCourse"}
