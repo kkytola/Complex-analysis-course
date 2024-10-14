@@ -1,12 +1,15 @@
-{"version": 6,
- "packagesDir": "lake-packages",
+{"version": "1.1.0",
+ "packagesDir": ".lake/packages",
  "packages":
- [{"git":
-   {"url": "https://github.com/PatrickMassot/checkdecls.git",
-    "subDir?": null,
-    "rev": "11fa569b1b52f987dc5dcea97fd80eaff95c2fce",
-    "opts": {},
-    "name": "checkdecls",
-    "inputRev?": null,
-    "inherited": false}}],
- "name": "ComplexAnalysisCourse"}
+ [{"url": "https://github.com/PatrickMassot/checkdecls.git",
+   "type": "git",
+   "subDir": null,
+   "scope": "",
+   "rev": "11fa569b1b52f987dc5dcea97fd80eaff95c2fce",
+   "name": "checkdecls",
+   "manifestFile": "lake-manifest.json",
+   "inputRev": null,
+   "inherited": false,
+   "configFile": "lakefile.lean"}],
+ "name": "ComplexAnalysisCourse",
+ "lakeDir": ".lake"}
