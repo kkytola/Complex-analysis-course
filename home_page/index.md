@@ -8,7 +8,7 @@ usemathjax: true
 
 # Complex Analysis
 
-Course MS-C1300 Complex Analysis, Fall semester 2024
+## MS-C1300, Fall semester 2024
 
 ### Exercise sets
 
