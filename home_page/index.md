@@ -6,10 +6,9 @@
 usemathjax: true
 ---
 
-Useful links:
+### Links
 
-* [Zulip chat for Lean](https://leanprover.zulipchat.com/) for coordination
-* [Blueprint]({{ site.url }}/blueprint/)
-* [Blueprint as pdf]({{ site.url }}/blueprint.pdf)
+* [Theory blueprint]({{ site.url }}/blueprint/)
+* [Blueprint as pdf]({{ site.url }}/blueprint.pdf) (not a replacement for the lecture notes!)
 * [Dependency graph]({{ site.url }}/blueprint/dep_graph_document.html)
-* [Doc pages for this repository]({{ site.url }}/docs/)
+
