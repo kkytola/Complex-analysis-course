@@ -1,3 +1,10 @@
 /build
 /lakefile.olean
 /lake-packages/*
+/blueprint/lean_decls
+/blueprint/web
+/blueprint/web/*
+/blueprint/print/*
+/blueprint/src/web.paux
+/.lake
+/.lake/*

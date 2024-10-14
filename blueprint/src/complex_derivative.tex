@@ -1,0 +1,392 @@
+\section{Real linear maps versus complex linear maps}
+
+The right abstract way of understanding the differential of a function is as a linear
+approximation to a function locally. The key difference between real analysis and
+complex analysis is whether one uses real linear maps or complex linear maps.
+
+\begin{definition}[Linear map]
+  \label{def:linear}
+  \uses{}
+  \lean{}
+  % \leanok
+  Let $\bK$ be a field (for example $\bK = \bR$ or $\bK = \bC$), and let
+  $V$ and $W$ be vector spaces over $\bK$. A function $L : V \to W$ is
+  said to be \term{$\bK$-linear} if
+  \begin{align*}
+    L(v_1 + v_2) = \; & L(v_1) + L(v_2) & & \text{ for all } v_1, v_2 \in V, \\
+    L(c v) = \; & c \, L(v) & & \text{ for all } v \in V, c \in \bK .
+  \end{align*}
+  Such a function $L$ is also called a \term{$\bK$-linear map} (or a
+  \term{$\bK$-linear transformation}) between the spaces $V$ and $W$.
+\end{definition}
+
+The complex plane $\bC \cong \bR^2$ can be seen either as a 2-dimensional real vector space
+or as a $1$-dimensional complex vector space. In particular, it makes sense to talk about
+both $\bR$-linear maps $\bC \to \bC$ and $\bC$-linear maps $\bC \to \bC$.
+
+More generally, any complex vector space can be seen as a real vector space
+(of twice the same dimension), and any complex linear map becomes a real linear map.
+The converse is not true! Let us elaborate on this in a simple example which
+will soon be seen to pertain to the difference of complex differentiability
+and real differentiability.
+
+\textbf{Remark:} Identifying $\bC = \bR^2$ (and choosing basis vectors $1, \ii \in \bC$
+for $\bC$ seen as a 2-dimensional vector space), we see that an
+$\bR$-linear map $L : \bC \to \bC$ can be encoded in a $2 \times 2$ matrix with real entries,
+\begin{align*}
+  M = \left[ \begin{array}{cc} a & b \\ c & d \end{array} \right] \in \bR^{2 \times 2}
+\end{align*}
+in such a way that
+\begin{align*}
+  L (x + \ii y) = (a x + b y) + \ii (c x + d y) .
+\end{align*}
+
+\textbf{Remark:} A $\bC$-linear map $L : \bC \to \bC$ can be encoded in a single complex number
+$\lambda \in \bC$ (or more pedantically, in a $1 \times 1$ matrix $[\lambda] \in \bC^{1 \times 1}$),
+in such a way that
+\begin{align*}
+  L z = \lambda z .
+\end{align*}
+We can write $\lambda = \alpha + \ii \beta$, with
+$\alpha = \re(\lambda), \beta = \im(\lambda) \in \bR$. We can also write $z = x + \ii y$
+and obtain the expression
+\begin{align*}
+  L (x + \ii y) = (\alpha + \ii \beta) (x + \ii y)
+    = (\alpha x - \beta y) + \ii (\beta x + \alpha y) .
+\end{align*}
+In other words, seen as a real-linear map, the complex multiplication by $\lambda$
+corresponds to the matrix
+\begin{align*}
+  M = \left[ \begin{array}{cc} \alpha & -\beta \\ \beta & \alpha \end{array} \right] .
+\end{align*}
+This clearly shows that not every real-linear map $\bC \to \bC$ is complex linear.
+It also gives an explicit set of equations for the entries of
+the matrix of a real-linear map characterizing complex-linearity, which turn out to be
+very closely related to the Cauchy-Riemann equations.
+
+\begin{lemma}[Complex linear versus real linear maps of $\bC$]
+  \label{lem:complex_linear_vs_real_linear}
+  \uses{def:linear, thm:complex_number_field}
+  %\lean{}
+  % \leanok
+  Let $L : \bC \to \bC$ be a $\bR$-linear map represented in the basis $1,\ii$ by
+  the matrix $M = \left[ \begin{array}{cc} a & b \\ c & d \end{array} \right] \in \bR^{2 \times 2}$.
+  Then the following are equivalent:
+  \begin{itemize}
+    \item $L$ is $\bC$-linear;
+    \item $b = - c$ and $a = d$.
+  \end{itemize}
+\end{lemma}
+\begin{proof}
+  %\uses{}
+  % \leanok
+  Clear from the above discussion.
+\end{proof}
+
+
+
+\section{Complex derivative}
+
+\begin{definition}[Complex derivative \Palka{Sec.~III.1.1}]
+  \label{def:complex_derivative}
+  \uses{thm:complex_number_field, def:limit}
+  %\lean{}
+  % \leanok
+  A function $f \colon A \to \bC$ is said to be
+  \term{complex differentiable} at an interior
+  point $z_0 \in A \subset \bC$ of its domain of definition
+  if the limit
+  \begin{align*}
+    f'(z_0) := \lim_{z \to z_0} \frac{f(z) - f(z_0)}{z - z_0}
+  \end{align*}
+  exists. The value $f'(z_0) \in \bC$ is then called the
+  \term{(complex) derivative} of $f$ at $z_0$.
+\end{definition}
+
+\begin{lemma}[Local linear approximation]
+  \label{lem:local_linear_approximation}
+  \uses{def:complex_derivative}
+  %\lean{}
+  % \leanok
+  If a function $f \colon A \to \bC$ has complex derivative
+  $f'(z_0) = \lambda \in \bC$ at a point $z_0 \in A$, then
+  we can write a linear approximation
+  \begin{align*}
+    f(z) = f(z_0) + (z - z_0) \, \lambda + \epsilon(z) ,
+  \end{align*}
+  where the error term $\epsilon$ is small near $z_0$ in the sense that
+  $\lim_{z \to z_0} \frac{\epsilon(z)}{|z-z_0|} = 0$.
+\end{lemma}
+\begin{proof}
+  %\uses{}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{lemma}[Complex differentiability implies continuity \Palka{Sec.~III.1.1}]
+  \label{lem:differentiable_implies_continuous}
+  \uses{def:continuous, def:complex_derivative}
+  %\lean{}
+  % \leanok
+  If a function $f \colon A \to \bC$ is complex differentiable at a point $z_0 \in A$,
+  then it is continuous at $z_0$.
+\end{lemma}
+\begin{proof}
+  %\uses{}
+  % \leanok
+  \ldots
+\end{proof}
+
+
+\subsection{Differentiation rules}
+
+\begin{lemma}[Linearity of the derivative \Palka{Sec.~III.1.2~(3.4)}]
+  \label{lem:derivative_linearity}
+  \uses{def:complex_derivative, def:linear}
+  %\lean{}
+  % \leanok
+  If two functions $f, g \colon A \to \bC$ are complex differentiable
+  at a point $z_0 \in A$, then the sum function $f + g$
+  is also complex differentiable at $z_0$, and its derivative is
+  \begin{align*}
+    (f + g)'(z_0) = f'(z_0) + g'(z_0) .
+  \end{align*}
+  If a function $f \colon A \to \bC$ is complex differentiable
+  at a point $z_0 \in A$ and $c \in \bC$ is a complex number,
+  then the function $c f$
+  is also complex differentiable at $z_0$, and its derivative is
+  \begin{align*}
+    (c f)'(z_0) = c \, f'(z_0) .
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  %\uses{}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{lemma}[Leibniz rule \Palka{Sec.~III.1.2~(3.4)}]
+  \label{lem:leibniz_rule}
+  \uses{def:complex_derivative}
+  %\lean{}
+  % \leanok
+  If two functions $f, g \colon A \to \bC$ are complex differentiable
+  at a point $z_0 \in A$, then the product function $f g$
+  is also complex differentiable at $z_0$, and its derivative is
+  \begin{align*}
+    (f g)'(z_0) = f'(z_0) \, g(z_0) + f(z_0) \, g'(z_0) .
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  %\uses{}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{lemma}[Derivative of a quotient \Palka{Sec.~III.1.2~(3.4)}]
+  \label{lem:quotient_derivative}
+  \uses{def:complex_derivative}
+  %\lean{}
+  % \leanok
+  If two functions $f, g \colon A \to \bC$ are complex differentiable
+  at a point $z_0 \in A$ and $g(z_0) \ne 0$, then the quotient function $f / g$
+  is also complex differentiable at $z_0$, and its derivative is
+  \begin{align*}
+    \left( \frac{f}{g} \right)'(z_0)
+      = \frac{f'(z_0) \, g(z_0) - f(z_0) \, g'(z_0)}{g(z_0)^2} .
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  %\uses{}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{lemma}[Chain rule \Palka{Thm~III.1.1}]
+  \label{lem:chain_rule}
+  \uses{def:complex_derivative}
+  %\lean{}
+  % \leanok
+  If $f \colon A \to B \subset \bC$ is differentiable at $z_0 \in A$
+  and $g \colon B \to \bC$ is differentiable at $f(z_0) \in B$,
+  then the composition $g \circ f \colon A \to \bC$ is differentiable at $z_0$,
+  with derivative
+  \begin{align*}
+    (g \circ f)'(z_0) = f'(z_0) \; g'\big( f(z_0) \big) .
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  %\uses{}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{lemma}[Derivative of inverse \Palka{Thm~III.4.1}]
+  \label{lem:inverse_derivative}
+  \uses{def:complex_derivative}
+  %\lean{}
+  % \leanok
+  \ldots (with $w_0 = f(z_0)$)
+  \begin{align*}
+    (f^{-1})'(w_0) = \frac{1}{f'(z_0)} .
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  \uses{lem:chain_rule}
+  % \leanok
+  \ldots
+\end{proof}
+
+
+\subsection{Analytic functions}
+
+\begin{definition}[Analytic function \Palka{Sec.~III.1.3}]
+  \label{def:analytic_function}
+  \uses{def:complex_derivative}
+  %\lean{}
+  % \leanok
+  A function $f \colon U \to \bC$ defined on an open set $U \subset \bC$ is
+  said to be \term{analytic} (or \term{holomorphic}) if it is complex
+  differentiable at every point $z_0 \in U$.
+\end{definition}
+
+\begin{lemma}[Polynomials are analytic]
+  \label{lem:polynomial_analytic}
+  \uses{def:polynomial, def:analytic_function}
+  \lean{}
+  % \leanok
+  Every polynomial function $p \colon \bC \to \bC$ is analytic.
+\end{lemma}
+\begin{proof}
+  \uses{lem:derivative_linearity, lem:leibniz_rule}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{lemma}[Rational functions are analytic]
+  \label{lem:rational_function_analytic}
+  \uses{def:rational_function, def:analytic_function}
+  \lean{}
+  % \leanok
+  Every rational function $f \colon U \to \bC$ is analytic
+  on its domain of definition $U \subset \bC$.
+\end{lemma}
+\begin{proof}
+  \uses{lem:polynomial_analytic, lem:quotient_derivative}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{lemma}[Branches of $n$th root functions are analytic]
+  \label{lem:root_function_analytic}
+  \uses{def:analytic_function}
+  % \lean{}
+  % \leanok
+  The principal branch of the $n$th root function
+  $z \mapsto \sqrt[n]{z}$ is analytic on its domain
+  $\bC \setminus (-\infty,0]$.
+
+  (Different branch choices can be made to obtain analyticity on
+  other domains, but no branch of $\sqrt[n]{z}$ can be made analytic
+  on all of $\bC$.)
+\end{lemma}
+\begin{proof}
+  \uses{lem:inverse_derivative}
+  % \leanok
+  \ldots
+\end{proof}
+
+\section{Cauchy-Riemann equations}
+
+\begin{theorem}[Cauchy-Riemann equations \Palka{Thm~III.2.2}]
+  \label{thm:cauchy_riemann}
+  \uses{def:analytic_function}
+  %\lean{}
+  % \leanok
+  Let $f \colon U \to \bC$ be a function defined on an open set $U \subset \bC$,
+  and let $u \colon U \to \bR$ and $v \colon U \to \bR$ be its
+  real and imaginary parts, viewed as real functions of two real variables,
+  \begin{align*}
+    u(x,y) = \re \Big( f (x + \ii y) \Big)
+    \quad \text{and} \quad
+    v(x,y) = \im \Big( f (x + \ii y) \Big)
+  \end{align*}
+  so that $f = u + \ii \, v$.
+  Suppose furthermore that $u$ and $v$ are continuously real-differentiable on $U$.
+
+  Then the following are equivalent:
+  \begin{itemize}
+    \item The partial derivatives of $u$ and $v$ satisfy
+          the \term{Cauchy-Riemann equations}
+          \begin{align*}
+            %\pder{x} u(x,y) = \pder{y} v(x,y)
+            %\pderof{u}{x} (x,y) = \pderof{v}{y} (x,y)
+            \pderof{u}{x} = \pderof{v}{y}
+            \quad \text{and} \quad
+            %\pder{y} u(x,y) = -\pder{x} v(x,y) .
+            %\pderof{u}{y} (x,y) = - \pderof{v}{x} (x,y) .
+            \pderof{u}{y} = - \pderof{v}{x}
+          \end{align*}
+          in $U$.
+    \item The function $f$ is analytic.
+  \end{itemize}
+  %Then we have:
+%
+  %\textbf{(i):} If $f$ is analytic, then $u$ and $v$ are real-differentiable
+  %at every point $(x,y) \in U$ and their partial derivatives satisfy
+  %the \term{Cauchy-Riemann equations}
+  %\begin{align*}
+  %  %\pder{x} u(x,y) = \pder{y} v(x,y)
+  %  %\pderof{u}{x} (x,y) = \pderof{v}{y} (x,y)
+  %  \pderof{u}{x} = \pderof{v}{y}
+  %  \quad \text{and} \quad
+  %  %\pder{y} u(x,y) = -\pder{x} v(x,y) .
+  %  %\pderof{u}{y} (x,y) = - \pderof{v}{x} (x,y) .
+  %  \pderof{u}{y} = - \pderof{v}{x} .
+  %\end{align*}
+%
+  %\textbf{(ii):} If $u$ and $v$ are continuously real-differentiable
+  %in all of $U$ and their partial derivatives satisfy
+  %the Cauchy-Riemann equations above, then $f$ is analytic.
+\end{theorem}
+\begin{proof}
+  \uses{lem:complex_linear_vs_real_linear, lem:local_linear_approximation}
+  % \leanok
+  \ldots
+\end{proof}
+
+
+\subsection{Consequences of Cauchy-Riemann equations}
+
+\begin{lemma}[Analytic functions of vanishing derivative]
+  \label{lem:zero_derivative_implies_constant}
+  \uses{def:analytic_function}
+  \lean{}
+  % \leanok
+  Suppose that $f \colon D \to \bC$ is a analytic function
+  on a domain $D \subset \bC$ (i.e. a connected open set)
+  such that $f'(z) = 0$ for all $z \in D$.
+  Then $f$ is a constant function.
+\end{lemma}
+\begin{proof}
+  \uses{thm:cauchy_riemann}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{theorem}[Criteria for constantness of a analytic function]
+  \label{thm:constantness_criteria}
+  \uses{def:analytic_function}
+  \lean{}
+  % \leanok
+  Suppose that $f \colon D \to \bC$ is a analytic function
+  on a domain $D \subset \bC$ (i.e. a connected open set).
+  If any of the functions $u = \re(f) \colon D \to \bR$,
+  $v = \im(f) \colon D \to \bR$, $|f| \colon D \to \bR$,
+  is constant on $D$, then $f$ is itself a constant function.
+\end{theorem}
+\begin{proof}
+  \uses{thm:cauchy_riemann}
+  % \leanok
+  \ldots
+\end{proof}

@@ -1,0 +1,507 @@
+\section{Uniform convergence}
+
+\begin{definition}[Uniform convergence \Palka{Sec.~VII.1.1}]
+  \label{def:uniform_limit}
+  \uses{def:limit}
+  %\lean{}
+  % \leanok
+  Let $(f_n)_{n \in \bN}$ be a sequence of functions
+  $f_n \colon X \to \bC$, and let $f \colon X \to \bC$
+  also be a such function. We say that the sequence
+  $(f_n)_{n \in \bN}$ \term{converges uniformly} to $f$
+  (on $X$) if for every $\eps > 0$ there exists an $N \in \bN$
+  such that for all $n \ge N$ we have
+  \begin{align*}
+    \big| f_n(x) - f(x) \big| < \eps
+    \qquad \text{ for all } x \in X .
+  \end{align*}
+\end{definition}
+
+\begin{lemma}[Continuity is preserved in uniform limits \Palka{Thm~VII.1.1}]
+  \label{lem:uniform_limit_continuous}
+  \uses{def:uniform_limit, def:continuous}
+  %\lean{}
+  % \leanok
+  Let $X$ be a metric space (e.g., $\bR$, $\bC$, or a subset of these).
+  If a sequence $(f_n)_{n \in \bN}$ of continuous functions
+  $f_n \colon X \to \bC$ converges uniformly to a function
+  $f \colon X \to \bC$, then $f$ is continuous.
+\end{lemma}
+\begin{proof}
+  %\uses{def:uniform_limit}
+  % \leanok
+  %\ldots
+  See \textbf{MS-C1541 Metric Spaces}.
+\end{proof}
+
+\begin{lemma}[Integration commutes with uniform limits \Palka{Thm~VII.1.1}]
+  \label{lem:uniform_limit_integral}
+  \uses{def:uniform_limit, def:continuous, def:riemann_integral, lem:uniform_limit_continuous}
+  %\lean{}
+  % \leanok
+  If a sequence $(f_n)_{n \in \bN}$ of continuous functions
+  $f_n \colon [a,b] \to \bC$ on a closed interval $[a,b] \subset \bR$
+  converges uniformly to a function
+  $f \colon [a,b] \to \bC$, then we have
+  \begin{align*}
+    \lim_{n \to \infty} \int_a^b f_n(x) \, \ud x
+      = \int_a^b f(x) \, \ud x .
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  %\uses{}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{corollary}[Contour integration commutes with uniform limits \Palka{Thm~VII.1.1}]
+  \label{cor:uniform_limit_contour_integral}
+  \uses{def:uniform_limit, def:continuous, def:contour_integral}
+  %\lean{}
+  % \leanok
+  %Let $A \subset \bC$ be a subset of the complex plane.
+  If a sequence $(f_n)_{n \in \bN}$ of continuous functions
+  $f_n \colon A \to \bC$ on a subset $A \subset \bC$  of the complex plane
+  converges uniformly to a function
+  $f \colon A \to \bC$, then for any piecewise smooth path $\gamma$
+  in $A$ we have
+  \begin{align*}
+    \lim_{n \to \infty} \int_\gamma f_n(z) \, \ud z
+      = \int_\gamma f(z) \, \ud z .
+  \end{align*}
+\end{corollary}
+\begin{proof}
+  \uses{lem:uniform_limit_integral}
+  % \leanok
+  This follows straightforwardly from the definition of contour integration
+  and Lemma~\ref{lem:uniform_limit_integral} above.
+\end{proof}
+
+\begin{lemma}[Sequence of analytic functions \Palka{Thm~VII.3.1}]
+  \label{lem:uoc_convergent_analytic}
+  \uses{def:uniform_limit, def:analytic_function}
+  \lean{}
+  Suppose that functions $f_1, f_2, \ldots \colon U \to \bC$
+  are analytic functions on an open set $U \subset \bC$
+  such that on each compact subset $K \subset U$, the sequence
+  $(f_n)_{n \in \bN}$ converges uniformly to a
+  function $f$. Then $f$ is analytic on $U$.
+  Moreover, for any $k \in \bN$, the sequence $(f^{(k)}_n)_{n \in \bN}$
+  of $k$th derivatives converges uniformly on compacts to $f^{(k)}$.
+  % \leanok
+\end{lemma}
+\begin{proof}
+  \uses{cor:uniform_limit_contour_integral, thm:cauchy_formula_derivative}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{lemma}[Cauchy criterion for uniform convergence \Palka{Thm~VII.1.2}]
+  \label{lem:cauchy_uniform_limit_criterion}
+  \uses{def:uniform_limit}
+  %\lean{}
+  % \leanok
+  \ldots
+\end{lemma}
+\begin{proof}
+  \uses{lem:complex_complete}
+  % \leanok
+  \ldots
+\end{proof}
+
+
+
+\section{Complex series}
+
+\begin{definition}[Complex series \Palka{Sec.~VII.2.1}]
+  \label{def:complex_series}
+  \uses{def:limit, thm:complex_number_field}
+  %\lean{}
+  % \leanok
+  \ldots
+\end{definition}
+
+
+
+\section{Series of functions}
+
+\begin{definition}[Series of functions \Palka{Sec.~VII.2.2}]
+  \label{def:function_series}
+  \uses{def:limit_of_sequence, def:uniform_limit, def:complex_series}
+  %\lean{}
+  % \leanok
+  \ldots
+\end{definition}
+
+\begin{lemma}[Weierstrass M-test \Palka{Thm~VII.2.2}]
+  \label{lem:weierstrass_test}
+  \uses{def:function_series}
+  %\lean{}
+  % \leanok
+  Suppose that $M_1,M_2,\ldots \ge 0$ are nonnegative
+  numbers such that the series $\sum_{n=1}^\infty M_n$ converges.
+  Suppose also that for each $n \in \bN$,
+  $f_n \colon X \to \bC$ is a function on $X$
+  such that $|f_n(x)| \le M_n$ for all $x \in X$.
+  Then the series $\sum_{n=1}^\infty f_n$
+  converges absolutely and uniformly on~$X$.
+\end{lemma}
+\begin{proof}
+  \uses{lem:cauchy_uniform_limit_criterion}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{lemma}[Series of analytic functions \Palka{Thm~VII.3.2}]
+  \label{lem:uoc_convergent_analytic_series}
+  \uses{def:uniform_limit, def:function_series, def:analytic_function}
+  \lean{}
+  Suppose that functions $f_1, f_2, \ldots \colon U \to \bC$
+  are analytic functions on an open set $U \subset \bC$
+  such that on each compact subset $K \subset U$, the series
+  $\sum_{n=1}^\infty f_n$ converges uniformly to a
+  function $f$. Then $f$ is analytic on $U$.
+  Moreover, for any $k \in \bN$, the series $\sum_{n=1}^\infty f^{(k)}_n$
+  of $k$th derivatives converges uniformly on compacts to $f^{(k)}$.
+  % \leanok
+\end{lemma}
+\begin{proof}
+  \uses{lem:uoc_convergent_analytic}
+  % \leanok
+  \ldots
+\end{proof}
+
+
+
+\section{Power series}
+
+\begin{definition}[Power series \Palka{Sec.~VII.3.3}]
+  \label{def:power_series}
+  \uses{def:function_series}
+  %\lean{}
+  % \leanok
+  Let $z_0 \in \bC$ be a point in the complex plane
+  and let $a_0,a_1,a_2\ldots \in \bC$ be coefficients.
+  A function series of the form
+  \begin{align*}
+  \sum_{n=0}^\infty a_n \, (z-z_0)^n
+    = a_0 + a_1 \, (z - z_0) + a_2 \, (z - z_0)^2 + \cdots
+  \end{align*}
+  is called a \term{power series} centered at $z_0$.
+\end{definition}
+
+\begin{lemma}[Hadamard's formula for the radius of convergence \Palka{Thm~VII.3.3}]
+  \label{lem:radius_of_convergence}
+  \uses{def:power_series}
+  %\lean{}
+  % \leanok
+  Let $z_0 \in \bC$ be a point in the complex plane
+  and let $a_0,a_1,a_2\ldots \in \bC$ be coefficients.
+  Define
+  \begin{align*}
+    R = \frac{1}{\limsup_{n \to \infty} \sqrt[n]{|a_n|}} .
+  \end{align*}
+  Then the power series
+  \begin{align*}
+    \sum_{n=0}^\infty a_n \, (z-z_0)^n
+      = a_0 + a_1 \, (z - z_0) + a_2 \, (z - z_0)^2 + \cdots
+  \end{align*}
+  diverges for any $z \in \bC$ such that $|z-z_0| > R$
+  and converges for any $z \in \bC$ such that $|z-z_0| < R$.
+  Moreover, the convergence is uniform on compact subsets
+  of $\BallRC{R}{z_0}$ (but not necessarily uniform on $\BallRC{R}{z_0}$).
+
+  (The number $R$ above is called the \term{radius of convergence}
+  of the power series.)
+\end{lemma}
+\begin{proof}
+  \uses{lem:weierstrass_test}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{lemma}[Analyticity of the sum of a power series \Palka{Thm~VII.3.3}]
+  \label{lem:power_series_analytic}
+  \uses{def:power_series, def:analytic_function, lem:radius_of_convergence}
+  %\lean{}
+  % \leanok
+  Let $z_0 \in \bC$ be a point in the complex plane
+  and let $a_0,a_1,a_2\ldots \in \bC$ be coefficients.
+  Suppose that the power series
+  \begin{align*}
+    f(z) = \sum_{n=0}^\infty a_n \, (z-z_0)^n
+  \end{align*}
+  has radius of convergence $R > 0$.
+  Then it defines an analytic function~$f$ on the disk $\DiskRC{R}{z_0}$.
+  The derivative of $f$ is given by the power series
+  \begin{align*}
+    f'(z) = \sum_{n=1}^\infty n \, a_n \, (z-z_0)^{n-1} .
+  \end{align*}
+  Moreover, the coefficients $a_k$ are related to the $k$th derivatives of $f$
+  at $z_0$ through the formula
+  \begin{align*}
+    a_k = \frac{f^{(k)}(z_0)}{k!} .
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  \uses{lem:uoc_convergent_analytic_series}
+  % \leanok
+  \ldots
+\end{proof}
+
+
+
+\section{Taylor series and local representation of analytic functions}
+
+\begin{theorem}[Taylor series of analytic functions \Palka{Thm~VII.3.4}]
+  \label{thm:analytic_function_taylor_series}
+  \uses{def:power_series, def:analytic_function}
+  %\lean{}
+  % \leanok
+  Suppose that $f \colon U \to \bC$ is an analytic function
+  on an open set $U \subset \bC$ which contains
+  a disk $\DiskRC{r}{z_0} \subset U$.
+  Then the function $f$ can be represented in $\DiskRC{r}{z_0}$
+  as a power series
+  \begin{align*}
+    f(z) = \sum_{n=0}^\infty \frac{f^{(n)}(z_0)}{n!} \, (z-z_0)^n .
+  \end{align*}
+  Moreover, this is the unique power series centered at $z_0$
+  that representats $f$ in a neighborhood of $z_0$.
+\end{theorem}
+\begin{proof}
+  \uses{thm:cauchy_formula_derivative, lem:uniform_limit_integral, lem:power_series_analytic}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{lemma}[No vanishing of all derivatives at a point \Palka{Thm~VIII.1.1}]
+  \label{lem:no_vanishing_of_all_order_derivatives}
+  \uses{def:analytic_function, lem:higher_derivatives_analytic}
+  %\lean{}
+  % \leanok
+  Suppose that $f \colon \Domain \to \bC$ is an analytic function
+  on a connected open set $\Domain \subset \bC$.
+  If there exists a point $z_0 \in \Domain$
+  such that $f^{(n)}(z_0) = 0$ for all $n \in \bN$, then $f$ is a constant
+  function.
+\end{lemma}
+\begin{proof}
+  \uses{thm:analytic_function_taylor_series}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{theorem}[Factor theorem for analytic functions \Palka{Thm~VIII.1.2}]
+  \label{thm:factor_theorem_for_analytic_functions}
+  \uses{def:analytic_function}
+  %\lean{}
+  % \leanok
+  Suppose that $f \colon \Domain \to \bC$ is a non-constant analytic function
+  on a connected open set $\Domain \subset \bC$, and $z_0 \in \Domain$
+  is a point where $f(z_0) = 0$.
+  Then $f$ can be uniquely represented as
+  \begin{align*}
+    f(z) = (z - z_0)^m \, g(z) \qquad \text{ for } z \in \Domain ,
+  \end{align*}
+  where $m \in \bN$ and $g \colon \Domain \to \bC$ is an analytic
+  function such that $g(z_0) \ne 0$.
+\end{theorem}
+\begin{proof}
+  \uses{thm:analytic_function_taylor_series, lem:no_vanishing_of_all_order_derivatives}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{corollary}[Local representation of analytic functions \Palka{Cor~VIII.1.3}]
+  \label{cor:analytic_local_representation}
+  \uses{def:analytic_function}
+  %\lean{}
+  % \leanok
+  Suppose that $f \colon \Domain \to \bC$ is a non-constant analytic function
+  on a connected open set $\Domain \subset \bC$.
+  Then for any $z_0 \in \Domain$, we can write $f$ uniquely in the form
+  \begin{align*}
+    f(z) = f(z_0) + (z - z_0)^m \, g(z) \qquad \text{ for } z \in \Domain ,
+  \end{align*}
+  where $m \in \bN$ and $g \colon \Domain \to \bC$ is an analytic
+  function such that $g(z_0) \ne 0$.
+\end{corollary}
+\begin{proof}
+  \uses{thm:factor_theorem_for_analytic_functions}
+  % \leanok
+  Apply Theorem~\ref{thm:factor_theorem_for_analytic_functions} to the
+  function $z \mapsto f(z) - f(z_0)$.
+\end{proof}
+
+\begin{theorem}[L'Hospital's rule for analytic functions \Palka{Thm~VIII.1.4}]
+  \label{thm:l_hospital_rule}
+  \uses{def:analytic_function}
+  %\lean{}
+  % \leanok
+  Let $f$ and $g$ be functions that are analytic in a neighborhood of $z_0$
+  such that $f(z_0) = 0$ and $g(z_0) = 0$. Then we have
+  \begin{align*}
+    \lim_{z \to z_0} \frac{f(z)}{g(z)} = \lim_{z \to z_0} \frac{f'(z)}{g'(z)} ,
+  \end{align*}
+  understood in the sense that either both limits exist and are equal
+  to each other, or else neither limit exists.
+\end{theorem}
+\begin{proof}
+  \uses{cor:analytic_local_representation}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{theorem}[Discrete mapping theorem \Palka{Thm~VIII.1.5}]
+  \label{thm:discrete_mapping_theorem}
+  \uses{def:analytic_function}
+  %\lean{}
+  % \leanok
+  Suppose that $f \colon \Domain \to \bC$ is a non-constant
+  analytic function on a connected open set $\Domain \subset \bC$.
+  Then the set of zeros of $f$ is discrete, i.e., for
+  every $z_0 \in \Domain$ such that $f(z_0)=0$,
+  there exists a $r>0$ such that $f(z) \ne 0$
+  for all $z \in \BallRC{r}{z_0} \setminus \set{z_0}$.
+\end{theorem}
+\begin{proof}
+  \uses{thm:factor_theorem_for_analytic_functions}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{corollary}[Principle of analytic continuation \Palka{Cor~VIII.1.6}]
+  \label{cor:analytic_continuation}
+  \uses{def:analytic_function}
+  %\lean{}
+  % \leanok
+  Let $f, g \colon \Domain \to \bC$ be two analytic functions on a connected
+  open set $\Domain \subset \bC$.
+  If $f(z) = g(z)$ for all $z$ in
+  some subset of $\Domain$ which has an accumulation point in $\Domain$,
+  then we have $f(z) = g(z)$ for all $z \in \Domain$.
+\end{corollary}
+\begin{proof}
+  \uses{thm:discrete_mapping_theorem}
+  % \leanok
+  \ldots
+\end{proof}
+
+
+
+\section{Laurent series}
+
+\begin{definition}[Doubly infinite series \Palka{Sec.~VII.2.1}]
+  \label{def:doubly_infinite_series}
+  \uses{def:complex_series}
+  %\lean{}
+  % \leanok
+  A doubly infinite series of complex numbers is a series of the form
+  \begin{align*}
+    \sum_{n=-\infty}^\infty z_n
+      = \cdots + z_{-2} + z_{-1} + z_0 + z_1 + z_2 + \cdots ,
+  \end{align*}
+  where $\ldots, z_{-2}, z_{-1}, z_0, z_1, z_2, \ldots \in \bC$.
+  We say that such a series \term{converges} to $s \in \bC$ if
+  for all $\eps > 0$ there exists an $N \in \bN$
+  such that for all $m_+ \ge N$ and $m_- \le -N$ we have
+  \begin{align*}
+    \Big| \sum_{n=m_-}^{m_+} z_n - s \Big| < \eps .
+  \end{align*}
+\end{definition}
+
+\begin{lemma}[Convergence of doubly infinite series \Palka{Lem~VII.2.1}]
+  \label{lem:convergence_doubly_infinite}
+  \uses{def:doubly_infinite_series}
+  %\lean{}
+  % \leanok
+  A doubly infinite series
+  \begin{align*}
+    \sum_{n=-\infty}^\infty z_n
+      = \cdots + z_{-2} + z_{-1} + z_0 + z_1 + z_2 + \cdots ,
+  \end{align*}
+  of complex numbers converges if and only if both the series
+  $\sum_{n=0}^\infty z_n$ and $\sum_{n=1}^\infty z_{-n}$ converge.
+\end{lemma}
+\begin{proof}
+  \uses{def:limit}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{definition}[Laurent series \Palka{Sec.~VII.3.4}]
+  \label{def:laurent_series}
+  \uses{def:doubly_infinite_series}
+  %\lean{}
+  % \leanok
+  A \term{Laurent series} centered at $z_0 \in \bC$ is a doubly infinite series
+  of functions of the form
+  \begin{align*}
+    z \mapsto & \; \sum_{n=-\infty}^\infty a_n (z - z_0)^n \\
+         = & \; \cdots + \frac{a_{-2}}{(z-z_0)^2} + \frac{a_{-1}}{z-z_0}
+                + a_0 + a_1 (z-z_0) + a_2 (z-z_0)^2 + \cdots .
+  \end{align*}
+\end{definition}
+
+\begin{lemma}[Annulus of convergence of Laurent power series \Palka{Thm~VII.3.5}]
+  \label{lem:laurent_series_analytic}
+  \uses{def:laurent_series}
+  %\lean{}
+  % \leanok
+  Consider a Laurent series
+  \begin{align*}
+    f(z) = & \; \sum_{n=-\infty}^\infty a_n (z - z_0)^n .
+  \end{align*}
+  Denote
+  \begin{align*}
+    \rho_- = \limsup_{n \to \infty} \sqrt[n]{|a_{-n}|}, \qquad
+    \rho_+ = \Big( \limsup_{n \to \infty} \sqrt[n]{|a_{n}|} \Big)^{-1} .
+  \end{align*}
+  Then the series $\sum_{n=-\infty}^\infty a_n (z - z_0)^n$
+  converges for all $z$ is the annulus
+  \begin{align*}
+    \AnnRRC{\rho_-}{\rho_+}{z_0}
+      := \Big\{ z \in \bC \; \Big| \; \rho_- < |z-z_0| < \rho_+ \Big\} .
+  \end{align*}
+  Moreover, the convergence is uniform on compact subsets
+  of $\AnnRRC{\rho_-}{\rho_+}{z_0}$, and the series defines an analytic
+  function $f(z)$ on the annulus $\AnnRRC{\rho_-}{\rho_+}{z_0}$.
+\end{lemma}
+\begin{proof}
+  \uses{lem:power_series_analytic}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{theorem}[Laurent series for analytic functions \Palka{Thm~VII.3.6}]
+  \label{thm:analytic_function_laurent_series}
+  \uses{def:laurent_series, def:analytic_function}
+  %\lean{}
+  % \leanok
+  Suppose that $f \colon U \to \bC$ is an analytic function
+  on an open set $U \subset \bC$ which contains
+  an annulus
+  \begin{align*}
+    \AnnRRC{r_1}{r_2}{z_0} = \Big\{z \in \bC \; \Big| \; r_1 < |z - z_0| < r_2 \Big\}
+  \end{align*}
+  for some $z_0 \in \bC$ and $0 \le r_1 < r_2$.
+  %$\DiskRC{r}{z_0} \subset U$.
+  Then the function $f$ can be represented in $\AnnRRC{r_1}{r_2}{z_0}$
+  as a series
+  \begin{align*}
+    f(z) = \sum_{n=-\infty}^\infty a_n \, (z-z_0)^n ,
+  \end{align*}
+  where the coefficients $a_n$, for $n \in \bZ$, are given by
+  \begin{align*}
+    a_n = \frac{1}{2\pi \ii}
+      \oint_{\bdry \BallRC{r}{z_0}} \frac{f(z)}{(z - z_0)^{n+1}} \, \ud z
+    \qquad \text{ for any } r \in (r_1, r_2) .
+  \end{align*}
+\end{theorem}
+\begin{proof}
+  \uses{thm:cauchy_formula_derivative, lem:uniform_limit_integral,
+        lem:laurent_series_analytic, thm:analytic_function_taylor_series}
+  % \leanok
+  \ldots
+\end{proof}

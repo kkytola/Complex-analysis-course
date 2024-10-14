@@ -1,0 +1,153 @@
+\section{Isolated singularities of analytic functions}
+
+\begin{definition}[Isolated singularity \Palka{Sec.~VIII.2.1}]
+  \label{def:isolated_singularity}
+  \uses{def:analytic_function}
+  %\lean{}
+  % \leanok
+  Let $f : U \to \bC$ be an analytic function on an open set $U \subset \bC$.
+  We say that $f$ has an \term{isolated singularity} at $z_0 \in \bC$ if
+  $\BallRC{r}{z_0} \setminus \set{z_0} \subset U$ for some $r>0$ but $z_0 \notin U$.
+\end{definition}
+
+\begin{definition}[Classification of isolated singularities \Palka{Sec.~VIII.2.1}]
+  \label{def:singularity_classification}
+  \uses{def:isolated_singularity, thm:analytic_function_laurent_series}
+  %\lean{}
+  % \leanok
+  Let $z_0 \in \bC$ be an isolated singularity of
+  an analytic function $f : U \to \bC$.
+  Let $r > 0$ be such that $\BallRC{r}{z_0} \setminus \set{z_0} \subset U$,
+  so that by Theorem~\ref{thm:analytic_function_laurent_series}
+  $f$ can be represented in $\BallRC{r}{z_0} \setminus \set{z_0}$
+  uniquely as a Laurent series
+  \begin{align*}
+    f(z) = \sum_{n=-\infty}^\infty a_n (z - z_0)^n .
+  \end{align*}
+  Depending on the coefficients $a_n$ of negative indices $n < 0$,
+  we distinguish three types of singularities:
+  \begin{itemize}
+    \item $f$ has a \term{removable singularity} at $z_0$ if $a_n = 0$ for all $n < 0$;
+    \item $f$ has a \term{pole of order $m \in \bN$} at $z_0$
+      if $a_{-m} \ne 0$ and $a_n = 0$ for all $n < -m$;
+    \item $f$ has an \term{essential singularity} at $z_0$
+      $a_n \ne 0$ for infinitely many $n < 0$.
+  \end{itemize}
+\end{definition}
+
+\begin{definition}[Residue at an isolated singularity \Palka{Sec.~VIII.2.1}]
+  \label{def:residue}
+  \uses{def:isolated_singularity, thm:analytic_function_laurent_series}
+  %\lean{}
+  % \leanok
+  Let $z_0 \in \bC$ be an isolated singularity of
+  an analytic function $f : U \to \bC$.
+  Let $r > 0$ be such that $\BallRC{r}{z_0} \setminus \set{z_0} \subset U$,
+  so that by Theorem~\ref{thm:analytic_function_laurent_series}
+  $f$ can be represented in $\BallRC{r}{z_0} \setminus \set{z_0}$
+  uniquely as a Laurent series
+  \begin{align*}
+    f(z) = \sum_{n=-\infty}^\infty a_n (z - z_0)^n .
+  \end{align*}
+  The coefficient $a_{-1}$ is called the \term{residue} of $f$ at $z_0$,
+  and is denoted $\ResAtOf{z_0}{f} = a_{-1} \in \bC$.
+\end{definition}
+
+\begin{theorem}[Riemann extension theorem \Palka{Thm~VIII.2.1}]
+  \label{thm:removable_singularity}
+  \uses{def:singularity_classification}
+  %\lean{}
+  % \leanok
+  Let $z_0 \in \bC$ be an isolated singularity of
+  an analytic function $f : U \to \bC$.
+  Then the singularity is removable if and only if
+  $f$ is bounded in some punctured disk $\BallRC{r}{z_0} \setminus \{z_0\}$
+  with $r>0$.
+\end{theorem}
+\begin{proof}
+  %\uses{}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{theorem}[Characterization of poles \Palka{Thm~VIII.2.4}]
+  \label{thm:pole}
+  \uses{def:singularity_classification}
+  %\lean{}
+  % \leanok
+  Let $z_0 \in \bC$ be an isolated singularity of
+  an analytic function $f : U \to \bC$.
+  Then the singularity is a pole if and only if
+  \begin{align*}
+    \lim_{z \to z_0} | f(z) | = \infty .
+  \end{align*}
+\end{theorem}
+\begin{proof}
+  %\uses{}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{theorem}[Characterization of poles \Palka{Thm~VIII.2.4}]
+  \label{thm:essential_singularity}
+  \uses{def:singularity_classification}
+  %\lean{}
+  % \leanok
+  Let $z_0 \in \bC$ be an isolated singularity of
+  an analytic function $f : U \to \bC$.
+  Then the singularity is an essential singularity if and only if
+  for any $r>0$ such that $\PDisk = \BallRC{r}{z_0} \setminus \{z_0\} \subset U$
+  we have that the image $f[\PDisk] \subset \bC$ is dense.
+\end{theorem}
+\begin{proof}
+  %\uses{}
+  % \leanok
+  \ldots
+\end{proof}
+
+
+
+\section{The residue theorem}
+
+\begin{theorem}[Residue theorem \Palka{Thm~VIII.3.1}]
+  \label{thm:residue_theorem}
+  \uses{def:residue}
+  %\lean{}
+  % \leanok
+  Let $U \subset \bC$ be an open set and $\gamma$ a contractible closed contour in $U$.
+  Let $f : U \setminus S \to \bC$ be an analytic function with isolated
+  singularities at a countable set $S \subset U$ of points.
+  Then
+  \begin{align*}
+    \oint_\gamma f(z) \, dz
+      = 2 \pi \ii \sum_{w \in S} \windN{w}{\gamma} \, \ResAtOf{w}{f} .
+  \end{align*}
+\end{theorem}
+\begin{proof}
+  \uses{thm:cauchy_integral_formula}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{corollary}[Residue theorem for Jordan contours \Palka{Cor~VIII.3.2}]
+  \label{thm:jordan_residue_theorem}
+  \uses{def:residue}
+  %\lean{}
+  % \leanok
+  Let $U \subset \bC$ be an open set and $S \subset U$ a discrete subset of it.
+  Let $\Domain$ be a Jordan domain such that $\closOf{\Domain} \subset U$
+  and $\bdry \Domain \cap S = \emptyset$.
+  Let $\gamma$ be a closed contour traversing the boundary $\bdry \Domain$
+  of the Jordan domain in the positive orientation.
+  Let $f : U \setminus S \to \bC$ be an analytic function with isolated
+  singularities at the points of $S$.
+  Then
+  \begin{align*}
+    \oint_\gamma f(z) \, dz = 2 \pi \ii \sum_{w \in S \cap \Domain} \ResAtOf{w}{f} .
+  \end{align*}
+\end{corollary}
+\begin{proof}
+  \uses{thm:residue_theorem}
+  % \leanok
+  \ldots
+\end{proof}

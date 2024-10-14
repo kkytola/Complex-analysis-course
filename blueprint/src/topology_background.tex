@@ -1,0 +1,183 @@
+\section{Metrics and related concepts}
+
+\begin{definition}[Ball (disk)]
+  \label{def:ball}
+  %\uses{}
+  %\lean{}
+  % \leanok
+  A \term{ball} is \ldots
+\end{definition}
+
+\section{Limits}
+
+\begin{definition}[Limit]
+  \label{def:limit}
+  %\uses{}
+  %\lean{}
+  % \leanok
+  Let $X$ be a metric space.
+  \ldots
+\end{definition}
+
+\begin{definition}[Cauchy sequence]
+  \label{def:cauchy_sequence}
+  %\uses{}
+  %\lean{}
+  % \leanok
+  %Let $X$ be a metric space.
+  \ldots
+\end{definition}
+
+\begin{lemma}[Every real Cauchy sequence converges]
+  \label{lem:real_complete}
+  \uses{def:cauchy_sequence, def:limit}
+  %\lean{}
+  % \leanok
+  If a real number sequence $(x_n)_{n \in \bN}$ is Cauchy,
+  then it converges to a limit $\lim_{n \to \infty} x_n \in \bR$.
+\end{lemma}
+\begin{proof}
+  %\uses{def:cauchy_sequence}
+  % \leanok
+  See \textbf{MS-C1541 Metric Spaces}.
+\end{proof}
+
+\begin{lemma}[Every complex Cauchy sequence converges]
+  \label{lem:complex_complete}
+  \uses{def:cauchy_sequence, def:limit, def:complex_numbers}
+  %\lean{}
+  % \leanok
+  %Let $X$ be a metric space.
+  \ldots
+\end{lemma}
+\begin{proof}
+  \uses{lem:real_complete}
+  % \leanok
+  See \textbf{MS-C1541 Metric Spaces}.
+
+  (Idea: This follows from Lemma~\ref{lem:real_complete} by
+  considering real and imaginary parts separately and picking
+  a subsequence of a subsequence.)
+\end{proof}
+
+\section{Continuity}
+
+\begin{definition}[Continuity]
+  \label{def:continuous}
+  %\uses{}
+  %\lean{}
+  % \leanok
+  Let $X$ and $Y$ be metric spaces.
+  A functions $f \colon X \to Y$ is \term{continuous} if\ldots
+\end{definition}
+
+\begin{definition}[Uniform continuity]
+  \label{def:uniformly_continuous}
+  %\uses{}
+  %\lean{}
+  % \leanok
+  Let $X$ and $Y$ be metric spaces.
+  A functions $f \colon X \to Y$ is \term{uniformly continuous} if\ldots
+\end{definition}
+
+\begin{lemma}[Uniform continuity implies continuity]
+  \label{lem:uniformly_continuous_implies_continuous}
+  \uses{def:continuous, def:uniformly_continuous}
+  \lean{}
+  % \leanok
+  If a function $f \colon X \to Y$ is uniformly continuous, then it is continuous.
+\end{lemma}
+\begin{proof}
+  See \textbf{MS-C1541 Metric Spaces}.
+
+  (The very easy proof is also a good exercise.)
+\end{proof}
+
+\section{Connectedness and path-connectedness}
+
+\begin{definition}[Connectedness]
+  \label{def:connected}
+  %\uses{}
+  %\lean{}
+  % \leanok
+  \ldots
+\end{definition}
+
+\begin{definition}[Path-connectedness]
+  \label{def:path_connected}
+  \uses{def:path}
+  %\lean{}
+  % \leanok
+  \ldots
+\end{definition}
+
+\begin{lemma}[Path-connectedness implies connectedness]
+  \label{lem:path_connected_implies_connected}
+  \uses{def:connected, def:path_connected}
+  \lean{}
+  % \leanok
+  If $X$ is path-connected, then it is connected.
+\end{lemma}
+\begin{proof}
+  See \textbf{MS-C1541 Metric Spaces}.
+\end{proof}
+
+\begin{lemma}[Open connected sets are path-connected]
+  \label{lem:connected_open_implies_path_connected}
+  \uses{def:connected, def:path_connected}
+  \lean{}
+  % \leanok
+  If a subset $A \subset \bC$ of the complex plane is open
+  and connected, then it is path-connected.
+\end{lemma}
+\begin{proof}
+  See \textbf{MS-C1541 Metric Spaces}.
+\end{proof}
+
+\section{Compactness}
+
+\begin{definition}[Compactness]
+  \label{def:compact}
+  \uses{def:limit}
+  %\lean{}
+  % \leanok
+  \ldots
+\end{definition}
+
+\begin{theorem}[Bolzano-Weierstrass theorem]
+  \label{thm:bolzano_weierstrass}
+  \uses{def:compact}
+  %\lean{}
+  % \leanok
+  %Let $X$ be a metric space.
+  A subset $B \subset \bR$ of the real line is compact
+  if an only if it is closed and bounded.
+
+  A subset $A \subset \bC$ of the complex plane is compact
+  if an only if it is closed and bounded.
+\end{theorem}
+\begin{proof}
+  % \leanok
+  See \textbf{MS-C1541 Metric Spaces}.
+\end{proof}
+
+\begin{lemma}[On a compact domain continuity implies uniform continuity]
+  \label{lem:on_compact_continuous_implies_uniformly_continuous}
+  \uses{def:continuous, def:uniformly_continuous, def:compact}
+  \lean{}
+  % \leanok
+  If $X$ is compact and a function $f \colon X \to Y$ is continuous, then it is uniformly continuous.
+\end{lemma}
+\begin{proof}
+  See \textbf{MS-C1541 Metric Spaces}.
+\end{proof}
+
+\begin{theorem}[Cantor's intersection theorem]
+  \label{thm:intersect_nested_compacts}
+  \uses{def:compact}
+  \lean{}
+  % \leanok
+  \ldots
+\end{theorem}
+
+\section{Convexity}

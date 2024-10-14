@@ -15,7 +15,6 @@
 \newcommand{\discussion}[1]{}
 \newcommand{\leanok}{}
 \newcommand{\mathlibok}{}
-\newcommand{\notready}{}
 % Make sure that arguments of \uses and \proves are real labels, by using invisible refs:
 % latex prints a warning if the label is not defined, but nothing is shown in the pdf file.
 % It uses LaTeX3 programming, this is why we use the expl3 package.
@@ -27,3 +26,26 @@
  {\clist_map_inline:nn{#1}{\vphantom{\ref{##1}}}%
   \ignorespaces}
 \ExplSyntaxOff
+
+
+% \declaretheorem[numberwithin=chapter]{theorem}
+% \declaretheorem[sibling=theorem]{proposition}
+% \declaretheorem[sibling=theorem]{corollary}
+% \declaretheorem[sibling=theorem]{remark}
+% \declaretheorem[sibling=theorem]{lemma}
+% \declaretheorem[sibling=theorem]{definition}
+% \declaretheorem[sibling=theorem]{example}
+\newtheorem{theorem}{Theorem}[chapter]
+%\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+%\newtheorem{sublemma}[theorem]{Sub-lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\bbk}{\mathbbm{k}}

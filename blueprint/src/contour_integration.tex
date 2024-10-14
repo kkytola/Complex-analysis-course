@@ -1,0 +1,258 @@
+\section{Paths in the complex plane}
+
+\begin{definition}[Path \Palka{Sec.~IV.1.1}]
+  \label{def:path}
+  \uses{def:continuous}
+  %\lean{}
+  % \leanok
+  A \term{path} in the complex plane is a continuous function $\gamma \colon [a,b] \to \bC$.
+\end{definition}
+
+\begin{definition}[Smooth and piecewise smooth paths \Palka{Sec.~IV.1.2}]
+  \label{def:piecewise_smooth_path}
+  \uses{def:path, def:continuous}
+  %\lean{}
+  % \leanok
+  \ldots
+\end{definition}
+
+\begin{definition}[Reverse path \Palka{Sec.~IV.1.4}]
+  \label{def:reverse_path}
+  \uses{def:path}
+  %\lean{}
+  % \leanok
+  \ldots
+\end{definition}
+
+\begin{definition}[Concatenation of paths \Palka{Sec.~IV.1.4}]
+  \label{def:path_concatenation}
+  \uses{def:path}
+  %\lean{}
+  % \leanok
+  \ldots
+\end{definition}
+
+\begin{definition}[Reparametrization of paths \Palka{Sec.~IV.1.5}]
+  \label{def:path_reparametrization}
+  \uses{def:path}
+  %\lean{}
+  % \leanok
+  \ldots
+\end{definition}
+
+\begin{definition}[Smooth and piecewise smooth reparametrizations \Palka{Sec.~IV.1.5}]
+  \label{def:piecewise_smooth_reparametrization}
+  \uses{def:path_reparametrization}
+  %\lean{}
+  % \leanok
+  \ldots
+\end{definition}
+
+
+
+\section{Integrals along paths}
+
+\begin{definition}[Contour integral along a smooth path \Palka{Sec.~IV.2.1}]
+  \label{def:smooth_contour_integral}
+  \uses{def:riemann_integral, lem:continuous_implies_riemann_integrable, def:piecewise_smooth_path}
+  %\lean{}
+  % \leanok
+  Let $f : A \to \bC$ be a continuous function defined on a subset $A \subset \bC$.
+  %and write $u = \re f, v = \im f \colon [a,b] \to \bR$
+  %for its real and imaginary parts so that $f(z) = u(z) + \ii v(z)$ for $z \in A$.
+  Let $\gamma \colon [a,b] \to A$ be a smooth path in~$A$.
+  We define the \term{integral of $f$ along $\gamma$} as
+  \begin{align*}
+    \int_\gamma f(z) \, dz
+    \; = \; \int_a^b f \big( \gamma(t) \big) \, \gamma'(t) \; \ud t .
+    %= \; \int_a^b u \big( \gamma(t) \big) \gamma'(t) \, \ud t
+    %     + \ii \int_a^b v \big( \gamma(t) \big) \gamma'(t) \, \ud t .
+  \end{align*}
+\end{definition}
+
+Sometimes it is appropriate to integrate functions with respect to the
+arc-length in the following sense.
+\begin{definition}[Arc-length integral along a smooth path \Palka{Sec.~IV.2.1}]
+  \label{def:smooth_arc_length_integral}
+  \uses{def:riemann_integral, lem:continuous_implies_riemann_integrable, def:piecewise_smooth_path}
+  %\lean{}
+  % \leanok
+  Let $f : A \to \bC$ be a continuous function defined on a subset $A \subset \bC$.
+  %and write $u = \re f, v = \im f \colon [a,b] \to \bR$
+  %for its real and imaginary parts so that $f(z) = u(z) + \ii v(z)$ for $z \in A$.
+  Let $\gamma \colon [a,b] \to A$ be a smooth path in~$A$.
+  We define the \term{integral of $f$ with respect to the arc length of $\gamma$} as
+  \begin{align*}
+    \int_\gamma f(z) \, |dz|
+    \; = \; \int_a^b f \big( \gamma(t) \big) \, |\gamma'(t)| \; \ud t .
+    %= \; \int_a^b u \big( \gamma(t) \big) \gamma'(t) \, \ud t
+    %     + \ii \int_a^b v \big( \gamma(t) \big) \gamma'(t) \, \ud t .
+  \end{align*}
+\end{definition}
+
+In order to extend the definition of contour integrals to piecewise smooth paths,
+we note that the definition behaves additively under path concatenation.
+
+\begin{lemma}[Contour integrals and smooth path concatenation \Palka{Lem~IV.2.1(iv)}]
+  \label{lem:integral_concatenation}
+  \uses{def:smooth_contour_integral, def:smooth_arc_length_integral, def:path_concatenation}
+  %\lean{}
+  % \leanok
+  If a smooth path $\gamma$ in $A$ is a concatenation of smooth
+  paths $\eta_1, \ldots, \eta_n$, and
+  $f : A \to \bC$ is a continuous function defined on $A \subset \bC$,
+  then we have
+  \begin{align*}
+    \int_\gamma f(z) \, \ud z \; = \; \sum_{j=1}^n \int_{\eta_j} f(z) \, \ud z
+  \end{align*}
+  and
+  \begin{align*}
+    \int_\gamma f(z) \, |\ud z| \; = \; \sum_{j=1}^n \int_{\eta_j} f(z) \, |\ud z| .
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  %\uses{}
+  % \leanok
+  %Straightforward from a corresponding property of Riemann integrals.
+  \ldots
+\end{proof}
+
+By virtue of the above, the following gives a well-defined meaning
+to integrals along piecewise smooth paths.
+\begin{definition}[Contour integral along a path \Palka{Sec.~IV.2.1}]
+  \label{def:contour_integral}
+  \uses{def:smooth_contour_integral, def:piecewise_smooth_path, lem:integral_concatenation}
+  %\lean{}
+  % \leanok
+  Let $f : A \to \bC$ be a continuous function defined on a subset $A \subset \bC$.
+  Let $\gamma \colon [a,b] \to A$ be a piecewise smooth path in~$A$,
+  which is a concatenation of smooth paths $\eta_1, \ldots, \eta_n$.
+  We define the \term{integral of $f$ along $\gamma$} as
+  \begin{align*}
+    \int_\gamma f(z) \, dz \; = \; \sum_{j=1}^n \int_{\eta_j} f(z) \, dz .
+  \end{align*}
+\end{definition}
+\begin{definition}[Arc-length integral along a path]
+  \label{def:arc_length_integral}
+  \uses{def:smooth_arc_length_integral, def:piecewise_smooth_path, lem:integral_concatenation}
+  %\lean{}
+  % \leanok
+  Let $f : A \to \bC$ be a continuous function defined on a subset $A \subset \bC$.
+  Let $\gamma \colon [a,b] \to A$ be a piecewise smooth path in~$A$,
+  which is a concatenation of smooth paths $\eta_1, \ldots, \eta_n$.
+  We define the \term{integral of $f$ along $\gamma$} as
+  \begin{align*}
+    \int_\gamma f(z) \, dz \; = \; \sum_{j=1}^n \int_{\eta_j} f(z) \, dz .
+  \end{align*}
+\end{definition}
+
+\begin{lemma}[Reparametrization invariance of integrals \Palka{Lem~IV.2.1(v)}]
+  \label{lem:reparametrization_invariance_of_integral}
+  \uses{def:contour_integral, def:arc_length_integral, def:piecewise_smooth_reparametrization}
+  %\lean{}
+  % \leanok
+  Let $\gamma$ be a piecewise smooth path in~$A$,
+  and let $\widetilde{\gamma}$ be obtained from $\gamma$ by an
+  orientation-preserving reparametrization. Then for any continuous
+  function $f : A \to \bC$ we have
+  \begin{align*}
+    \int_{\widetilde{\gamma}} f(z) \, dz \; = \; \int_{\gamma} f(z) \, dz
+  \end{align*}
+  and
+  \begin{align*}
+    \int_{\widetilde{\gamma}} f(z) \, |dz| \; = \; \int_{\gamma} f(z) \, |dz| .
+  \end{align*}
+\end{lemma}
+
+\begin{lemma}[Contour integrals and path reversal \Palka{Lem~IV.2.1(iii)}]
+  \label{lem:integral_reversal}
+  \uses{def:contour_integral, def:arc_length_integral, def:reverse_path}
+  %\lean{}
+  % \leanok
+  If $f : A \to \bC$ is a continuous function defined on $A \subset \bC$,
+  and $\gamma$ is a piecewise path in $A$, then for the contour integral
+  and the arc length integral behave as follows under path reversal:
+  then we have
+  \begin{align*}
+    \int_{\opp{\gamma}} f(z) \, \ud z \; = \; - \int_{\gamma} f(z) \, \ud z
+  \end{align*}
+  and
+  \begin{align*}
+    \int_{\opp{\gamma}} f(z) \, |\ud z| \; = \; \int_{\gamma} f(z) \, |\ud z|
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  %\uses{}
+  % \leanok
+  %Straightforward from a corresponding property of Riemann integrals.
+  \ldots
+\end{proof}
+
+\begin{lemma}[Linearity of integrals \Palka{Lem~IV.2.1(i-ii)}]
+  \label{lem:integral_linearity}
+  \uses{def:contour_integral, def:arc_length_integral, def:linear}
+  %\lean{}
+  % \leanok
+  \begin{align*}
+    \int_\gamma \Big( f_1(z) + f_2(z) \Big) \, \ud z
+    \; = \; \int_\gamma f_1(z) \, \ud z + \int_\gamma f_2(z) \, \ud z
+  \end{align*}
+  \begin{align*}
+    \int_\gamma c \, f(z) \, \ud z \; = \; c \int_\gamma f(z) \, \ud z .
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  %\uses{}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{lemma}[Triangle inequality for contour integrals \Palka{Lem~IV.2.1(vi)}]
+  \label{lem:integral_triangle_inequality}
+  \uses{def:contour_integral, def:arc_length_integral}
+  %\lean{}
+  % \leanok
+  \begin{align*}
+    \left| \int_\gamma f(z) \, \ud z \right| \; \le \; \int_\gamma |f(z)| \, |dz| .
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  %\uses{}
+  % \leanok
+  \ldots
+\end{proof}
+
+
+
+\section{Primitives}
+
+\begin{definition}[Primitive of a function \Palka{Sec.~IV.2.3}]
+  \label{def:primitive}
+  \uses{def:analytic_function}
+  %\lean{}
+  % \leanok
+  Let $f : U \to \bC$ be a function defined on an open subset $U \subset \bC$.
+  A \term{primitive} of $f$ is a function $F : U \to \bC$ such that
+  $F$ is holomorphic (i.e., complex differentiable) on $U$,
+  \begin{align*}
+    F'(z) = f(z) \qquad \text{ for all } z \in U .
+  \end{align*}
+\end{definition}
+
+\begin{theorem}[Fundamental theorem of calculus for contour integrals \Palka{Thm~IV.2.2}]
+  \label{thm:ftc_for_contour_integrals}
+  \uses{def:primitive, def:contour_integral}
+  %\lean{}
+  % \leanok
+  Suppose that $f \colon U \to \bC$ is a continuous function
+  on an open set $U \subset \bC$, and that $f$ has a
+  primitive $F \colon U \to \bC$.
+  Then for any piecewise smooth path $\gamma \colon [a,b] \to U$ we have
+  \begin{align*}
+    \int_\gamma f(z) \, dz \; = \; F \big( \gamma(b) \big) - F \big( \gamma(a) \big) .
+  \end{align*}
+  In particular for any closed path $\gamma$ in $U$, we have
+  \begin{align*}
+    \oint_\gamma f(z) \, dz \; = \; 0 .
+  \end{align*}
+\end{theorem}

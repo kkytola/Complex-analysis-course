@@ -1,0 +1,174 @@
+\section{The algebra and geometry of complex numbers}
+
+
+\subsection{The field of complex numbers}
+
+
+\subsection{Conjugate, modulus, and argument}
+
+\begin{definition}[Complex conjugate \Palka{Sec.~I.1.2}]
+  \label{def:complex_conjugate}
+  \uses{def:complex_numbers}
+  %\lean{}
+  % \leanok
+  The \term{complex conjugate} of a complex number $z = x + \ii y$
+  (where $x,y \in \bR$) is the complex number $\cconj{z} = x - \ii y$.
+\end{definition}
+
+
+\begin{lemma}[Properties of complex conjugate \Palka{Sec.~I.1.2~(1.1)}]
+  \label{lem:complex_conjugate_properties}
+  \uses{def:complex_conjugate}
+  %\lean{}
+  % \leanok
+  For any $z , w \in \bC$, we have
+  \begin{align*}
+    \cconj{\cconj{z}} = z , \qquad
+    \cconj{z + w} = \cconj{z} + \cconj{w} , \qquad
+    \cconj{z w} = \cconj{z} \, \cconj{w} ,
+  \end{align*}
+  \begin{align*}
+    \re (z) = \frac{z + \cconj{z}}{2} , \qquad
+    \im (z) = \frac{z - \cconj{z}}{2 \ii} .
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  %\uses{}
+  % \leanok
+  Direct calculation.
+\end{proof}
+
+\begin{definition}[Absolute value (modulus) \Palka{Sec.~I.1.2}]
+  \label{def:absolute_value}
+  \uses{def:complex_numbers}
+  %\lean{}
+  % \leanok
+  The \term{absolute value} (or \term{modulus}) of a
+  complex number $z = x + \ii y$ (where $x,y \in \bR$)
+  is the nonnegative real number $|z| = \sqrt{x^2 + y^2}$.
+\end{definition}
+
+\begin{lemma}[Properties of absolute value \Palka{Sec.~I.1.2~(1.2)}]
+  \label{lem:absolute_value_properties}
+  \uses{def:absolute_value, def:complex_conjugate}
+  %\lean{}
+  % \leanok
+  For any $z, w \in \bC$, we have
+  \begin{align*}
+    |z|^2 = z \, \cconj{z} , \qquad
+    |z w| = |z| \, |w| ,
+  \end{align*}
+  \begin{align*}
+    \re(z) \le |z| , \qquad
+    \im(z) \le |z| ,
+  \end{align*}
+  \begin{align*}
+    |z + w| \le |z| + |w| , \qquad
+    |z + w| \ge \big| |z| - |w| \big| .
+  \end{align*}
+  Also, if $z \ne 0$, then
+  \begin{align*}
+    z^{-1} = \frac{\cconj{z}}{|z|^2} , \qquad
+    \qquad
+    \Big| \frac{w}{z} \Big| = \frac{|w|}{|z|} .
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  %\uses{}
+  % \leanok
+  Straightforward.
+\end{proof}
+
+\begin{definition}[Argument \Palka{Sec.~I.1.2}]
+  \label{def:argument}
+  \uses{def:complex_numbers, def:absolute_value}
+  %\lean{}
+  % \leanok
+  A real number $\theta \in \bR$ is an \term{argument} of a complex
+  number $z \in \bC$ if
+  \begin{align*}
+    z = |z| \, \Big( \cos (\theta) + \ii \, \sin (\theta) \Big) .
+  \end{align*}
+
+  (Note: the argument of a nonzero complex number is defined only
+  modulo addition of integer multiples of $2 \pi$.)
+
+  The \term{principal argument} of a nonzero complex number $z \in \bC$
+  is its unique argument on the interval $(-\pi, \pi]$, and it is denoted
+  by $\Arg(z)$.
+\end{definition}
+
+\begin{lemma}[Multiplication in polar form \Palka{Sec.~I.1.2~(1.6)}]
+  \label{lem:multiplication_polar}
+  \uses{thm:complex_number_field, def:argument, def:absolute_value}
+  %\lean{}
+  % \leanok
+  For any $z,w \in \bC$, we have
+  \begin{align*}
+    |zw| = |z| \, |w|
+    \qquad \text{ and } \qquad
+    \Arg(zw) = \Arg(z) + \Arg(w) .
+  \end{align*}
+\end{lemma}
+
+\begin{lemma}[De Moivre's formula \Palka{Sec.~I.1.2~(1.7)}]
+  \label{lem:de_moivre}
+  \uses{thm:complex_number_field}
+  %\lean{}
+  % \leanok
+  For any $\theta \in \bR$ and $n \in \bZ$, we have
+  \begin{align*}
+    \big( \cos \theta + i \sin \theta \big)^n = \cos(n \theta) + i \sin(n \theta) .
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  \uses{lem:multiplication_polar}
+  % \leanok
+  Straightforward induction using Lemma~\ref{lem:multiplication_polar}.
+\end{proof}
+
+%\begin{itemize}
+%  \item $n$th roots of unity / of a complex number
+%\end{itemize}
+
+
+
+\section{Functions of a complex variable}
+
+
+\subsection{Exponentials and logarithms}
+
+\begin{definition}[Complex exponential]
+  \label{def:complex_exp}
+  % \uses{}
+  % \lean{}
+  % \leanok
+
+  foo.
+\end{definition}
+
+
+\subsection{Polynomials and rational functions}
+
+\begin{definition}[Polynomial]
+  \label{def:polynomial}
+  \uses{thm:complex_number_field}
+  %\lean{}
+  % \leanok
+  Polynomial functions are functions $p : \bC \to \bC$ of the form
+  \begin{align*}
+    p(z) = a_n z^n + a_{n-1} z^{n-1} + \cdots + a_1 z + a_0
+  \end{align*}
+  where $a_0,a_1,\ldots,a_{n-1},a_n \in \bC$ are coefficients.
+\end{definition}
+
+\begin{definition}[Rational function]
+  \label{def:rational_function}
+  \uses{def:polynomial}
+  %\lean{}
+  % \leanok
+  Rational functions are functions $f : D \to \bC$ which can be written as
+  ratios $f(z) = \frac{p(z)}{q(z)}$ of two polynomials
+  $p, q \colon \bC \to \bC$ on a domain $D \subset \bC$
+  where the denominator polynomial $q$ has no zeroes.
+\end{definition}

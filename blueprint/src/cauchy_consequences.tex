@@ -1,0 +1,238 @@
+\section{Analyticity of derivatives}
+
+\begin{lemma}[Analyticity of derivatives \Palka{Thm~V.3.1}]
+  \label{lem:derivative_analytic}
+  \uses{def:analytic_function}
+  %\lean{}
+  % \leanok
+  If a function $f \colon U \to \bC$ is analytic on an open set $U \subset \bC$,
+  then its derivative $f'$ is also analytic on $U$.
+  In particular, then $f$ is continuously differentiable,
+  $f \in \ContDiff{1}(U)$.
+\end{lemma}
+\begin{proof}
+  \uses{thm:cauchy_formula}%\uses{lem:lemma_1_6}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{corollary}[Analyticity of higher derivatives \Palka{Cor~V.3.2}]
+  \label{lem:higher_derivatives_analytic}
+  \uses{def:analytic_function}
+  %\lean{}
+  % \leanok
+  If a function $f \colon U \to \bC$ is analytic on an open set $U \subset \bC$,
+  then all its derivatives $f', f'', \ldots, f^{(k)}, \ldots$ are also analytic on $U$.
+  In particular, then $f$ is infinitely differentiable (i.e., smooth),
+  $f \in \Smooth(U)$.
+\end{corollary}
+\begin{proof}
+  \uses{lem:derivative_analytic}
+  % \leanok
+  Straightforward induction using Lemma~\ref{lem:derivative_analytic}.
+\end{proof}
+
+\begin{theorem}[Morera's theorem \Palka{Thm~V.3.3}]
+  \label{thm:morera}
+  \uses{def:analytic_function}
+  %\lean{}
+  % \leanok
+  Let $f \colon U \to \bC$ be a continuous function on an open set $U \subset \bC$.
+  If $f$ has the property that
+  \begin{align*}
+    \oint_{\bdry \Tri} f(z) \, \ud z = 0
+  \end{align*}
+  for any closed triangle $\Tri \subset U$, then $f$ is analytic on $U$.
+\end{theorem}
+
+\begin{theorem}[Cauchy's integral formula for derivatives]
+  \label{thm:cauchy_formula_derivative}
+  \uses{def:analytic_function}
+  %\lean{}
+  % \leanok
+  Suppose that a function $f \colon U \to \bC$ is analytic on an open
+  set $U \subset \bC$ containing the disk $\DiskRC{r}{z} \subset U$.
+  Then for any closed contour $\gamma$ in $\DiskRC{r}{z}$
+  and $n \in \bN$ we have
+  \begin{align*}
+    \windN{\gamma}{z} \, f^{(n)}(z)
+      = \frac{n!}{2\pi \ii} \oint_\gamma \frac{f(\zeta)}{(\zeta - z)^{n+1}} \, \ud \zeta .
+  \end{align*}
+\end{theorem}
+\begin{proof}
+  \uses{thm:cauchy_formula}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{lemma}[Cauchy's estimate for derivatives \Palka{Thm~V.3.6}]
+  \label{lem:cauchy_derivative_estimate}
+  \uses{def:analytic_function}
+  %\lean{}
+  % \leanok
+  Suppose that a function $f \colon U \to \bC$ is analytic on an open
+  set $U \subset \bC$ containing the disk $\DiskRC{r}{z} \subset U$,
+  and suppose that there exists a constant $M>0$ such that
+  $|f(z)| \le M$ for all $z \in \DiskRC{r}{z}$.
+  Then for any $n \in \bN$ we have
+  \begin{align*}
+    \big| f^{(n)}(z) \big| \le n! \, M \, r^{-n} .
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  \uses{thm:cauchy_formula_derivative, lem:integral_triangle_inequality}
+  % \leanok
+  \ldots
+\end{proof}
+
+
+
+\section{Liouville's theorem}
+
+\begin{theorem}[Liouville's theorem \Palka{Thm~V.3.7}]
+  \label{thm:liouville}
+  \uses{def:analytic_function}
+  %\lean{}
+  % \leanok
+  If a function $f \colon \bC \to \bC$ on the entire complex plane
+  is analytic and bounded, then $f$ is a constant function.
+\end{theorem}
+\begin{proof}
+  \uses{lem:cauchy_derivative_estimate}
+  % \leanok
+  \ldots
+\end{proof}
+
+
+
+\section{The fundamental theorem of algebra}
+
+\begin{theorem}[Fundamental theorem of algebra \Palka{Thm~V.3.8}]
+  \label{thm:fundamental_theorem_of_algebra}
+  \uses{def:polynomial}
+  %\lean{}
+  % \leanok
+  Every non-constant polynomial function $p \colon \bC \to \bC$
+  has a root, i.e., there exists a $z_0 \in \bC$ such that $p(z_0) = 0$.
+\end{theorem}
+\begin{proof}
+  \uses{thm:liouville, lem:polynomial_analytic}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{corollary}[Fundamental theorem of algebra \Palka{Thm~V.3.9}]
+  \label{cor:complex_polynomial_factorization}
+  \uses{def:polynomial}
+  %\lean{}
+  % \leanok
+  A complex-coefficient
+  polynomial $p(z) = a_0 + a_1 z + a_2 z^2 + \cdots + a_n z^n$
+  of degree $n \in \bN$ can be factored as
+  \begin{align*}
+    p(z) = c \, (z - z_1) \, (z - z_2) \, \cdots \, (z - z_n)
+  \end{align*}
+  where $c = a_n \ne 0$, and $z_1 , \ldots, z_n \in \bC$
+  are the roots of $p$ (with repetition according to the
+  multiplicities of the roots).
+\end{corollary}
+\begin{proof}
+  \uses{thm:fundamental_theorem_of_algebra}
+  % \leanok
+  This follows from Theorem~\ref{thm:fundamental_theorem_of_algebra}
+  by induction on the degree of the polynomial,
+  using the polynomial division (Euclidean algorithm in the
+  ring of univariate polynomials, see \textbf{MS-C1081 Abstract Algebra}).
+\end{proof}
+
+
+
+\section{Maximum principle}
+
+\begin{theorem}[Maximum principle for analytic functions \Palka{Thm~V.3.10}]
+  \label{thm:maximum_principle}
+  \uses{def:analytic_function, def:connected}
+  %\lean{}
+  % \leanok
+  Let $f \colon \Domain \to \bC$ be an analytic function on a
+  connected open set $\Domain \subset \bC$.
+  Suppose that there exists a point $z_0 \in \Domain$
+  such that
+  \begin{align*}
+    |f(z)| \le |f(z_0)| \qquad \text{ for all } z \in \Domain .
+  \end{align*}
+  Then $f$ is a constant function.
+\end{theorem}
+\begin{proof}
+  \uses{thm:cauchy_formula}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{corollary}[Maximum principle for analytic functions continuous up to the boundary \Palka{Cor~V.3.11}]
+  \label{cor:maximum_modulus_on_boundary}
+  \uses{def:analytic_function, def:connected}
+  %\lean{}
+  % \leanok
+  Let $\domain \subset \bC$ be a bounded connected open set.
+  Let $f \colon \cl{\Domain} \to \bC$ be a continuous function
+  on its closure which is analytic in $\Domain$.
+  Then $z \mapsto |f(z)|$ attains its maximum in $\cl{\Domain}$
+  at some point of the boundary $\bdry \Domain$.
+\end{corollary}
+\begin{proof}
+  \uses{thm:maximum_principle}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{lemma}[Schwarz's lemma \Palka{Thm~V.3.14}]
+  \label{lem:schwarz_lemma}
+  \uses{def:analytic_function}
+  %\lean{}
+  % \leanok
+  Let $f \colon \DiskRC{1}{0} \to \bC$ be an analytic function
+  on the open unit disk such that $|f(z)| \le 1$
+  for all $z \in \DiskRC{1}{0}$ and $f(0) = 0$.
+  Then we have
+  \begin{align*}
+    |f'(0)| \le 1
+    \qquad \text{ and } \qquad
+    |f(z)| \le |z| \quad \text{ for all } z \in \DiskRC{1}{0} .
+  \end{align*}
+  Furthermore, unless $f$ is of the form $f(z) = \lambda z$ for
+  some $\lambda \in \bC$ with $|\lambda| = 1$, then we have
+  \begin{align*}
+    |f'(0)| < 1
+    \qquad \text{ and } \qquad
+    |f(z)| < |z| \quad \text{ for all } z \in \DiskRC{1}{0} \setminus \set{0}.
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  \uses{cor:maximum_modulus_on_boundary}
+  % \leanok
+  \ldots
+\end{proof}
+
+
+
+\section{The mean value property}
+
+\begin{theorem}[Mean value property for analytic functions]
+  \label{thm:mean_value_property}
+  \uses{def:analytic_function}
+  %\lean{}
+  % \leanok
+  Suppose that a function $f \colon U \to \bC$ is analytic on an open
+  set $U \subset \bC$ containing the closed disk $\CDiskRC{r}{z} \subset U$.
+  Then we have
+  \begin{align*}
+    f(z) = \frac{1}{2 \pi r} \oint_{\bdry \DiskRC{r}{z}}
+            \frac{f(\zeta)}{\zeta - z} \, |\ud \zeta| .
+  \end{align*}
+\end{theorem}
+\begin{proof}
+  \uses{thm:cauchy_formula}
+  % \leanok
+  \ldots
+\end{proof}

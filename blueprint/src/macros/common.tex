@@ -1,18 +1,74 @@
-% In this file you should put all LaTeX macros and settings to be used both by
-% the pdf version and the web version.
+% In this file you should put all LaTeX macros to be used
+% both by the pdf version and the web version.
 % This should be most of your macros.
+\newcommand{\term}[1]{\textbf{#1}}
 
-% The theorem-like environments defined below are those that appear by default
-% in the dependency graph. See the README of leanblueprint if you need help to
-% customize this. 
-% The configuration below use the theorem counter for all those environments
-% (this is what the [theorem] arguments mean) and never resets it.
-% If you want for instance to number them within chapters then you can add
-% [chapter] at the end of the next line.
-\newtheorem{theorem}{Theorem}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{corollary}[theorem]{Corollary}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\ud}{\mathrm{d}}
 
-\theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
+\newcommand{\Res}{\mathrm{Res}}
+\newcommand{\ResAt}[1]{\Res_{{#1}}}
+\newcommand{\ResAtOf}[2]{\Res_{{#1}}({#2})}
+\newcommand{\windNsym}{\mathfrak{n}}
+\newcommand{\windN}[2]{\mathfrak{n}_{{#1}}(#2)}
+
+\newcommand{\eps}{\varepsilon}
+
+\newcommand{\bN}{\mathbb{N}}
+\newcommand{\bZ}{\mathbb{Z}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bK}{\mathbb{K}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\re}{\Re\mathfrak{e}}
+\newcommand{\im}{\Im\mathfrak{m}}
+\newcommand{\ii}{\mathfrak{i}}
+\newcommand{\cconj}[1]{\overline{#1}}
+
+\newcommand{\pder}[1]{\frac{\partial}{\partial {#1}}}
+\newcommand{\pdder}[1]{\frac{\partial^2}{\partial {#1}^2}}
+\newcommand{\pmder}[2]{\frac{\partial^2}{\partial {#1} \, \partial {#2}}}
+\newcommand{\pderof}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\pdderof}[2]{\frac{\partial^2 {#1}}{\partial {#2}^2}}
+\newcommand{\pmderof}[3]{\frac{\partial^2 {#1}}{\partial {#2} \, \partial {#3}}}
+
+\newcommand{\Cont}{\mathcal{C}}
+\newcommand{\ContDiff}[1]{\Cont^{{#1}}}
+\newcommand{\Smooth}{\ContDiff{\infty}}
+
+\newcommand{\Tri}{\triangle}
+\newcommand{\Squ}{\mathcal{S}}
+\newcommand{\Rect}{\mathcal{R}}
+\newcommand{\Ball}{\mathcal{B}}
+\newcommand{\BallRC}[2]{\Ball_{#1}(#2)}
+\newcommand{\Disk}{\Ball}
+\newcommand{\CDisk}{\overline{\Ball}}
+\newcommand{\PDisk}{\Ball^\bullet}
+\newcommand{\DiskRC}[2]{\Disk_{{#1}}(#2)}
+\newcommand{\CDiskRC}[2]{\CDisk_{#1}(#2)}
+\newcommand{\PDiskRC}[2]{\PDisk_{#1}(#2)}
+\newcommand{\Ann}{\mathcal{A}}
+\newcommand{\AnnRRC}[3]{\Ann_{#1,#2}(#3)}
+\newcommand{\Domain}{\mathcal{D}}
+\newcommand{\bdry}{\partial}
+\newcommand{\closOf}[1]{\overline{{#1}}}
+
+\newcommand{\opp}[1]{\overleftarrow{#1}}
+\newcommand{\concat}{\sqplus}
+
+\newcommand{\gLie}{\mathfrak{g}}
+\newcommand{\hLie}{\mathfrak{h}}
+\newcommand{\aLie}{\mathfrak{a}}
+
+\newcommand{\wittLie}{\mathfrak{witt}}
+\newcommand{\virLie}{\mathfrak{vir}}
+
+\newcommand{\cohomology}[3]{H^{{#1}}(#2,#3)}
+\newcommand{\cobdries}[3]{B^{{#1}}(#2,#3)}
+\newcommand{\cocycles}[3]{C^{{#1}}(#2,#3)}
+
+\newcommand{\Arg}{\mathrm{Arg}}
+\newcommand{\arg}{\mathrm{arg}}
+\newcommand{\Log}{\mathrm{Log}}
+
+\newcommand{\Palka}[1]{[Palka1991, #1]}

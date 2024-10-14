@@ -1,0 +1,59 @@
+\section{Cauchy's integral theorem}
+
+\begin{lemma}[Goursat's lemma \Palka{Lem~V.1.1}]
+  \label{lem:goursat}
+  \uses{def:analytic_function, def:contour_integral}
+  \lean{}
+  % \leanok
+  Suppose that a function $f \colon U \to \bC$ is analytic on an open
+  set $U \subset \bC$.
+  Then for any closed triangle $\Tri \subset U$, we have
+  \begin{align*}
+    \oint_{\bdry \Tri} f(z) \, \ud z = 0 .
+  \end{align*}
+\end{lemma}
+
+\begin{theorem}[Cauchy's integral theorem \Palka{Thm~V.1.5}]
+  \label{thm:cauchy_theorem}
+  \uses{def:analytic_function, def:contour_integral}
+  %\lean{}
+  % \leanok
+  Suppose that a function $f \colon U \to \bC$ is analytic on an open
+  set $U \subset \bC$ containing the disk $\DiskRC{r}{z} \subset U$.
+  Then for any closed contour $\gamma$ in $\DiskRC{r}{z}$
+  and $n \in \bN$ we have
+  \begin{align*}
+    \oint_\gamma f(z) \, \ud z = 0 .
+  \end{align*}
+\end{theorem}
+\begin{proof}
+  \uses{lem:goursat}
+  % \leanok
+  \ldots
+\end{proof}
+
+
+
+\section{Cauchy's integral formula}
+
+%def:winding_number
+
+\begin{theorem}[Cauchy's integral formula \Palka{Thm~V.2.3}]
+  \label{thm:cauchy_formula}
+  \uses{def:analytic_function, def:contour_integral}
+  %\lean{}
+  % \leanok
+  Suppose that a function $f \colon U \to \bC$ is analytic on an open
+  set $U \subset \bC$ containing the disk $\DiskRC{r}{z} \subset U$.
+  Then for any closed contour $\gamma$ in $\DiskRC{r}{z}$
+  and $n \in \bN$ we have
+  \begin{align*}
+    \windN{\gamma}{z} \, f(z)
+      = \frac{1}{2\pi \ii} \oint_\gamma \frac{f(\zeta)}{\zeta - z} \, \ud \zeta .
+  \end{align*}
+\end{theorem}
+\begin{proof}
+  \uses{thm:cauchy_theorem}
+  % \leanok
+  \ldots
+\end{proof}
