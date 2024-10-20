@@ -1,10 +1,4 @@
-\section{The algebra and geometry of complex numbers}
-
-
-\subsection{The field of complex numbers}
-
-
-\subsection{Conjugate, modulus, and argument}
+\section{Conjugate, modulus, and argument}
 
 \begin{definition}[Complex conjugate \Palka{Sec.~I.1.2}]
   \label{def:complex_conjugate}
@@ -14,7 +8,6 @@
   The \term{complex conjugate} of a complex number $z = x + \ii y$
   (where $x,y \in \bR$) is the complex number $\cconj{z} = x - \ii y$.
 \end{definition}
-
 
 \begin{lemma}[Properties of complex conjugate \Palka{Sec.~I.1.2~(1.1)}]
   \label{lem:complex_conjugate_properties}
@@ -35,7 +28,7 @@
 \begin{proof}
   %\uses{}
   % \leanok
-  Direct calculation.
+  Direct calculations.
 \end{proof}
 
 \begin{definition}[Absolute value (modulus) \Palka{Sec.~I.1.2}]
@@ -45,7 +38,7 @@
   % \leanok
   The \term{absolute value} (or \term{modulus}) of a
   complex number $z = x + \ii y$ (where $x,y \in \bR$)
-  is the nonnegative real number $|z| = \sqrt{x^2 + y^2}$.
+  is the nonnegative real number $|z| = \sqrt{x^2 + y^2} \ge 0$.
 \end{definition}
 
 \begin{lemma}[Properties of absolute value \Palka{Sec.~I.1.2~(1.2)}]
@@ -90,7 +83,9 @@
     z = |z| \, \Big( \cos (\theta) + \ii \, \sin (\theta) \Big) .
   \end{align*}
 
-  (Note: the argument of a nonzero complex number is defined only
+  (Note/warning: For a nonzero complex number $z$,
+  it is convenient to denote $\theta = \arg(z)$,
+  but this is an abuse of notation, the argumentis defined only
   modulo addition of integer multiples of $2 \pi$.)
 
   The \term{principal argument} of a nonzero complex number $z \in \bC$
@@ -98,33 +93,117 @@
   by $\Arg(z)$.
 \end{definition}
 
+
+
+\section{The polar form}
+
+\begin{definition}[Complex exponential function]
+  \label{def:complex_exp}
+  \uses{def:complex_numbers}
+  % \lean{}
+  % \leanok
+  We define the \term{complex exponential function} $\exp : \bC \to \bC$ by
+  \begin{align*}
+    \exp(x + \ii y) = e^x \, \big( \cos(y) + \ii \, \sin(y) \big)
+    \qquad \text{ for } x,y \in \bR ,
+  \end{align*}
+  where $e^x$ is the usual real exponential.
+  We also use the notation $e^z = \exp(z)$ for complex exponentials.
+
+  The exponential with purely imaginary argument takes the
+  form of \term{Euler's formula}
+  \begin{align*}
+    e^{\ii \theta} = \cos(\theta) + \ii \, \sin(\theta)
+    \qquad \text{ for } \theta \in \bR .
+  \end{align*}
+\end{definition}
+
+\begin{lemma}[Polar form]
+  \label{lem:polar_form}
+  \uses{def:complex_exp, def:argument, def:absolute_value}
+  % \lean{}
+  % \leanok
+  Every complex number $z \in \bC$ can be written in the \term{polar form}
+  \begin{align*}
+    z = r \, e^{\ii \theta}
+    \qquad \text{ where $r \ge 0$ and $\theta \in \bR$.}
+  \end{align*}
+  The modulus of $z$ is the number $r = |z|$ above.
+  If $z \ne 0$, then $\theta$ above is a choice of the argument of $z$,
+  i.e., $\theta = \Arg(z) + 2 \pi m$ for some $m \in \bZ$.
+\end{lemma}
+\begin{proof}
+  % \uses{}
+  % \leanok
+  \ldots
+\end{proof}
+
 \begin{lemma}[Multiplication in polar form \Palka{Sec.~I.1.2~(1.6)}]
   \label{lem:multiplication_polar}
-  \uses{thm:complex_number_field, def:argument, def:absolute_value}
+  \uses{thm:complex_number_field, lem:polar_form}
   %\lean{}
   % \leanok
-  For any $z,w \in \bC$, we have
+  For any $z,w \in \bC$, written in polar form as
+  $z = r e^{\ii \theta}$ and $w = r' e^{\ii \theta'}$, the product
+  can be written in polar form as
   \begin{align*}
-    |zw| = |z| \, |w|
+    z w = r r' \, e^{\ii (\theta + \theta')} .
+  \end{align*}
+  In other words,
+  \begin{align*}
+    |z w| = |z| \, |w|
     \qquad \text{ and } \qquad
-    \Arg(zw) = \Arg(z) + \Arg(w) .
+    \arg(z w) = \arg(z) + \arg(w) \modtwopi.
   \end{align*}
 \end{lemma}
+\begin{proof}
+  \uses{lem:trigonometric_angle_sum}
+  % \leanok
+  \ldots
+\end{proof}
 
-\begin{lemma}[De Moivre's formula \Palka{Sec.~I.1.2~(1.7)}]
+\begin{theorem}[De Moivre's formula \Palka{Sec.~I.1.2~(1.7)}]
   \label{lem:de_moivre}
   \uses{thm:complex_number_field}
   %\lean{}
   % \leanok
   For any $\theta \in \bR$ and $n \in \bZ$, we have
   \begin{align*}
-    \big( \cos \theta + i \sin \theta \big)^n = \cos(n \theta) + i \sin(n \theta) .
+    \big( \cos (\theta) + \ii \, \sin (\theta) \big)^n = \cos(n \theta) + \ii \, \sin(n \theta) .
   \end{align*}
-\end{lemma}
+\end{theorem}
 \begin{proof}
   \uses{lem:multiplication_polar}
   % \leanok
-  Straightforward induction using Lemma~\ref{lem:multiplication_polar}.
+  Induction using Lemma~\ref{lem:multiplication_polar}.
+\end{proof}
+
+\begin{lemma}[Roots of unity]
+  \label{lem:roots_of_unity}
+  \uses{thm:complex_number_field}
+  % \lean{}
+  % \leanok
+  For any $n \in \bN$, the solutions $z \in \bC$ to the equation
+  \begin{align*}
+    z^n = 1
+  \end{align*}
+  are the $n$ distinct complex numbers
+  \begin{align*}
+    z_j \, = \, e^{\ii 2 \pi j / n}
+        \, = \, \cos \Big( \frac{2 \pi j}{n} \Big) + \ii \, \sin \Big( \frac{2 \pi j}{n} \Big)
+    \qquad \text{ where } j = 0, 1, \ldots, n-1 .
+  \end{align*}
+  These solutions are called the (complex) $n$th \term{roots of unity}.
+
+  In particular, we have the polynomial factorization
+  \begin{align*}
+    z^n - 1 \, = \, \prod_{j=0}^{n-1} \Big( z - e^{\ii 2 \pi j / n} \Big) .
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  \uses{lem:de_moivre}
+  % \leanok
+  \ldots
 \end{proof}
 
 %\begin{itemize}
@@ -134,19 +213,6 @@
 
 
 \section{Functions of a complex variable}
-
-
-\subsection{Exponentials and logarithms}
-
-\begin{definition}[Complex exponential]
-  \label{def:complex_exp}
-  % \uses{}
-  % \lean{}
-  % \leanok
-
-  foo.
-\end{definition}
-
 
 \subsection{Polynomials and rational functions}
 
@@ -172,3 +238,11 @@
   $p, q \colon \bC \to \bC$ on a domain $D \subset \bC$
   where the denominator polynomial $q$ has no zeroes.
 \end{definition}
+
+
+
+\subsection{Exponentials and branches of logarithms}
+
+
+
+\subsection{Branches of $n$th roots}
