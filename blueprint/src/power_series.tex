@@ -275,6 +275,28 @@
   \ldots
 \end{proof}
 
+\begin{theorem}[Equivalent characterizations of analyticity]
+  \label{thm:TFAE_ANALYTIC}
+  \uses{def:analytic_function, def:power_series, def:primitive}
+  % \lean{}
+  % \leanok
+  Let $f \colon U \to \bC$ be a continuous function on an open
+  set $U \subset \bC$.
+  Then the following are equivalent:
+  \begin{itemize}
+    \item $f$ is analytic on $U$;
+    \item for any $z \in U$ there exists a neighborhood of $z$
+      in which $f$ has a primitive;
+    \item for any $z \in U$ there exists a neighborhood of $z$
+      in which $f$ can be represented as a convergent power series.
+  \end{itemize}
+\end{theorem}
+\begin{proof}
+  \uses{thm:analytic_function_taylor_series, lem:power_series_analytic, thm:morera}
+  % \leanok
+  \ldots
+\end{proof}
+
 \begin{lemma}[No vanishing of all derivatives at a point \Palka{Thm~VIII.1.1}]
   \label{lem:no_vanishing_of_all_order_derivatives}
   \uses{def:analytic_function, lem:higher_derivatives_analytic}
@@ -372,7 +394,7 @@
 \end{proof}
 
 \begin{corollary}[Principle of analytic continuation \Palka{Cor~VIII.1.6}]
-  \label{cor:analytic_continuation}
+  \label{cor:ANALYTIC_CONTINUATION}
   \uses{def:analytic_function}
   %\lean{}
   % \leanok
@@ -475,7 +497,7 @@
 \end{proof}
 
 \begin{theorem}[Laurent series for analytic functions \Palka{Thm~VII.3.6}]
-  \label{thm:analytic_function_laurent_series}
+  \label{thm:ANALYTIC_FUNCTION_LAURENT_SERIES}
   \uses{def:laurent_series, def:analytic_function}
   %\lean{}
   % \leanok

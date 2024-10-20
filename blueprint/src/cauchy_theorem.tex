@@ -20,8 +20,7 @@
   % \leanok
   Suppose that a function $f \colon U \to \bC$ is analytic on an open
   set $U \subset \bC$ containing the disk $\DiskRC{r}{z} \subset U$.
-  Then for any closed contour $\gamma$ in $\DiskRC{r}{z}$
-  and $n \in \bN$ we have
+  Then for any closed contour $\gamma$ in $\DiskRC{r}{z}$ we have
   \begin{align*}
     \oint_\gamma f(z) \, \ud z = 0 .
   \end{align*}
@@ -36,17 +35,27 @@
 
 \section{Cauchy's integral formula}
 
-%def:winding_number
+\begin{definition}[Winding number]
+  \label{def:winding_number}
+  \uses{def:contour_integral}
+  % \lean{}
+  % \leanok
+  Let $z \in \bC$, and let $\gamma$ be a closed contour
+  in $\bC \setminus \set{z}$.
+  The \term{winding number} of $\gamma$ around $z$ is defined as
+  \begin{align*}
+    \windN{\gamma}{z} = \frac{1}{2\pi \ii} \oint_\gamma \frac{\ud \zeta}{\zeta - z} .
+  \end{align*}
+\end{definition}
 
 \begin{theorem}[Cauchy's integral formula \Palka{Thm~V.2.3}]
-  \label{thm:cauchy_formula}
-  \uses{def:analytic_function, def:contour_integral}
+  \label{thm:CAUCHY_FORMULA}
+  \uses{def:analytic_function, def:contour_integral, def:winding_number}
   %\lean{}
   % \leanok
   Suppose that a function $f \colon U \to \bC$ is analytic on an open
   set $U \subset \bC$ containing the disk $\DiskRC{r}{z} \subset U$.
-  Then for any closed contour $\gamma$ in $\DiskRC{r}{z}$
-  and $n \in \bN$ we have
+  Then for any closed contour $\gamma$ in $\DiskRC{r}{z}$ we have
   \begin{align*}
     \windN{\gamma}{z} \, f(z)
       = \frac{1}{2\pi \ii} \oint_\gamma \frac{f(\zeta)}{\zeta - z} \, \ud \zeta .

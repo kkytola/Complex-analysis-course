@@ -11,7 +11,7 @@
   $f \in \ContDiff{1}(U)$.
 \end{lemma}
 \begin{proof}
-  \uses{thm:cauchy_formula}%\uses{lem:lemma_1_6}
+  \uses{thm:CAUCHY_FORMULA}%\uses{lem:lemma_1_6}
   % \leanok
   \ldots
 \end{proof}
@@ -44,6 +44,11 @@
   \end{align*}
   for any closed triangle $\Tri \subset U$, then $f$ is analytic on $U$.
 \end{theorem}
+\begin{proof}
+  \uses{def:primitive, lem:derivative_analytic}
+  % \leanok
+  \ldots
+\end{proof}
 
 \begin{theorem}[Cauchy's integral formula for derivatives]
   \label{thm:cauchy_formula_derivative}
@@ -60,7 +65,7 @@
   \end{align*}
 \end{theorem}
 \begin{proof}
-  \uses{thm:cauchy_formula}
+  \uses{thm:CAUCHY_FORMULA}
   % \leanok
   \ldots
 \end{proof}
@@ -108,7 +113,7 @@
 \section{The fundamental theorem of algebra}
 
 \begin{theorem}[Fundamental theorem of algebra \Palka{Thm~V.3.8}]
-  \label{thm:fundamental_theorem_of_algebra}
+  \label{thm:FUNDAMENTAL_THEOREM_OF_ALGEBRA}
   \uses{def:polynomial}
   %\lean{}
   % \leanok
@@ -164,7 +169,7 @@
   Then $f$ is a constant function.
 \end{theorem}
 \begin{proof}
-  \uses{thm:cauchy_formula}
+  \uses{thm:CAUCHY_FORMULA}
   % \leanok
   \ldots
 \end{proof}
@@ -232,7 +237,7 @@
   \end{align*}
 \end{theorem}
 \begin{proof}
-  \uses{thm:cauchy_formula}
+  \uses{thm:CAUCHY_FORMULA}
   % \leanok
   \ldots
 \end{proof}
