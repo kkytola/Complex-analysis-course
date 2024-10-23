@@ -6,17 +6,17 @@
   %\lean{}
   % \leanok
   A \term{metric} on a set $X$ is a function
-  $d \colon X \times X \to [0,\infty)$ such that
-  for all $x_1, x_2, x_3 \in X$ we have
+  $\genmet \colon X \times X \to [0,\infty)$ such that
+  for all $p_1, p_2, p_3 \in X$ we have
   \begin{align*}
-    d(x_1,x_3) \le \; & d(x_1,x_2) + d(x_2,x_3)
+    \genmet(p_1, p_3) \le \; & \genmet(p_1,p_2) + \genmet(p_2,p_3)
             & \text{(triangle inequality)} \\
-    d(x_1,x_2) = \; & d(x_2,x_1)
+    \genmet(p_1, p_2) = \; & \genmet(p_2,p_1)
             & \text{(symmetricity)} \\
-    d(x_1,_2y) = \; & 0 \text{ if and only if } x_1 = x_2 .
+    \genmet(p_1, p_2) = \; & 0 \text{ if and only if } p_1 = p_2 .
             & \text{(separation of points)}
   \end{align*}
-  The set $X$ equipped with the metric $d$ on
+  The set $X$ equipped with the metric $\genmet$ on
   it is called a \term{metric space}.
 \end{definition}
 
@@ -27,7 +27,7 @@
   % \leanok
   The formula
   \begin{align*}
-    d(z,w) = |z - w|
+    \genmet(z,w) = |z - w|
     \qquad \text{ for } z,w \in \bC
   \end{align*}
   defines a metric on the complex plane $\bC$.
@@ -47,51 +47,101 @@
   \uses{def:metric_space}
   %\lean{}
   % \leanok
-  Let $X$ be a metric space with metric $d \colon X \times X \to [0,\infty)$.
-  Let $x_0 \in X$ be a point and let $r>0$.
+  Let $X$ be a metric space with metric $\genmet \colon X \times X \to [0,\infty)$.
+  Let $p_0 \in X$ be a point and let $r>0$.
 
   The set
   \begin{align*}
-    \BallRC{r}{x_0} = \set{x \in X \; \Big| \; d(x,x_0) < r}
+    \BallRC{r}{p_0} = \Big\{ p \in X \; \Big| \; \genmet(p,p_0) < r \Big\}
   \end{align*}
-  is called an \term{open ball} in $X$, centered at $x_0$, and with radius $r$.
+  is called an \term{open ball} in $X$, centered at $p_0$, and with radius $r$.
 
   The set
   \begin{align*}
-    \CBallRC{r}{x_0} = \set{x \in X \; \Big| \; d(x,x_0) \le r}
+    \CBallRC{r}{p_0} = \Big\{ p \in X \; \Big| \; \genmet(p,p_0) \le r \Big\}
   \end{align*}
-  is called a \term{closed ball} in $X$, centered at $x_0$, and with radius $r$.
+  is called a \term{closed ball} in $X$, centered at $p_0$, and with radius $r$.
 
-  The set
-  \begin{align*}
-    \SphereRC{r}{x_0} = \set{x \in X \; \Big| \; d(x,x_0) = r}
-  \end{align*}
-  is called a \term{sphere} in $X$, centered at $x_0$, and with radius $r$.
+  %The set
+  %\begin{align*}
+  %  \SphereRC{r}{x_0} = \set{x \in X \; \Big| \; \genmet(x,x_0) = r}
+  %\end{align*}
+  %is called a \term{sphere} in $X$, centered at $x_0$, and with radius $r$.
 
   (In the case of the complex plane $\bC$, the term \term{disk}
-  may be used instead of the general term ball, and the term \term{circle}
-  may be used instead of the general term sphere.)
+  is often used instead of the general metric space theory term \term{ball}.)
+  %and the term \term{circle}
+  %may be used instead of the general term sphere.)
+\end{definition}
+
+\begin{definition}[Interior point]
+  \label{def:interior}
+  \uses{def:ball}
+  % \lean{}
+  % \leanok
+  Let $X$ be a metric space, and $A \subset X$ a subset.
+  A point $p \in A$ is said to be an \term{interior point} of $A$
+  if for some $r > 0$ we have $\BallRC{r}{p} \subset A$.
+  %The set of all interior points of $A$ is denoted \ldots and called the \term{interior} of $A$,
+\end{definition}
+
+\begin{definition}[Exterior point]
+  \label{def:exterior}
+  \uses{def:ball, def:interior}
+  % \lean{}
+  % \leanok
+  Let $X$ be a metric space, and $A \subset X$ a subset.
+  A point $p \in X \setminus A$ is said to be an \term{exterior point} of $A$
+  if for some $r > 0$ we have $\BallRC{r}{p} \subset X \setminus A$.
+
+  (It is easy to see that the exterior points of $A$ are exactly the interior
+  points)
+\end{definition}
+
+\begin{definition}[Boundary]
+  \label{def:boundary}
+  \uses{def:ball, def:interior, def:exterior}
+  % \lean{}
+  % \leanok
+  Let $X$ be a metric space, and $A \subset X$ a subset.
+  A point $p \in X$ is said to be a \term{boundary point} of $A$
+  if for all $r > 0$ we have that $\BallRC{r}{p}$ contains points
+  of $A$ and $X \setminus A$ (i.e. $\BallRC{r}{p} \cap A \ne \emptyset$
+  and $\BallRC{r}{p} \setminus A \ne \emptyset$).
+
+  The set of all boundary points of $A$ is denoted $\bdry A$ and called the
+  \term{boundary} of $A$.
+
+  (It is easy to see that the boundary $\bdry A \subset X$ is exactly
+  the set of points of $X$ which are neither interior nor exterior points
+  of $A$.)
 \end{definition}
 
 \begin{definition}[Open set]
   \label{def:open_set}
-  \uses{def:metric_space, def:ball}
+  \uses{def:metric_space, def:ball, def:interior}
   % \lean{}
   % \leanok
-  Let $X$ be a metric space with metric $d \colon X \times X \to [0,\infty)$.
+  Let $X$ be a metric space.
+  % with metric $\genmet \colon X \times X \to [0,\infty)$.
   A subset $U \subset X$ is said to be an \term{open set} if
-  for every $x \in U$ there exists an $r > 0$ such that
-  $\Ball{r}{x} \subset U$.
+  %for every $x \in U$ there exists an $r > 0$ such that
+  %$\BallRC{r}{x} \subset U$.
+  each point $p \in U$ is an interior point of $U$.
 \end{definition}
 
 \begin{definition}[Closed set]
   \label{def:closed_set}
-  \uses{def:open_set}
+  \uses{def:open_set, def:exterior}
   % \lean{}
   % \leanok
-  Let $X$ be a metric space with metric $d \colon X \times X \to [0,\infty)$.
+  Let $X$ be a metric space.
+  % with metric $\genmet \colon X \times X \to [0,\infty)$.
   A subset $F \subset X$ is said to be a \term{closed set} if
   the complement $X \setminus F \subset X$ is an open set.
+
+  (Equivalently, each point $p \in X \setminus F$ in the complement
+  of $F$ is an exterior point of $F$.)
 \end{definition}
 
 \begin{definition}[Boundedness]
@@ -99,10 +149,11 @@
   \uses{def:metric_space}
   % \lean{}
   % \leanok
-  Let $X$ be a metric space with metric $d \colon X \times X \to [0,\infty)$.
+  Let $X$ be a metric space.
+  with metric $\genmet \colon X \times X \to [0,\infty)$.
 
-  A subset $A \subset X$ is said to be bounded if there exists
-  a number $M>0$ such that $d(x,y) \le M$ for all $x,y \in A$.
+  A subset $A \subset X$ is \term{bounded} if there exists
+  a number $M>0$ such that $\genmet(p,q) \le M$ for all $p,q \in A$.
   (If $X$ is nonempty, an equivalent definition would be that
   $A$ is bounded if it is a subset of some ball in $X$.)
 
@@ -126,16 +177,170 @@
   \uses{def:metric_space}
   %\lean{}
   % \leanok
-  %Let $X$ be a metric space with metric $d \colon X \times X \to [0,\infty)$.
-  \ldots
+  Let $X$ be a metric space and
+  %with metric $\genmet \colon X \times X \to [0,\infty)$.
+  let $(x_n)_{n \in \bN}$ be a sequence of points in $X$.
+  %We say that $x \in X$ is the \term{limit} of the sequence $(x_n)_{n \in \bN}$
+  %%(or that the sequence \term{converges} to the limit $x$)
+  We say that the sequence $(x_n)_{n \in \bN}$ \term{converges}
+  to a \term{limit} $x \in X$
+  if for all $\eps > 0$ there exists an $N \in \bN$ such that
+  for all $n \ge N$ we have $x_n \in \BallRC{\eps}{x}$
+  (i.e., $\genmet(x_n,x) < \eps$).
+  We then denote
+  \begin{align*}
+    \lim_{n \to \infty} x_n = x .
+  \end{align*}
+  (It is straightforward to check that the limit is
+  unique if it exists.)
+
+  Let then $X$ and $Y$ be metric spaces, with respective metrics
+  $\genmet_X$ and $\genmet_Y$, and
+  let $f \colon X \to Y$ be a function.
+  We say that the function $f$ has a \term{limit} $y \in Y$
+  \term{at a point} $p_0 \in X$
+  if for all $\eps > 0$ there exists a $\delta > 0$ such that
+  for all $p \in \BallRC{\delta}{p_0} \setminus \set{p_0}$
+  %(i.e., when $0 < \genmet_X (p,p_0) < \delta$)
+  we have $f(p) \in \BallRC{\eps}{y}$.
+  %(i.e., $\genmet_Y \big( f(p),y \big) < \eps$).
+  We then denote
+  \begin{align*}
+    \lim_{p \to p_0} f(p) = y .
+  \end{align*}
+  (It is straightforward to check that the limit is
+  unique if it exists.)
+
+  (Equivalently, written in terms of distances,
+  $\lim_{p \to p_0} f(p) = y$ means that
+  for every $\eps > 0$ there exists a $\delta > 0$ such that
+  we have $\genmet_Y \big( f(p), y \big) < \eps$ whenever
+  $0 < \genmet_X (p,p_0) < \delta$.)
 \end{definition}
+
+\begin{lemma}[Limits in the complex plane]
+  \label{lem:complex_limit}
+  \uses{def:limit, lem:metric_on_C}
+  % \lean{}
+  % \leanok
+  For a sequence $(z_n)_{n \in \bN}$ of complex numbers
+  %$z_n = x_n + \ii y_n$ (with $x_n,y_n \in \bR$) converges
+  %to a limit $z = x + \ii y$ if and only if the real and imaginary
+  %part sequences converge to the real and imaginary parts of the limit,
+  %i.e., $\lim_{n \to \infty} x_n = x$ and $\lim_{n \to \infty} y_n = y$.
+  we have
+  \begin{align*}
+    \lim_{n \to \infty} z_n = z
+  \end{align*}
+  if and only if
+  \begin{align*}
+    \lim_{n \to \infty} \re(z_n) = \re(z)
+    \quad \text{and} \quad
+    \lim_{n \to \infty} \im(z_n) = \im(z) .
+  \end{align*}
+
+  Let $X$ be a metric space,
+  let $f \colon X \to \bC$ a complex-valued
+  function on $X$, and
+  %Write $u, v \colon X \to \bR$
+  %for the real and imaginary parts of the function, so that
+  %$f(p) = u(p) + \ii \, v(p)$ for $p \in X$.
+  let $p_0 \in X$ be a point. Then we have
+  \begin{align*}
+    \lim_{p \to p_0} f(p) = z
+  \end{align*}
+  if and only if
+  \begin{align*}
+    \lim_{p \to p_0} \re \big( f(p) \big) = \re(z)
+    \quad \text{and} \quad
+    \lim_{p \to p_0} \im \big( f(p) \big) = \im(z) .
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  %\uses{lem:absolute_value_properties}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{lemma}[Operations with complex limits]
+  \label{lem:complex_limit_properties}
+  \uses{lem:complex_limit, thm:complex_number_field}
+  % \lean{}
+  % \leanok
+  Let $(z_n)_{n \in \bN}$ and $(w_n)_{n \in \bN}$
+  be complex number sequences converging to limits
+  \begin{align*}
+    \lim_{n \to \infty} z_n = z
+    \quad \text{and} \quad
+    \lim_{n \to \infty} w_n = w .
+  \end{align*}
+  Then we have
+  \begin{align*}
+    \lim_{n \to \infty} (z_n + w_n) \, = \, z + w ,
+    \quad
+    \lim_{n \to \infty} (z_n w_n) \, = \, z w ,
+    \quad
+    \lim_{n \to \infty} \frac{z_n}{w_n} \, = \, \frac{z}{w}
+    \; \text{ if $w \ne 0$}.
+  \end{align*}
+    %If moreover $w \ne 0$ then we also have
+    %\begin{align*}
+    %  \lim_{n \to \infty} \frac{z_n}{w_n} \; = \; \frac{z}{w} .
+    %\end{align*}
+  %In particular, taking one of the sequences to be a constant sequence $c \in \bC$,
+  %we get $\lim_{n \to \infty} (z_n + c) = z + c$ and
+  %$\lim_{n \to \infty} (c \, z_n) = c z$.
+  %%In particular, taking $(w_n)_{n \in \bN}$ to be a constant sequence
+  %%$w_n = c \in \bC$, we have
+  %%\begin{align*}
+  %%  \lim_{n \to \infty} (z_n + c) = z + c
+  %%  \quad \text{and} \quad
+  %%  \lim_{n \to \infty} (c \, z_n) = c z .
+  %%\end{align*}
+
+  Let $X$ be a metric space, let $p_0 \in X$
+  be a point, and let $f,g \colon X \to \bC$
+  be two complex-valued functions on $X$ such that
+  \begin{align*}
+    \lim_{p \to p_0} f(p) = z
+    \quad \text{and} \quad
+    \lim_{p \to p_0} g(p) = w .
+  \end{align*}
+  Then we have
+  \begin{align*}
+    \lim_{p \to p_0} \big( f(p) + g(p) \big) \, = \, z + w ,
+    \quad
+    \lim_{p \to p_0} \big( f(p) \, g(p) \big) \, = \, z w ,
+    \quad
+    \lim_{p \to p_0} \frac{f(p)}{g(p)} \, = \, \frac{z}{w}
+    \; \text{ if $w \ne 0$}.
+  \end{align*}
+    %If moreover $w \ne 0$ then we also have
+    %\begin{align*}
+    %  \lim_{p \to p_0} \frac{f(p)}{g(p)} \; = \; \frac{z}{w}
+    %\end{align*}
+  %In particular taking one of the functions to be a constant function
+  %$c \in \bC$, we get $\lim_{p \to p_0} \big( f(p) + c \big) = z + c$
+  %and $\lim_{p \to p_0} \big( c \, f(p) \big) = c z$.
+  %%In particular, taking $g$ to be a constant function
+  %%$g(p) = c \in \bC$, we have
+  %%\begin{align*}
+  %%  \lim_{p \to p_0} \big( f(p) + c \big) = z + c
+  %%  \quad \text{and} \quad
+  %%  \lim_{p \to p_0} \big( c \, f(p) \big) = c z .
+  %%\end{align*}
+\end{lemma}
+\begin{proof}
+  The arguments are similar to the proofs given in
+  \textbf{MS-C1541 Metric Spaces} for the real-valued cases.
+\end{proof}
 
 \begin{definition}[Cauchy sequence]
   \label{def:cauchy_sequence}
   \uses{def:metric_space}
   %\lean{}
   % \leanok
-  %Let $X$ be a metric space with metric $d \colon X \times X \to [0,\infty)$.
+  %Let $X$ be a metric space with metric $\genmet \colon X \times X \to [0,\infty)$.
   \ldots
 \end{definition}
 
@@ -166,7 +371,7 @@
   (This property is known as \term{completeness} of the metric space $\bC$.)
 \end{lemma}
 \begin{proof}
-  \uses{lem:real_complete}
+  \uses{lem:real_complete, lem:complex_limit}
   % \leanok
   See \textbf{MS-C1541 Metric Spaces}.
 
@@ -179,14 +384,230 @@
 
 \section{Continuity}
 
+%\begin{definition}[Limit of a function at a point]
+%  \label{def:function_limit}
+%  \uses{def:metric_space}
+%  %\lean{}
+%  % \leanok
+%  Let $X$ and $Y$ be metric spaces.
+%  Let $f \colon X \to Y$ be
+%  a function, and let $x_0 \in X$ be a point.
+%  We say that the function $f$ has a \term{limit} $y \in Y$
+%  \term{at the point} $x_0 \in X$
+%  if for all $\eps > 0$ there exists a $\delta > 0$ such that
+%  for all $x \in \BallRC{\delta}{x_0} \setminus \set{x_0}$
+%  %(i.e., when $0 < \genmet_X (x,x_0) < \delta$)
+%  we have $f(x) \in \BallRC{\eps}{y}$.
+%  %(i.e., $\genmet_Y \big( f(x),y \big) < \eps$).
+%  We then denote
+%  \begin{align*}
+%    \lim_{x \to x_0} f(x) = y .
+%  \end{align*}
+%  (It is straightforward to check that the limit is
+%  unique if it exists.)
+%
+%  (Equivalently, written in terms of distances,
+%  $\lim_{x \to x_0} f(x) = y$ means that
+%  for every $\eps > 0$ there exists a $\delta > 0$ such that
+%  we have $\genmet_Y \big( f(x),y \big) < \eps$ whenever
+%  $0 < \genmet_X (x,x_0) < \delta$.)
+%\end{definition}
+%
+%\begin{lemma}[Limits of complex valued functions]
+%  \label{lem:complex_function_limit}
+%  \uses{def:function_limit, lem:metric_on_C}
+%  % \lean{}
+%  % \leanok
+%  Let $X$ be a metric space.
+%  Let $f \colon X \to \bC$ a complex-valued
+%  function on $X$ and
+%  %Write $u, v \colon X \to \bR$
+%  %for the real and imaginary parts of the function, so that
+%  %$f(p) = u(p) + \ii \, v(p)$ for $p \in X$.
+%  let $p_0 \in X$ be a point. Then we have
+%  \begin{align*}
+%    \lim_{p \to p_0} f(p) = z
+%  \end{align*}
+%  if and only if
+%  \begin{align*}
+%    \lim_{p \to p_0} \re \big( f(p) \big) = \re(z)
+%    \quad \text{and} \quad
+%    \lim_{p \to p_0} \im \big( f(p) \big) = \im(z) .
+%  \end{align*}
+%%\end{lemma}
+%
+%\begin{lemma}[Operations with limits of complex-valued functions]
+%  \label{lem:complex_function_limit_properties}
+%  \uses{lem:complex_function_limit}
+%  % \lean{}
+%  % \leanok
+%  Let $X$ be a metric space, and let $f,g \colon X \to \bC$
+%  be two complex-valued functions on $X$. Let $p_0 \in X$
+%  be a point, and assume that
+%  \begin{align*}
+%    \lim_{p \to p_0} f(p) = z
+%    \quad \text{and} \quad
+%    \lim_{p \to p_0} g(p) = w .
+%  \end{align*}
+%  Then we have
+%  \begin{align*}
+%    \lim_{p \to p_0} \big( f(p) + g(p) \big) = z + w
+%    \quad \text{and} \quad
+%    \lim_{p \to p_0} \big( f(p) \, g(p) \big) = z w .
+%  \end{align*}
+%
+%  In particular, taking $g$ to be a constant function
+%  $g(p) = c \in \bC$, we have
+%  \begin{align*}
+%    \lim_{p \to p_0} \big( f(p) + c \big) = z + c
+%    \quad \text{and} \quad
+%    \lim_{p \to p_0} \big( c \, f(p) \big) = c z .
+%  \end{align*}
+%\end{lemma}
+
 \begin{definition}[Continuity]
   \label{def:continuous}
-  \uses{def:metric_space}
+  \uses{def:metric_space, def:limit}
   %\lean{}
   % \leanok
   Let $X$ and $Y$ be metric spaces.
-  A functions $f \colon X \to Y$ is \term{continuous} if\ldots
+  A function $f \colon X \to Y$ is said to be \term{continuous at a point}
+  $p_0 \in X$ if $\lim_{p \to p_0} f(p) = f(p_0)$.
+
+  (Equivalently, for every $\eps > 0$ there
+  exists a $\delta > 0$ such that for any $p \in \BallRC{\delta}{p_0}$
+  we have $f(p) \in \BallRC{\eps}{f(p_0)}$.)
+
+  A function $f \colon X \to Y$ is said to be \term{continuous} if
+  it is continuous at every point $p_0 \in X$.
 \end{definition}
+
+\begin{lemma}[Continuity of complex-valued functions]
+  \label{lem:continuous_complex}
+  \uses{def:continuous}
+  % \lean{}
+  % \leanok
+  Let $X$ be a metric space, and let $f \colon X \to \bC$ be
+  a complex-valued function on $X$. Then $f$ is continuous
+  at $p_0 \in X$ if and only if its real and imaginary parts
+  $p \mapsto \re \big( f(p) \big)$
+  and $p \mapsto \im \big( f(p) \big)$ are continuous at $p_0$.
+\end{lemma}
+\begin{proof}
+  \uses{lem:complex_limit}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{corollary}[Continuity of coordinate projections]
+  \label{cor:coordinate_continuous}
+  \uses{def:continuous}
+  % \lean{}
+  % \leanok
+  The coordinate projections
+  \begin{align*}
+    \re \colon \; & \bC \to \bR
+    \qquad\qquad \text{ and } & \quad
+    \im \colon \; & \bC \to \bR \\
+    & z \mapsto \re(z) &
+    & z \mapsto \im(z)
+  \end{align*}
+  are continuous functions.
+\end{corollary}
+\begin{proof}
+  \uses{lem:continuous_complex}
+  % \leanok
+
+
+\end{proof}
+
+\begin{lemma}[Operations with continuous complex-valued functions]
+  \label{lem:complex_continuity_properties}
+  \uses{def:continuous, thm:complex_number_field}
+  % \lean{}
+  % \leanok
+  Let $X$ be a metric space, let $p_0 \in X$
+  be a point, and let $f,g \colon X \to \bC$
+  be two complex-valued functions on $X$
+  which are continuous at $p_0$.
+  Then also the functions
+  \begin{align*}
+    p \mapsto f(p) + g(p)
+    \quad \text{and} \quad
+    p \mapsto f(p) \, g(p)
+  \end{align*}
+  are continuous at $p_0$.
+
+  If moreover $g(p_0) \ne 0$, then
+  also the function
+  $p \mapsto \frac{f(p)}{g(p)}$
+  is continuous at $p_0$.
+\end{lemma}
+\begin{proof}
+  \uses{lem:continuous_complex, lem:complex_limit_properties}
+  \ldots
+\end{proof}
+
+\begin{lemma}[Continuity characterization]
+  \label{lem:continuity_characterization}
+  \uses{def:continuous, def:open_set, def:closed_set}
+  % \lean{}
+  % \leanok
+  Let $X$ and $Y$ be metric spaces, and let $f \colon X \to Y$ be a function.
+  Then the following are equivalent:
+  \begin{itemize}
+    \item $f$ is a continuous function;
+    \item for every open set $V \subset Y$, the preimage
+      $f^{-1}[V] = \big\{ x \in X \, \big| \, f(x) \in V \big\}$
+      is an open set in $X$;
+    \item for every closed set $A \subset Y$, the preimage
+      $f^{-1}[A] = \big\{ x \in X \, \big| \, f(x) \in A \big\}$
+      is a closed set in $X$.
+  \end{itemize}
+\end{lemma}
+\begin{proof}
+  % \uses{}
+  % \leanok
+  See \textbf{MS-C1541 Metric Spaces}.
+\end{proof}
+
+\begin{lemma}[Composition of continuous functions]
+  \label{lem:composition_continuous}
+  \uses{def:continuous}
+  % \lean{}
+  % \leanok
+  Let $X$, $Y$, and $Z$ be metric spaces, and
+  let $f \colon X \to Y$ and $g \colon Y \to Z$ be functions.
+  If $f$ is continuous at $x_0 \in X$ and $g$ is continuous at $f(x_0) \in Y$,
+  then the composition $g \circ f \colon X \to Z$ is continuous at $x_0$.
+
+  (The composition $g \circ f$ is defined by
+  the formula $(g \circ f)(x) = g \big( f(x) \big)$.)
+\end{lemma}
+\begin{proof}
+  \uses{lem:continuity_characterization}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{corollary}[Real multivariate polynomials are continuous]
+  \label{cor:multivariate_polynomial_continuous}
+  \uses{def:continuous}
+  % \lean{}
+  % \leanok
+  Let $N \in \bN$ be a natural number, and let
+  $c_{n,m} \in \bR$ be real numbers for $n,m \in \{0,1,\ldots,N\}$.
+  Then the function $p \colon \bC \to \bR$ defined by
+  \begin{align*}
+    p(x + \ii y) = \sum_{m=0}^N \sum_{n=0}^N c_{m,n} \, x^m \, y^n
+  \end{align*}
+  is continuous.
+\end{corollary}
+\begin{proof}
+  \uses{lem:composition_continuous, lem:complex_continuity_properties, cor:coordinate_continuous}
+  % \leanok
+  See \textbf{MS-C1541 Metric Spaces}.
+\end{proof}
 
 \begin{definition}[Uniform continuity]
   \label{def:uniformly_continuous}
@@ -194,7 +615,10 @@
   %\lean{}
   % \leanok
   Let $X$ and $Y$ be metric spaces.
-  A functions $f \colon X \to Y$ is \term{uniformly continuous} if\ldots
+  A function $f \colon X \to Y$ is \term{uniformly continuous} if
+  for every $\eps > 0$ there exists a $\delta > 0$ such that for
+  any $p_0 \in X$ and $p \in \BallRC{\delta}{p_0}$
+  we have $f(p) \in \BallRC{\eps}{f(p_0)}$.
 \end{definition}
 
 \begin{lemma}[Uniform continuity implies continuity]
@@ -207,9 +631,8 @@
 \begin{proof}
   See \textbf{MS-C1541 Metric Spaces}.
 
-  (The very easy proof is also a good exercise.)
+  (The easy proof is also a good exercise.)
 \end{proof}
-
 
 
 \section{Connectedness and path-connectedness}
@@ -219,7 +642,20 @@
   \uses{def:metric_space}
   %\lean{}
   % \leanok
-  \ldots
+  %\ldots
+  A set $A \subset X$ in a metric space $X$
+  is \term{disconnected} if there exists
+  a continuous surjective function
+  $f \colon A \to \set{0,1}$ onto the two-element discrete
+  set $\set{0,1}$.
+  Otherwise $A$ is \term{connected}
+  (then every continuous function $A \to \set{0,1}$ must be
+  either constant $0$ or constant $1$).
+
+  (The usual definition in topology textbooks reads
+  slightly differently, but it is
+  equivalent to the one we chose here by
+  Lemma~\ref{lem:continuity_characterization}.)
 \end{definition}
 
 \begin{definition}[Path-connectedness]

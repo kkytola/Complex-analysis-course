@@ -26,7 +26,7 @@
   \end{align*}
 \end{lemma}
 \begin{proof}
-  %\uses{}
+  \uses{thm:complex_number_field}
   % \leanok
   Direct calculations.
 \end{proof}
@@ -67,7 +67,7 @@
   \end{align*}
 \end{lemma}
 \begin{proof}
-  %\uses{}
+  \uses{thm:complex_number_field}
   % \leanok
   Straightforward.
 \end{proof}
@@ -94,12 +94,23 @@
 \end{definition}
 
 
+\begin{lemma}[Discontinuity of the principal argument]
+  \label{lem:discontinuity_of_principal_arg}
+  \uses{def:argument, def:continuous, lem:metric_on_C}
+  % \lean{}
+  % \leanok
+  The principal argument
+  $\Arg \colon \bC \setminus \set{0} \to (-\pi,\pi]$
+  is continuous on the subset $\bC \setminus (-\infty,0]$, but it is
+  discontinuous on the negative real axis $(-\infty,0]$.
+\end{lemma}
+
 
 \section{The polar form}
 
 \begin{definition}[Complex exponential function]
   \label{def:complex_exp}
-  \uses{def:complex_numbers}
+  \uses{def:complex_numbers, thm:complex_number_field}
   % \lean{}
   % \leanok
   We define the \term{complex exponential function} $\exp : \bC \to \bC$ by
@@ -117,6 +128,30 @@
     \qquad \text{ for } \theta \in \bR .
   \end{align*}
 \end{definition}
+
+\begin{lemma}[Properties of the complex exponential]
+  \label{lem:complex_exp_properties}
+  \uses{def:complex_exp}
+  % \lean{}
+  % \leanok
+  For any $z,w \in \bC$ we have
+  \begin{align*}
+    e^{z + w} = e^z \, e^w.
+  \end{align*}
+
+  For any $z \in \bC$ we have
+  \begin{align*}
+    e^{\cconj{z}} = \cconj{e^z}, \quad |e^z| = e^{\re(z)}, \quad \arg(e^z) = \im(z) \modtwopi .
+  \end{align*}
+
+  For $z,w \in \bC$ we have
+  $e^{z} = e^{w}$ if and only if $z = w + 2 \pi \ii n$ for some $n \in \bZ$.
+\end{lemma}
+\begin{proof}
+  \uses{lem:trigonometric_angle_sum}
+  % \leanok
+  \ldots
+\end{proof}
 
 \begin{lemma}[Polar form]
   \label{lem:polar_form}
