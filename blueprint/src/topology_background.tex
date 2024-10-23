@@ -1,30 +1,141 @@
 \section{Metrics and related concepts}
 
-\begin{definition}[Ball (disk)]
-  \label{def:ball}
+\begin{definition}[Metric]
+  \label{def:metric_space}
   %\uses{}
   %\lean{}
   % \leanok
-  A \term{ball} is \ldots
+  A \term{metric} on a set $X$ is a function
+  $d \colon X \times X \to [0,\infty)$ such that
+  for all $x_1, x_2, x_3 \in X$ we have
+  \begin{align*}
+    d(x_1,x_3) \le \; & d(x_1,x_2) + d(x_2,x_3)
+            & \text{(triangle inequality)} \\
+    d(x_1,x_2) = \; & d(x_2,x_1)
+            & \text{(symmetricity)} \\
+    d(x_1,_2y) = \; & 0 \text{ if and only if } x_1 = x_2 .
+            & \text{(separation of points)}
+  \end{align*}
+  The set $X$ equipped with the metric $d$ on
+  it is called a \term{metric space}.
 \end{definition}
+
+\begin{lemma}[Metric in the complex plane]
+  \label{lem:metric_on_C}
+  \uses{def:metric_space, def:absolute_value}
+  % \lean{}
+  % \leanok
+  The formula
+  \begin{align*}
+    d(z,w) = |z - w|
+    \qquad \text{ for } z,w \in \bC
+  \end{align*}
+  defines a metric on the complex plane $\bC$.
+
+  (Thus $\bC$ becomes a metric space. Also any subset of $\bC$,
+  in particular $\bR \subset \bC$, becomes a metric space when equipped
+  with the metric given by the above formula restricted to the subset.)
+\end{lemma}
+\begin{proof}
+  \uses{lem:absolute_value_properties}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{definition}[Ball (disk)]
+  \label{def:ball}
+  \uses{def:metric_space}
+  %\lean{}
+  % \leanok
+  Let $X$ be a metric space with metric $d \colon X \times X \to [0,\infty)$.
+  Let $x_0 \in X$ be a point and let $r>0$.
+
+  The set
+  \begin{align*}
+    \BallRC{r}{x_0} = \set{x \in X \; \Big| \; d(x,x_0) < r}
+  \end{align*}
+  is called an \term{open ball} in $X$, centered at $x_0$, and with radius $r$.
+
+  The set
+  \begin{align*}
+    \CBallRC{r}{x_0} = \set{x \in X \; \Big| \; d(x,x_0) \le r}
+  \end{align*}
+  is called a \term{closed ball} in $X$, centered at $x_0$, and with radius $r$.
+
+  The set
+  \begin{align*}
+    \SphereRC{r}{x_0} = \set{x \in X \; \Big| \; d(x,x_0) = r}
+  \end{align*}
+  is called a \term{sphere} in $X$, centered at $x_0$, and with radius $r$.
+
+  (In the case of the complex plane $\bC$, the term \term{disk}
+  may be used instead of the general term ball, and the term \term{circle}
+  may be used instead of the general term sphere.)
+\end{definition}
+
+\begin{definition}[Open set]
+  \label{def:open_set}
+  \uses{def:metric_space, def:ball}
+  % \lean{}
+  % \leanok
+  Let $X$ be a metric space with metric $d \colon X \times X \to [0,\infty)$.
+  A subset $U \subset X$ is said to be an \term{open set} if
+  for every $x \in U$ there exists an $r > 0$ such that
+  $\Ball{r}{x} \subset U$.
+\end{definition}
+
+\begin{definition}[Closed set]
+  \label{def:closed_set}
+  \uses{def:open_set}
+  % \lean{}
+  % \leanok
+  Let $X$ be a metric space with metric $d \colon X \times X \to [0,\infty)$.
+  A subset $F \subset X$ is said to be a \term{closed set} if
+  the complement $X \setminus F \subset X$ is an open set.
+\end{definition}
+
+\begin{definition}[Boundedness]
+  \label{def:bounded}
+  \uses{def:metric_space}
+  % \lean{}
+  % \leanok
+  Let $X$ be a metric space with metric $d \colon X \times X \to [0,\infty)$.
+
+  A subset $A \subset X$ is said to be bounded if there exists
+  a number $M>0$ such that $d(x,y) \le M$ for all $x,y \in A$.
+  (If $X$ is nonempty, an equivalent definition would be that
+  $A$ is bounded if it is a subset of some ball in $X$.)
+
+  A function $f \colon Z \to X$ with values in a metric space~$X$
+  is \term{bounded} if the set $f[Z] \subset X$ of its values is a
+  bounded subset of~$X$.
+
+  (In the case $X = \bC$ we have the following further characterizations:
+  A subset $A \subset \bC$ is bounded if and only if there exists an $R>0$
+  such that $|z| \le R$ for all $z \in A$. A function $f \colon Z \to \bC$
+  is bounded if and only if there exists an $R>0$ such that $|f(z)| \le R$
+  for all $z \in Z$.)
+\end{definition}
+
+
 
 \section{Limits}
 
 \begin{definition}[Limit]
   \label{def:limit}
-  %\uses{}
+  \uses{def:metric_space}
   %\lean{}
   % \leanok
-  Let $X$ be a metric space.
+  %Let $X$ be a metric space with metric $d \colon X \times X \to [0,\infty)$.
   \ldots
 \end{definition}
 
 \begin{definition}[Cauchy sequence]
   \label{def:cauchy_sequence}
-  %\uses{}
+  \uses{def:metric_space}
   %\lean{}
   % \leanok
-  %Let $X$ be a metric space.
+  %Let $X$ be a metric space with metric $d \colon X \times X \to [0,\infty)$.
   \ldots
 \end{definition}
 
@@ -35,6 +146,8 @@
   % \leanok
   If a real number sequence $(x_n)_{n \in \bN}$ is Cauchy,
   then it converges to a limit $\lim_{n \to \infty} x_n \in \bR$.
+
+  (This property is known as \term{completeness} of the metric space $\bR$.)
 \end{lemma}
 \begin{proof}
   %\uses{def:cauchy_sequence}
@@ -44,11 +157,13 @@
 
 \begin{lemma}[Every complex Cauchy sequence converges]
   \label{lem:complex_complete}
-  \uses{def:cauchy_sequence, def:limit, def:complex_numbers}
+  \uses{def:cauchy_sequence, def:limit, lem:metric_on_C}
   %\lean{}
   % \leanok
-  %Let $X$ be a metric space.
-  \ldots
+  If a complex number sequence $(z_n)_{n \in \bN}$ is Cauchy,
+  then it converges to a limit $\lim_{n \to \infty} z_n \in \bC$.
+
+  (This property is known as \term{completeness} of the metric space $\bC$.)
 \end{lemma}
 \begin{proof}
   \uses{lem:real_complete}
@@ -60,11 +175,13 @@
   a subsequence of a subsequence.)
 \end{proof}
 
+
+
 \section{Continuity}
 
 \begin{definition}[Continuity]
   \label{def:continuous}
-  %\uses{}
+  \uses{def:metric_space}
   %\lean{}
   % \leanok
   Let $X$ and $Y$ be metric spaces.
@@ -73,7 +190,7 @@
 
 \begin{definition}[Uniform continuity]
   \label{def:uniformly_continuous}
-  %\uses{}
+  \uses{def:metric_space}
   %\lean{}
   % \leanok
   Let $X$ and $Y$ be metric spaces.
@@ -93,11 +210,13 @@
   (The very easy proof is also a good exercise.)
 \end{proof}
 
+
+
 \section{Connectedness and path-connectedness}
 
 \begin{definition}[Connectedness]
   \label{def:connected}
-  %\uses{}
+  \uses{def:metric_space}
   %\lean{}
   % \leanok
   \ldots
@@ -123,14 +242,15 @@
 \end{proof}
 
 \begin{lemma}[Open connected sets are path-connected]
-  \label{lem:connected_open_implies_path_connected}
-  \uses{def:connected, def:path_connected}
+  \label{lem:open_connected_iff_path_connected}
+  \uses{def:connected, def:path_connected, def:open_set, lem:metric_on_C}
   %\lean{}
   % \leanok
-  If a subset $A \subset \bC$ of the complex plane is open
-  and connected, then it is path-connected.
+  Suppose that $U \subset \bC$ is an open subset of the complex plane.
+  Then $U$ is connected if and only if it is path-connected.
 \end{lemma}
 \begin{proof}
+  \uses{lem:path_connected_implies_connected}
   See \textbf{MS-C1541 Metric Spaces}.
 \end{proof}
 
@@ -146,7 +266,7 @@
 
 \begin{theorem}[Bolzano-Weierstrass theorem]
   \label{thm:bolzano_weierstrass}
-  \uses{def:compact}
+  \uses{def:compact, def:closed_set, lem:metric_on_C, def:bounded}
   %\lean{}
   % \leanok
   %Let $X$ be a metric space.
@@ -159,6 +279,21 @@
 \begin{proof}
   % \leanok
   See \textbf{MS-C1541 Metric Spaces}.
+\end{proof}
+
+\begin{theorem}[Boundedness of continuous functions on compacts]
+  \label{thm:continuous_on_compact_implies_bounded}
+  \uses{def:compact, def:bounded, def:continuous}
+  % \lean{}
+  % \leanok
+  Suppose that $X$ is compact.
+  Then every continuous function $f \colon X \to \bR$
+  is bounded.
+\end{theorem}
+\begin{proof}
+  % \uses{}
+  % \leanok
+  \ldots
 \end{proof}
 
 \begin{lemma}[On a compact domain continuity implies uniform continuity]
