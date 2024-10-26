@@ -124,15 +124,15 @@ very closely related to the Cauchy-Riemann equations.
 \end{proof}
 
 \begin{lemma}[Complex differentiability implies continuity \Palka{Sec.~III.1.1}]
-  \label{lem:differentiable_implies_continuous}
+  \label{lem:complex_differentiable_implies_continuous}
   \uses{def:continuous, def:complex_derivative}
   %\lean{}
   % \leanok
-  If a function $f \colon A \to \bC$ is complex differentiable at a point $z_0 \in A$,
-  then it is continuous at $z_0$.
+  If a function $f \colon A \to \bC$ has a complex derivative $f'(z_0)$
+  at a point $z_0 \in A$, then it is continuous at $z_0$.
 \end{lemma}
 \begin{proof}
-  %\uses{}
+  \uses{lem:differentiable_implies_continuous}
   % \leanok
   \ldots
 \end{proof}
@@ -145,22 +145,22 @@ very closely related to the Cauchy-Riemann equations.
   \uses{def:complex_derivative, def:linear}
   %\lean{}
   % \leanok
-  If two functions $f, g \colon A \to \bC$ are complex differentiable
-  at a point $z_0 \in A$, then the sum function $f + g$
-  is also complex differentiable at $z_0$, and its derivative is
+  If two functions $f, g \colon A \to \bC$ have complex derivatives
+  $f'(z_0), g'(z_0)$ at a point $z_0 \in A$, then the sum function $f + g$
+  has a complex derivative at $z_0$ given by
   \begin{align*}
     (f + g)'(z_0) = f'(z_0) + g'(z_0) .
   \end{align*}
-  If a function $f \colon A \to \bC$ is complex differentiable
-  at a point $z_0 \in A$ and $c \in \bC$ is a complex number,
-  then the function $c f$
-  is also complex differentiable at $z_0$, and its derivative is
+  If a function $f \colon A \to \bC$ is has a complex derivative
+  $f'(z_0)$ at a point $z_0 \in A$ and $c \in \bC$ is a complex number,
+  then the function $c f$ has complex derivative
   \begin{align*}
-    (c f)'(z_0) = c \, f'(z_0) .
+    (c f)'(z_0) = c \, f'(z_0)
   \end{align*}
+  at $z_0$.
 \end{lemma}
 \begin{proof}
-  %\uses{}
+  \uses{lem:complex_limit_properties}
   % \leanok
   \ldots
 \end{proof}
@@ -170,12 +170,13 @@ very closely related to the Cauchy-Riemann equations.
   \uses{def:complex_derivative}
   %\lean{}
   % \leanok
-  If two functions $f, g \colon A \to \bC$ are complex differentiable
-  at a point $z_0 \in A$, then the product function $f g$
-  is also complex differentiable at $z_0$, and its derivative is
+  If two functions $f, g \colon A \to \bC$ have complex derivatives
+  $f'(z_0), g'(z_0)$ at a point $z_0 \in A$, then the product function $f g$
+  has complex derivative
   \begin{align*}
-    (f g)'(z_0) = f'(z_0) \, g(z_0) + f(z_0) \, g'(z_0) .
+    (f g)'(z_0) = f'(z_0) \, g(z_0) + f(z_0) \, g'(z_0)
   \end{align*}
+  at $z_0$.
 \end{lemma}
 \begin{proof}
   %\uses{}
@@ -188,13 +189,14 @@ very closely related to the Cauchy-Riemann equations.
   \uses{def:complex_derivative}
   %\lean{}
   % \leanok
-  If two functions $f, g \colon A \to \bC$ are complex differentiable
-  at a point $z_0 \in A$ and $g(z_0) \ne 0$, then the quotient function $f / g$
-  is also complex differentiable at $z_0$, and its derivative is
+  If two functions $f, g \colon A \to \bC$ have complex derivatives
+  $f'(z_0), g'(z_0)$ at a point $z_0 \in A$ and $g(z_0) \ne 0$, then
+  the quotient function $f / g$ has complex derivative
   \begin{align*}
     \left( \frac{f}{g} \right)'(z_0)
       = \frac{f'(z_0) \, g(z_0) - f(z_0) \, g'(z_0)}{g(z_0)^2} .
   \end{align*}
+  at $z_0$.
 \end{lemma}
 \begin{proof}
   %\uses{}
@@ -277,24 +279,7 @@ very closely related to the Cauchy-Riemann equations.
   \ldots
 \end{proof}
 
-\begin{lemma}[Branches of $n$th root functions are analytic]
-  \label{lem:root_function_analytic}
-  \uses{def:analytic_function}
-  % \lean{}
-  % \leanok
-  The principal branch of the $n$th root function
-  $z \mapsto \sqrt[n]{z}$ is analytic on its domain
-  $\bC \setminus (-\infty,0]$.
 
-  (Different branch choices can be made to obtain analyticity on
-  other domains, but no branch of $\sqrt[n]{z}$ can be made analytic
-  on all of $\bC$.)
-\end{lemma}
-\begin{proof}
-  \uses{lem:inverse_derivative}
-  % \leanok
-  \ldots
-\end{proof}
 
 \section{Cauchy-Riemann equations}
 
@@ -355,6 +340,39 @@ very closely related to the Cauchy-Riemann equations.
   \ldots
 \end{proof}
 
+\begin{lemma}[The complex exponential is analytic]
+  \label{lem:exp_analytic}
+  \uses{def:complex_exp, def:analytic_function}
+  %\lean{}
+  % \leanok
+  The complex exponential function $\exp \colon \bC \to \bC$ is analytic.
+\end{lemma}
+\begin{proof}
+  \uses{thm:cauchy_riemann}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{lemma}[Branches of $n$th root functions are analytic]
+  \label{lem:root_function_analytic}
+  \uses{def:analytic_function, def:principal_complex_nth_root}
+  % \lean{}
+  % \leanok
+  The principal branch of the $n$th root function
+  $z \mapsto \sqrt[n]{z}$ is analytic on its domain
+  $\bC \setminus (-\infty,0]$.
+
+  (Different branch choices can be made to obtain analyticity on
+  other domains, but for $n \ge 2$,
+  no branch of $\sqrt[n]{z}$ can be made analytic on all of $\bC$.)
+\end{lemma}
+\begin{proof}
+  \uses{lem:inverse_derivative}
+  % \leanok
+  \ldots
+\end{proof}
+
+
 
 \subsection{Consequences of Cauchy-Riemann equations}
 
@@ -369,7 +387,7 @@ very closely related to the Cauchy-Riemann equations.
   Then $f$ is a constant function.
 \end{lemma}
 \begin{proof}
-  \uses{thm:cauchy_riemann}
+  \uses{thm:cauchy_riemann, lem:vanishing_partial_derivatives_implies_constant}
   % \leanok
   \ldots
 \end{proof}
@@ -386,7 +404,7 @@ very closely related to the Cauchy-Riemann equations.
   is constant on $D$, then $f$ is itself a constant function.
 \end{theorem}
 \begin{proof}
-  \uses{thm:cauchy_riemann}
+  \uses{thm:cauchy_riemann, lem:zero_derivative_implies_constant}
   % \leanok
   \ldots
 \end{proof}

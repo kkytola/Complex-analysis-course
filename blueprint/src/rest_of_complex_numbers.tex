@@ -141,7 +141,9 @@
 
   For any $z \in \bC$ we have
   \begin{align*}
-    e^{\cconj{z}} = \cconj{e^z}, \quad |e^z| = e^{\re(z)}, \quad \arg(e^z) = \im(z) \modtwopi .
+    e^{\cconj{z}} = \cconj{e^z}, \quad
+    |e^z| = e^{\re(z)}, \quad
+    \arg(e^z) = \im(z) \modtwopi .
   \end{align*}
 
   For $z,w \in \bC$ we have
@@ -278,6 +280,101 @@
 
 \subsection{Exponentials and branches of logarithms}
 
+\begin{definition}[Principal complex logarithm]
+  \label{def:principal_complex_log}
+  \uses{def:argument}
+  % \lean{}
+  % \leanok
+  The \term{principal logarithm} is the function
+  \begin{align*}
+    \Log \colon \; & \bC \setminus \set{0} \to \bC \\
+    \Log(z) \, = \; & \log |z| + \ii \, \Arg(z) ,
+  \end{align*}
+  where $\log |z|$ is the usual natural logarithm of the positive
+  real number $|z|>0$ and
+  $\Arg(z) \in (-\pi,\pi]$ is the principal argument of
+  the nonzero complex number $z \ne 0$.
 
+  (Directly from this definition one sees that for
+  $z \in \bC \setminus \set{0}$ we have $e^{\Log(z)} = z$.
+  All complex solutions $w$ to $e^w = z$ are of the
+  form $w = \Log(z) + 2 \pi \ii n$ where $n \in \bZ$.)
+\end{definition}
+
+\begin{definition}[Branches of complex logarithm]
+  \label{def:branch_of_log}
+  \uses{def:complex_exp, def:open_set, def:continuous, def:principal_complex_log}
+  % \lean{}
+  % \leanok
+  A \term{branch of the logarithm} is a continuous function
+  $\ell \colon U \to \bC$ on an open set $U \subset \bC$ such that
+  \begin{align*}
+    e^{\ell(z)} = z \qquad \text{ for all } z \in U .
+  \end{align*}
+
+  For example, the principal logarithm $\Log$
+  restricted to the open set $\bC \setminus (-\infty,0]$
+  is called the principal branch of the logarithm. Note that
+  this principal branch cannot be extended continuously to
+  the negative real axis.
+
+  (Note that since $e^w \ne 0$ for all $w \in \bC$, any branch
+  of the logarithm must exclude the origin from its domain of
+  definition, $0 \notin U$.)
+\end{definition}
+
+\subsection{Complex power functions}
+
+\begin{definition}[Principal complex power function]
+  \label{def:principal_complex_power}
+  \uses{def:principal_complex_log}
+  % \lean{}
+  % \leanok
+  Let $\alpha \in \bC$. The \term{principal (complex) $\alpha$th
+  power function} is the function $\bC \setminus \set{0} \to \bC$
+  given by
+  \begin{align*}
+    z \, \mapsto \, z^\alpha \, := \, e^{\alpha \, \Log(z)} .
+  \end{align*}
+
+  (Note: Integer powers have more direct natural definitions.
+  For $n \in \bN$ we simply define $z^n$ by recursive multiplication
+  and the function $z \mapsto z^n$ is continuous and defined in
+  all of $\bC$ and coincides with the principal power function
+  with $\alpha = n$ on $\bC \setminus \set{0}$.
+  We also define $z^{-n}$ by recursive multiplication of the
+  inverse $z^{-1}$ of $z$, and the function $z \mapsto z^{-n}$
+  is continuous on $\bC \setminus \set{0}$ and coincides with
+  the principal power function with $\alpha = -n$.
+  For $n = 0$ we define $z^0 = 1$ for any $z \in \bC$, and this
+  coincides with the principal power function with $\alpha = 0$
+  on $\bC \setminus \set{0}$.)
+\end{definition}
+
+Given a branch $\ell \colon U \to \bC$ of logarithm on an
+open set $U \subset \bC$, we obtain a branch of the $\alpha$th power
+function on $U$ by the formula $z \mapsto e^{\alpha \ell(z)}$.
+Using the same branch of the logarithm for the
+power functions, we have $z^\alpha z^\beta = z^{\alpha + \beta}$.
 
 \subsection{Branches of $n$th roots}
+
+\begin{definition}[Principal $n$th root function]
+  \label{def:principal_complex_nth_root}
+  \uses{def:principal_complex_log, def:principal_complex_power, lem:roots_of_unity}
+  % \lean{}
+  % \leanok
+  Let $n \in \bN$. The \term{principal (complex) $n$th
+  root} of $z \in \bC \setminus \set{0}$ is
+  \begin{align*}
+    \sqrt[n]{z} \; :=  \, z^{1/n} \, = \, e^{\frac{1}{n} \Log(z)} .
+  \end{align*}
+
+  (It follows directly from the definition and
+  the properties of complex exponential that
+  $(\sqrt[n]{z})^n = z$.
+  All complex solutions $w$ to $w^n = z$ are of the
+  form $w = \zeta \sqrt[n]{z}$ where $\zeta = e^{2 \pi \ii j / n}$
+  with $j = 0, 1, \ldots, n-1$, i.e., $\zeta$ is one of the
+  $n$ complex $n$th roots of unity.)
+\end{definition}

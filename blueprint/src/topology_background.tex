@@ -184,7 +184,7 @@
   %%(or that the sequence \term{converges} to the limit $x$)
   We say that the sequence $(x_n)_{n \in \bN}$ \term{converges}
   to a \term{limit} $x \in X$
-  if for all $\eps > 0$ there exists an $N \in \bN$ such that
+  if for any $\eps > 0$ there exists an $N \in \bN$ such that
   for all $n \ge N$ we have $x_n \in \BallRC{\eps}{x}$
   (i.e., $\genmet(x_n,x) < \eps$).
   We then denote
@@ -199,7 +199,7 @@
   let $f \colon X \to Y$ be a function.
   We say that the function $f$ has a \term{limit} $y \in Y$
   \term{at a point} $p_0 \in X$
-  if for all $\eps > 0$ there exists a $\delta > 0$ such that
+  if for any $\eps > 0$ there exists a $\delta > 0$ such that
   for all $p \in \BallRC{\delta}{p_0} \setminus \set{p_0}$
   %(i.e., when $0 < \genmet_X (p,p_0) < \delta$)
   we have $f(p) \in \BallRC{\eps}{y}$.
@@ -213,7 +213,7 @@
 
   (Equivalently, written in terms of distances,
   $\lim_{p \to p_0} f(p) = y$ means that
-  for every $\eps > 0$ there exists a $\delta > 0$ such that
+  for any $\eps > 0$ there exists a $\delta > 0$ such that
   we have $\genmet_Y \big( f(p), y \big) < \eps$ whenever
   $0 < \genmet_X (p,p_0) < \delta$.)
 \end{definition}
@@ -648,9 +648,9 @@
   a continuous surjective function
   $f \colon A \to \set{0,1}$ onto the two-element discrete
   set $\set{0,1}$.
-  Otherwise $A$ is \term{connected}
-  (then every continuous function $A \to \set{0,1}$ must be
-  either constant $0$ or constant $1$).
+  Otherwise $A$ is \term{connected};
+  then every continuous function $A \to \set{0,1}$ must be
+  either constant $0$ or constant $1$.
 
   (The usual definition in topology textbooks reads
   slightly differently, but it is
@@ -663,7 +663,11 @@
   \uses{def:path}
   %\lean{}
   % \leanok
-  \ldots
+  A set $A \subset X$ in a metric space $X$
+  is \term{path connected} if for any two points $p, q \in X$
+  there exists a continuous function $\gamma \colon [0,1] \to X$
+  such that $\gamma(0) = p$ and $\gamma(1) = q$
+  (a parametrized path in $X$ starting from $p$ and ending at $q$).
 \end{definition}
 
 \begin{lemma}[Path-connectedness implies connectedness]
@@ -671,7 +675,7 @@
   \uses{def:connected, def:path_connected}
   %\lean{}
   % \leanok
-  If $X$ is path-connected, then it is connected.
+  If a metric space $X$ is path-connected, then it is connected.
 \end{lemma}
 \begin{proof}
   See \textbf{MS-C1541 Metric Spaces}.

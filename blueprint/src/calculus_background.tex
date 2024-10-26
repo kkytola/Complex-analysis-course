@@ -1,3 +1,93 @@
+\section{Differentiability}
+
+\begin{definition}[Real differentiability]
+  \label{def:differential}
+  \uses{def:limit, def:linear, def:interior}
+  %\lean{}
+  % \leanok
+  Let $m,n \in \bN$, and
+  let $f \colon U \to \bR^m$ be a function
+  defined on a subset $U \subset \bR^n$.
+  A linear map $L \colon \bR^n \to \bR^m$
+  is said to be a \term{differential} of $f$
+  at $p_0 \in U$ if
+  \begin{align*}
+    f(p) = f(p_0) + L (p-p_0) + E(p-p_0)
+  \end{align*}
+  where the error term $E$ is small near $p_0$ in the sense that
+  \begin{align*}
+    \lim_{p \to p_0} \frac{\| E(p-p_0) \|}{\|p-p_0\|} = 0 .
+  \end{align*}
+  We say that $f$ is \term{differentiable} at $p_0$ if such
+  a linear map $L$ exists.
+
+  It is easy to check that the differential $L$ of $f$ at $p_0$
+  is unique if $p_0$ is an interior point of $U$;
+  we then denote it by $L = \ud f (p_0)$.
+\end{definition}
+
+\begin{lemma}[Differentiability implies continuity]
+  \label{lem:differentiable_implies_continuous}
+  \uses{def:differential, def:continuous}
+  % \lean{}
+  % \leanok
+  If a function $f \colon U \to \bR^m$
+  defined on a subset $U \subset \bR^n$ is differentiable
+  at $p_0 \in U$, then it is continuous at $p_0$.
+\end{lemma}
+\begin{proof}
+  %\uses{}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{lemma}[Jacobian matrix of the differential]
+  \label{lem:jacobian_matrix}
+  \uses{def:differential}
+  % \lean{}
+  % \leanok
+  If a function $f \colon U \to \bR^m$
+  defined on a subset $U \subset \bR^n$ is differentiable
+  at an interior point $p_0$ of $U$, then it has
+  all first order partial derivatives at $p_0$, and the
+  matrix representation of the differential $\ud f (p_0)$
+  in the standard bases of $\bR^m$ and $\bR^n$ is
+  \begin{align*}
+    \ud f (p_0)
+      %= \Big[ \frac{\partial f}{\partial x_1}(p_0) \; \cdots
+      %          \; \frac{\partial f}{\partial x_n}(p_0) \Big]
+      = \left[ \begin{array}{ccc}
+        \frac{\partial f_1}{\partial x_1}(p_0) & \cdots & \frac{\partial f_1}{\partial x_n}(p_0) \\
+        \vdots & \ddots & \vdots \\
+        \frac{\partial f_m}{\partial x_1}(p_0) & \cdots & \frac{\partial f_m}{\partial x_n}(p_0)
+        \end{array} \right]
+      \in \bR^{m \times n} ,
+  \end{align*}
+  where $f_1, \ldots, f_m \colon U \to \bR$ denote component functions of $f$.
+\end{lemma}
+\begin{proof}
+  %\uses{}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{lemma}[Vanishing partial derivatives implies locally constant]
+  \label{lem:vanishing_partial_derivatives_implies_constant}
+  \uses{def:differential, def:open_set, def:connected}
+  % \lean{}
+  % \leanok
+  Suppose that $f \colon U \to \bR^m$ is a function
+  defined on an open and connected subset $U \subset \bR^n$ of $\bR^n$
+  whose first order partial derivatives exist and are zero at all points
+  of $U$. Then $f$ is a constant function.
+\end{lemma}
+\begin{proof}
+  \uses{lem:open_connected_iff_path_connected}
+  % \leanok
+  \ldots
+\end{proof}
+
+
 \section{Riemann integral}
 
 For the purposes of this course, it suffices to know the Riemann
