@@ -92,15 +92,19 @@ very closely related to the Cauchy-Riemann equations.
   \uses{thm:complex_number_field, def:limit}
   %\lean{}
   % \leanok
-  A function $f \colon A \to \bC$ is said to be
-  \term{complex differentiable} at an interior
-  point $z_0 \in A \subset \bC$ of its domain of definition
-  if the limit
+  Let $f \colon A \to \bC$ be a complex-valued function defined on
+  a subset $A \subset \bC$ of the complex plane, and let $z_0 \in A$
+  be an interior point of the subset.
+
+  The $f$ is said to have
+  a \term{complex derivative}
   \begin{align*}
     f'(z_0) := \lim_{z \to z_0} \frac{f(z) - f(z_0)}{z - z_0}
   \end{align*}
-  exists. The value $f'(z_0) \in \bC$ is then called the
-  \term{(complex) derivative} of $f$ at $z_0$.
+  at $z_0$, if the limit on the right hand side above exists.
+
+  (In complex analysis we often drop the epithet ``complex'' above,
+  and simply call $f'(z_0)$ the \term{derivative} of $f$ at $z_0$.)
 \end{definition}
 
 \begin{lemma}[Local linear approximation]
@@ -124,7 +128,7 @@ very closely related to the Cauchy-Riemann equations.
 \end{proof}
 
 \begin{lemma}[Complex differentiability implies continuity \Palka{Sec.~III.1.1}]
-  \label{lem:complex_differentiable_implies_continuous}
+  \label{lem:complex_derivative_implies_continuous}
   \uses{def:continuous, def:complex_derivative}
   %\lean{}
   % \leanok
@@ -136,6 +140,55 @@ very closely related to the Cauchy-Riemann equations.
   % \leanok
   \ldots
 \end{proof}
+
+
+
+\section{Cauchy-Riemann equations}
+
+\begin{lemma}[Complex derivative implies differentiability]
+  \label{lem:complex_derivative_implies_differentiable}
+  \uses{def:complex_derivative, def:differential, lem:complex_linear_vs_real_linear}
+  %\lean{}
+  % \leanok
+  Let $f \colon A \to \bC$ be a function defined on a set $A \subset \bC$,
+  and let $u \colon U \to \bR$ and $v \colon U \to \bR$ be its
+  real and imaginary parts, viewed as real-valued functions of two real variables,
+  $u(x,y) = \re \big( f (x + \ii y) \big)$ and
+  $v(x,y) = \im \big( f (x + \ii y) \big)$,
+  so that $f = u + \ii \, v$.
+  If $f$ has a complex derivative $f'(z_0)$ at an interior
+  point $z_0 = x_0 + \ii y_0 \in A$, then $u$ and $v$ are differentiable
+  at $(x_0,y_0)$ and their partial derivatives satisfy the
+  \term{Cauchy-Riemann equations}
+  \begin{align*}
+    %\pder{x} u(x,y) = \pder{y} v(x,y)
+    %\pderof{u}{x} (x,y) = \pderof{v}{y} (x,y)
+    \pderof{u}{x}(x_0,y_0) = \pderof{v}{y}(x_0,y_0)
+    \quad \text{and} \quad
+    %\pder{y} u(x,y) = -\pder{x} v(x,y) .
+    %\pderof{u}{y} (x,y) = - \pderof{v}{x} (x,y) .
+    \pderof{u}{y}(x_0,y_0) = - \pderof{v}{x}(x_0,y_0).
+  \end{align*}
+
+  (These equations are equivalent to the differential
+  $\ud f (x_0, y_0) \colon \bR^2 \to \bR^2$
+  being $\bC$-linear when we identify $\bR^2 = \bC$.)
+
+  We can then write the derivative at $z_0$ in any of the following ways:
+  \begin{align*}
+    f'(z_0) \, = \; & \pderof{u}{x}(x_0,y_0) + \ii \, \pderof{v}{x}(x_0,y_0)
+    = \pderof{v}{y}(x_0,y_0) - \ii \, \pderof{u}{y}(x_0,y_0) \\
+    = \; & \pderof{u}{x}(x_0,y_0) - \ii \, \pderof{u}{y}(x_0,y_0)
+    = \pderof{v}{y}(x_0,y_0) + \ii \, \pderof{v}{x}(x_0,y_0) .
+  \end{align*}
+
+\end{lemma}
+\begin{proof}
+  \uses{lem:local_linear_approximation, lem:jacobian_matrix}
+  % \leanok
+  \ldots
+\end{proof}
+
 
 
 \subsection{Differentiation rules}
@@ -252,37 +305,6 @@ very closely related to the Cauchy-Riemann equations.
   differentiable at every point $z_0 \in U$.
 \end{definition}
 
-\begin{lemma}[Polynomials are analytic]
-  \label{lem:polynomial_analytic}
-  \uses{def:polynomial, def:analytic_function}
-  %\lean{}
-  % \leanok
-  Every polynomial function $p \colon \bC \to \bC$ is analytic.
-\end{lemma}
-\begin{proof}
-  \uses{lem:derivative_linearity, lem:leibniz_rule}
-  % \leanok
-  \ldots
-\end{proof}
-
-\begin{lemma}[Rational functions are analytic]
-  \label{lem:rational_function_analytic}
-  \uses{def:rational_function, def:analytic_function}
-  %\lean{}
-  % \leanok
-  Every rational function $f \colon U \to \bC$ is analytic
-  on its domain of definition $U \subset \bC$.
-\end{lemma}
-\begin{proof}
-  \uses{lem:polynomial_analytic, lem:quotient_derivative}
-  % \leanok
-  \ldots
-\end{proof}
-
-
-
-\section{Cauchy-Riemann equations}
-
 \begin{theorem}[Cauchy-Riemann equations \Palka{Thm~III.2.2}]
   \label{thm:cauchy_riemann}
   \uses{def:analytic_function}
@@ -290,19 +312,18 @@ very closely related to the Cauchy-Riemann equations.
   % \leanok
   Let $f \colon U \to \bC$ be a function defined on an open set $U \subset \bC$,
   and let $u \colon U \to \bR$ and $v \colon U \to \bR$ be its
-  real and imaginary parts, viewed as real functions of two real variables,
+  real and imaginary parts, viewed as real-valued functions of two real variables,
   \begin{align*}
     u(x,y) = \re \Big( f (x + \ii y) \Big)
     \quad \text{and} \quad
     v(x,y) = \im \Big( f (x + \ii y) \Big)
   \end{align*}
   so that $f = u + \ii \, v$.
-  Suppose furthermore that $u$ and $v$ are continuously real-differentiable on $U$.
 
   Then the following are equivalent:
   \begin{itemize}
-    \item The partial derivatives of $u$ and $v$ satisfy
-          the \term{Cauchy-Riemann equations}
+    \item The functions $u$ and $v$ are differentiable at every point in $U$
+          and their partial derivatives satisfy the \term{Cauchy-Riemann equations}
           \begin{align*}
             %\pder{x} u(x,y) = \pder{y} v(x,y)
             %\pderof{u}{x} (x,y) = \pderof{v}{y} (x,y)
@@ -335,7 +356,48 @@ very closely related to the Cauchy-Riemann equations.
   %the Cauchy-Riemann equations above, then $f$ is analytic.
 \end{theorem}
 \begin{proof}
-  \uses{lem:complex_linear_vs_real_linear, lem:local_linear_approximation}
+  \uses{lem:complex_derivative_implies_differentiable}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{lemma}[Analytic functions are continuous]
+  \label{lem:analytic_implies_continuous}
+  \uses{def:analytic_function, def:continuous}
+  % \lean{}
+  % \leanok
+  Every function $f \colon U \to \bC$ which is analytic on
+  an open set $U \subset \bC$ is also continuous on $U$.
+\end{lemma}
+\begin{proof}
+  \uses{lem:complex_derivative_implies_continuous}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{lemma}[Polynomials are analytic]
+  \label{lem:polynomial_analytic}
+  \uses{def:polynomial, def:analytic_function}
+  %\lean{}
+  % \leanok
+  Every polynomial function $p \colon \bC \to \bC$ is analytic.
+\end{lemma}
+\begin{proof}
+  \uses{lem:derivative_linearity, lem:leibniz_rule}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{lemma}[Rational functions are analytic]
+  \label{lem:rational_function_analytic}
+  \uses{def:rational_function, def:analytic_function}
+  %\lean{}
+  % \leanok
+  Every rational function $f \colon U \to \bC$ is analytic
+  on its domain of definition $U \subset \bC$.
+\end{lemma}
+\begin{proof}
+  \uses{lem:polynomial_analytic, lem:quotient_derivative}
   % \leanok
   \ldots
 \end{proof}
@@ -346,6 +408,7 @@ very closely related to the Cauchy-Riemann equations.
   %\lean{}
   % \leanok
   The complex exponential function $\exp \colon \bC \to \bC$ is analytic.
+  Its (complex) derivative at $z \in \bC$ is $\exp'(z) = \exp(z)$.
 \end{lemma}
 \begin{proof}
   \uses{thm:cauchy_riemann}
