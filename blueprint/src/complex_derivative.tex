@@ -281,7 +281,14 @@ very closely related to the Cauchy-Riemann equations.
   \uses{def:complex_derivative}
   %\lean{}
   % \leanok
-  \ldots (with $w_0 = f(z_0)$)
+  Suppose that $f$ is a complex-valued function defined on a subset of
+  the complex plane, which has a nonzero complex derivative $f'(z_0) \ne 0$
+  at a point $z_0$ and which has a local inverse function near $z_0$ in the
+  sense that there are open sets $U, V \subset \bC$ with $z_0 \in U$
+  and $f(z_0) \in V$, and the restriction of $f$ to $U$
+  is continuous $U \to V$ with a continuous inverse. Then
+  the local inverse function $f^{-1} \colon V \to U$ has complex derivative
+  at $w_0 := f(z_0)$ given by
   \begin{align*}
     (f^{-1})'(w_0) = \frac{1}{f'(z_0)} .
   \end{align*}
@@ -445,7 +452,7 @@ very closely related to the Cauchy-Riemann equations.
   %\lean{}
   % \leanok
   Suppose that $f \colon D \to \bC$ is a analytic function
-  on a domain $D \subset \bC$ (i.e. a connected open set)
+  on a connected open subset $D \subset \bC$ of the complex plane
   such that $f'(z) = 0$ for all $z \in D$.
   Then $f$ is a constant function.
 \end{lemma}
@@ -461,13 +468,72 @@ very closely related to the Cauchy-Riemann equations.
   %\lean{}
   % \leanok
   Suppose that $f \colon D \to \bC$ is a analytic function
-  on a domain $D \subset \bC$ (i.e. a connected open set).
+  on a connected open subset $D \subset \bC$ of the complex plane.
   If any of the functions $u = \re(f) \colon D \to \bR$,
   $v = \im(f) \colon D \to \bR$, $|f| \colon D \to \bR$,
   is constant on $D$, then $f$ is itself a constant function.
 \end{theorem}
 \begin{proof}
   \uses{thm:cauchy_riemann, lem:zero_derivative_implies_constant}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{lemma}[Harmonicity of real and imaginary parts]
+  \label{lem:real_and_imaginary_parts_harmonic}
+  \uses{def:analytic_function}
+  % \lean{}
+  % \leanok
+  Suppose that $f \colon U \to \bC$ is a analytic function
+  on an open subset $U \subset \bC$ of the complex plane.
+  Let $u,v \colon U \to \bR$ denote the real and imaginary
+  parts of $f$ defined by $u(x,y) = \re \big( f(x + \ii y)\big)$
+  and $v(x,y) = \im \big( f(x + \ii y)\big)$. Assume
+  moreover that that $u$ and $v$ are twice continuously differentiable
+  (later it will be shown that this assumption holds automatically
+  by the analyticity of $f$).
+  Then $u$ and $v$ are \term{harmonic functions},
+  i.e., they satisfy % the \term{Laplace equation}
+  \begin{align*}
+    \triangle u = 0 \qquad \text{ and } \qquad \triangle v = 0 ,
+    \qquad \text{ where} \qquad
+    \triangle = \pdder{x} + \pdder{y} .
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  \uses{thm:cauchy_riemann}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{definition}[Harmonic conjugate]
+  \label{def:harmonic_conjugate}
+  \uses{def:analytic_function, lem:real_and_imaginary_parts_harmonic}
+  % \lean{}
+  % \leanok
+  Suppose that $u \colon U \to \bR$ is harmonic function
+  on an open subset $U \subset \bR^2$, i.e., a twice continuously
+  differentiable function satisfying $\pdder{x} u + \pdder{y} u = 0$
+  on $U$. A function $v \colon U \to \bR$ is called a
+  \term{harmonic conjugate} of $u$ if the function
+  \begin{align*}
+    x + \ii y \; \mapsto \; u(x,y) + \ii \, v(x,y)
+  \end{align*}
+  is analytic on $U$.
+\end{definition}
+
+\begin{lemma}[Local existence of harmonic conjugates]
+  \label{lem:existence_of_harmonic_conjugate}
+  \uses{def:harmonic_conjugate, lem:real_and_imaginary_parts_harmonic}
+  % \lean{}
+  % \leanok
+  Let $B = \BallRC{r}{z_0} \subset \bC$ be a disk in the complex plane.
+  Suppose that $u \colon B \to \bR$ is harmonic function on $B$. Then a
+  harmonic conjugate $v \colon B \to \bR$ of $u$ in the disk $B$ exists and
+  is unique up to an additive constant.
+\end{lemma}
+\begin{proof}
+  \uses{thm:cauchy_riemann}
   % \leanok
   \ldots
 \end{proof}
