@@ -7,14 +7,36 @@
   % \leanok
   A \term{path} in the complex plane is a continuous function $\gamma \colon [a,b] \to \bC$
   from a closed interval $[a,b] \subset \bR$ to $\bC$.
+
+  When $A \subset \bC$ is a subset of the complex plane, we say that $\gamma$ is a path in $A$
+  if $\gamma(t) \in A$ for all $t \in [a,b]$.
 \end{definition}
 
-\begin{definition}[Smooth and piecewise smooth paths \Palka{Sec.~IV.1.2}]
-  \label{def:piecewise_smooth_path}
+\begin{definition}[Smooth path \Palka{Sec.~IV.1.2}]
+  \label{def:smooth_path}
   \uses{def:path, def:continuous}
   %\lean{}
   % \leanok
-  \ldots
+  A path $\gamma \colon [a,b] \to \bC$ is \term{smooth}
+  if it is continuously differentiable, i.e., the derivative
+  \begin{align*}
+    \dot{\gamma}(t) = \frac{\ud}{\ud t} \gamma(t)
+  \end{align*}
+  with respect to the parameter $t$
+  exists for all $t \in [a,b]$ (one-sided derivative at the end points),
+  and defines a continuous complex-valued function $t \mapsto \dot{\gamma}(t)$
+  on $[a,b]$.
+\end{definition}
+
+\begin{definition}[Contour (piecewise smooth path) \Palka{Sec.~IV.1.2}]
+  \label{def:piecewise_smooth_path}
+  \uses{def:smooth_path, def:continuous}
+  %\lean{}
+  % \leanok
+  A \term{contour} (also called a \term{piecewise smooth path})
+  is a continuous function $\gamma \colon [a,b] \to \bC$
+  such that for some finite subdivision $a = t_0 < t_1 < \ldots < t_n = b$,
+  the restrictions $\gamma|_{[t_{j-1},t_j]}$, $j = 1, \ldots, n$ are smooth paths.
 \end{definition}
 
 \begin{definition}[Reverse path \Palka{Sec.~IV.1.4}]
@@ -22,7 +44,12 @@
   \uses{def:path}
   %\lean{}
   % \leanok
-  \ldots
+  Given a path $\gamma \colon [a,b] \to \bC$,
+  the \term{reverse path} $\opp{\gamma} \colon [a,b] \to \bC$
+  is the path defined by
+  \begin{align*}
+    \opp{\gamma}(t) = \gamma(a+b-t) \qquad \text{ for } t \in [a,b] .
+  \end{align*}
 \end{definition}
 
 \begin{definition}[Concatenation of paths \Palka{Sec.~IV.1.4}]
@@ -30,15 +57,41 @@
   \uses{def:path}
   %\lean{}
   % \leanok
-  \ldots
+  Given path $\gamma \colon [a,b] \to \bC$ and
+  $\eta \colon [c,d] \to \bC$ with $\gamma(b) = \eta(c)$
+  (the starting point of $\eta$ coincides with the end point of $\gamma$),
+  the \term{concatenation} of $\gamma$ and $\eta$ is the path
+  $\gamma \concat \eta \colon [0,(b-a)+(d-c)] \to \bC$ defined by
+  \begin{align*}
+    (\gamma \concat \eta)(t) =
+    \begin{cases}
+      \gamma(a+t) & \text{ for } t \in [0,b-a] , \\
+      \eta(c+t-(b-a)) & \text{ for } t \in [b-a,(b-a)+(d-c)] .
+    \end{cases}
+  \end{align*}
 \end{definition}
 
 \begin{definition}[Reparametrization of paths \Palka{Sec.~IV.1.5}]
   \label{def:path_reparametrization}
-  \uses{def:path}
+  \uses{def:path, def:compact}
   %\lean{}
   % \leanok
-  \ldots
+  Given a path $\gamma \colon [a,b] \to \bC$ and a continuous increasing
+  bijection $\phi \colon [c,d] \to [a,b]$, we define the \term{reparametrization}
+  of $\gamma$ by $\phi$ as the path
+  \begin{align*}
+    \gamma \circ \phi \colon \, [c,d] \, \to \; & \bC
+    t \, \mapsto \; & \gamma(\phi(t)) .
+  \end{align*}
+
+  Note that
+  \begin{itemize}
+    \item $\phi^{-1} \colon [a,b] \to [c,d]$ is also a continuous increasing
+      bijection (a continuous bijection from the
+      compact $[a,b]$ is automatically a homeomorphism; see ) and
+      reparametrization can be undone by rereparametrizing by $\phi^{-1}$;
+    \item X
+  \end{itemize}
 \end{definition}
 
 \begin{definition}[Smooth and piecewise smooth reparametrizations \Palka{Sec.~IV.1.5}]
