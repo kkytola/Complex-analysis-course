@@ -332,7 +332,7 @@
 \end{lemma}
 \begin{proof}
   The arguments are similar to the proofs given in
-  \textbf{MS-C1541 Metric Spaces} for the real-valued cases.
+  \MetSpCourse{} for the real-valued cases.
 \end{proof}
 
 \begin{definition}[Cauchy sequence]
@@ -357,7 +357,7 @@
 \begin{proof}
   %\uses{def:cauchy_sequence}
   % \leanok
-  See \textbf{MS-C1541 Metric Spaces}.
+  See \MetSpCourse{}.
 \end{proof}
 
 \begin{lemma}[Every complex Cauchy sequence converges]
@@ -373,7 +373,7 @@
 \begin{proof}
   \uses{lem:real_complete, lem:complex_limit}
   % \leanok
-  See \textbf{MS-C1541 Metric Spaces}.
+  See \MetSpCourse{}.
 
   (Idea: This follows from Lemma~\ref{lem:real_complete} by
   considering real and imaginary parts separately and picking
@@ -517,8 +517,7 @@
 \begin{proof}
   \uses{lem:continuous_complex}
   % \leanok
-
-
+  \ldots
 \end{proof}
 
 \begin{lemma}[Operations with continuous complex-valued functions]
@@ -568,7 +567,7 @@
 \begin{proof}
   % \uses{}
   % \leanok
-  See \textbf{MS-C1541 Metric Spaces}.
+  See \MetSpCourse{}.
 \end{proof}
 
 \begin{lemma}[Composition of continuous functions]
@@ -606,7 +605,7 @@
 \begin{proof}
   \uses{lem:composition_continuous, lem:complex_continuity_properties, cor:coordinate_continuous}
   % \leanok
-  See \textbf{MS-C1541 Metric Spaces}.
+  See \MetSpCourse{}.
 \end{proof}
 
 \begin{definition}[Uniform continuity]
@@ -629,7 +628,7 @@
   If a function $f \colon X \to Y$ is uniformly continuous, then it is continuous.
 \end{lemma}
 \begin{proof}
-  See \textbf{MS-C1541 Metric Spaces}.
+  See \MetSpCourse{}.
 
   (The easy proof is also a good exercise.)
 \end{proof}
@@ -678,7 +677,7 @@
   If a metric space $X$ is path-connected, then it is connected.
 \end{lemma}
 \begin{proof}
-  See \textbf{MS-C1541 Metric Spaces}.
+  See \MetSpCourse{}.
 \end{proof}
 
 \begin{lemma}[Open connected sets are path-connected]
@@ -691,7 +690,7 @@
 \end{lemma}
 \begin{proof}
   \uses{lem:path_connected_implies_connected}
-  See \textbf{MS-C1541 Metric Spaces}.
+  See \MetSpCourse{}.
 \end{proof}
 
 \section{Compactness}
@@ -718,7 +717,7 @@
 \end{theorem}
 \begin{proof}
   % \leanok
-  See \textbf{MS-C1541 Metric Spaces}.
+  See \MetSpCourse{}.
 \end{proof}
 
 \begin{theorem}[Boundedness of continuous functions on compacts]
@@ -744,7 +743,22 @@
   If $X$ is compact and a function $f \colon X \to Y$ is continuous, then it is uniformly continuous.
 \end{lemma}
 \begin{proof}
-  See \textbf{MS-C1541 Metric Spaces}.
+  See \MetSpCourse{}.
+\end{proof}
+
+\begin{lemma}[Continuous bijection from a compact domain is a homeomorphism]
+  \label{lem:continuous_bijection_homeomorphism}
+  \uses{def:compact, def:continuous}
+  % \lean{}
+  % \leanok
+  Let $X$ and $Y$ be metric spaces and assume that $X$ is compact.
+  Then for any continuous bijection $f \colon X \to Y$,
+  also the inverse $f^{-1} \colon Y \to X$ is continuous.
+\end{lemma}
+\begin{proof}
+  \uses{lem:continuity_characterization}
+  % \leanok
+  See \MetSpCourse{}.
 \end{proof}
 
 \begin{theorem}[Cantor's intersection theorem]
@@ -754,5 +768,10 @@
   % \leanok
   \ldots
 \end{theorem}
+\begin{proof}
+  % \uses{}
+  % \leanok
+  See \MetSpCourse{}.
+\end{proof}
 
 \section{Convexity}

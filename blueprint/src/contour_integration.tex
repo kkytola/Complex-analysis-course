@@ -7,14 +7,36 @@
   % \leanok
   A \term{path} in the complex plane is a continuous function $\gamma \colon [a,b] \to \bC$
   from a closed interval $[a,b] \subset \bR$ to $\bC$.
+
+  When $A \subset \bC$ is a subset of the complex plane, we say that $\gamma$ is a path in $A$
+  if $\gamma(t) \in A$ for all $t \in [a,b]$.
 \end{definition}
 
-\begin{definition}[Smooth and piecewise smooth paths \Palka{Sec.~IV.1.2}]
-  \label{def:piecewise_smooth_path}
+\begin{definition}[Smooth path \Palka{Sec.~IV.1.2}]
+  \label{def:smooth_path}
   \uses{def:path, def:continuous}
   %\lean{}
   % \leanok
-  \ldots
+  A path $\gamma \colon [a,b] \to \bC$ is \term{smooth}
+  if it is continuously differentiable, i.e., the derivative
+  \begin{align*}
+    \dot{\gamma}(t) = \frac{\ud}{\ud t} \gamma(t)
+  \end{align*}
+  with respect to the parameter $t$
+  exists for all $t \in [a,b]$ (one-sided derivative at the end points),
+  and defines a continuous complex-valued function $t \mapsto \dot{\gamma}(t)$
+  on $[a,b]$.
+\end{definition}
+
+\begin{definition}[Contour / piecewise smooth path \Palka{Sec.~IV.1.2}]
+  \label{def:contour}
+  \uses{def:smooth_path, def:continuous}
+  %\lean{}
+  % \leanok
+  A \term{contour} (also called a \term{piecewise smooth path})
+  is a continuous function $\gamma \colon [a,b] \to \bC$
+  such that for some finite subdivision $a = t_0 < t_1 < \ldots < t_n = b$,
+  the restrictions $\gamma|_{[t_{j-1},t_j]}$, $j = 1, \ldots, n$ are smooth paths.
 \end{definition}
 
 \begin{definition}[Reverse path \Palka{Sec.~IV.1.4}]
@@ -22,7 +44,12 @@
   \uses{def:path}
   %\lean{}
   % \leanok
-  \ldots
+  Given a path $\gamma \colon [a,b] \to \bC$,
+  the \term{reverse path} $\opp{\gamma} \colon [a,b] \to \bC$
+  is the path defined by
+  \begin{align*}
+    \opp{\gamma}(t) = \gamma(a+b-t) \qquad \text{ for } t \in [a,b] .
+  \end{align*}
 \end{definition}
 
 \begin{definition}[Concatenation of paths \Palka{Sec.~IV.1.4}]
@@ -30,32 +57,79 @@
   \uses{def:path}
   %\lean{}
   % \leanok
-  \ldots
+  Given path $\gamma \colon [a,b] \to \bC$ and
+  $\eta \colon [c,d] \to \bC$ with $\gamma(b) = \eta(c)$
+  (the starting point of $\eta$ coincides with the end point of $\gamma$),
+  the \term{concatenation} of $\gamma$ and $\eta$ is the path
+  $\gamma \concat \eta \colon [a,b+d-c] \to \bC$ defined by
+  \begin{align*}
+    (\gamma \concat \eta)(t) =
+    \begin{cases}
+      \gamma(t) & \text{ for } t \in [a,b] , \\
+      \eta(c+t-b)) & \text{ for } t \in [b,b+d-c] .
+    \end{cases}
+  \end{align*}
+
+  (The slightly cumbersome formula in the second case is due to the fact
+  that we need to attach the two parameter intervals of lengths
+  $b-a$ and $d-c$ to each other, and we have, somewhat arbitrarily,
+  chosen to glue them to form the interval $[a,b+d-c]$.)
 \end{definition}
 
 \begin{definition}[Reparametrization of paths \Palka{Sec.~IV.1.5}]
   \label{def:path_reparametrization}
-  \uses{def:path}
+  \uses{def:path, lem:continuous_bijection_homeomorphism, def:contour}
   %\lean{}
   % \leanok
-  \ldots
+  Given a path $\gamma \colon [a,b] \to \bC$ and a continuous increasing
+  bijection $\phi \colon [c,d] \to [a,b]$, we define the \term{reparametrization}
+  of $\gamma$ by $\phi$ as the path
+  \begin{align*}
+    \gamma \circ \phi \colon \, [c,d] \, \to \; & \bC
+    t \, \mapsto \; & \gamma(\phi(t)) .
+  \end{align*}
+
+  Note that
+  \begin{itemize}
+    \item $\phi^{-1} \colon [a,b] \to [c,d]$ is also a continuous increasing
+      bijection (a continuous bijection from the
+      compact $[a,b]$ is automatically a homeomorphism; see ) and
+      reparametrization can be undone by rereparametrizing by $\phi^{-1}$;
+    \item If both $\gamma$ and the reparametrization function $\phi$ are
+      piecewise smooth, then the reparametrized path $\gamma \circ \phi$
+      is also piecewise smooth (i.e., a contour).
+  \end{itemize}
 \end{definition}
 
-\begin{definition}[Smooth and piecewise smooth reparametrizations \Palka{Sec.~IV.1.5}]
-  \label{def:piecewise_smooth_reparametrization}
-  \uses{def:path_reparametrization}
-  %\lean{}
+
+
+\section{Complex-valued integrals}
+
+\begin{definition}[Integral of a complex-valued function]
+  \label{def:complex_valued_integral}
+  \uses{def:riemann_integral, lem:continuous_complex, lem:continuous_implies_riemann_integrable}
+  % \lean{}
   % \leanok
-  \ldots
-\end{definition}
+  Let $f \colon [a,b] \to \bC$ be a complex-valued continuous function
+  defined on a closed interval $[a,b] \subset \bR$. We define the
+  \term{integral} of $f$ as
+  \begin{align*}
+    \int_a^b f(t) \, \ud t
+      \; = \; \int_a^b \re \big( f(t) \big) \, \ud t
+              \; + \; \ii \int_a^b \im \big( f(t) \big) \, \ud t .
+  \end{align*}
 
+  (Note that on the right hand side we have just Riemann integrals
+  of the continuous real-valued functions $t \mapsto \re \big( f(t) \big)$
+  and $t \mapsto \im \big( f(t) \big)$.)
+\end{definition}
 
 
 \section{Integrals along paths}
 
 \begin{definition}[Contour integral along a smooth path \Palka{Sec.~IV.2.1}]
   \label{def:smooth_contour_integral}
-  \uses{def:riemann_integral, lem:continuous_implies_riemann_integrable, def:piecewise_smooth_path}
+  \uses{def:complex_valued_integral, def:smooth_path}
   %\lean{}
   % \leanok
   Let $f : A \to \bC$ be a continuous function defined on a subset $A \subset \bC$.
@@ -65,17 +139,20 @@
   We define the \term{integral of $f$ along $\gamma$} as
   \begin{align*}
     \int_\gamma f(z) \, dz
-    \; = \; \int_a^b f \big( \gamma(t) \big) \, \gamma'(t) \; \ud t .
+    \; = \; \int_a^b f \big( \gamma(t) \big) \, \dot{\gamma}(t) \; \ud t .
     %= \; \int_a^b u \big( \gamma(t) \big) \gamma'(t) \, \ud t
     %     + \ii \int_a^b v \big( \gamma(t) \big) \gamma'(t) \, \ud t .
   \end{align*}
+
+  (Here $\dot{\gamma}(t) = \frac{\ud}{\ud t} \gamma(t)$ denotes the derivative of
+  the smooth path $\gamma$ with respect to its parameter $t$.)
 \end{definition}
 
 Sometimes it is appropriate to integrate functions with respect to the
 arc-length in the following sense.
 \begin{definition}[Arc-length integral along a smooth path \Palka{Sec.~IV.2.1}]
   \label{def:smooth_arc_length_integral}
-  \uses{def:riemann_integral, lem:continuous_implies_riemann_integrable, def:piecewise_smooth_path}
+  \uses{def:complex_valued_integral, lem:continuous_implies_riemann_integrable, def:smooth_path}
   %\lean{}
   % \leanok
   Let $f : A \to \bC$ be a continuous function defined on a subset $A \subset \bC$.
@@ -122,7 +199,7 @@ By virtue of the above, the following gives a well-defined meaning
 to integrals along piecewise smooth paths.
 \begin{definition}[Contour integral along a path \Palka{Sec.~IV.2.1}]
   \label{def:contour_integral}
-  \uses{def:smooth_contour_integral, def:piecewise_smooth_path, lem:integral_concatenation}
+  \uses{def:smooth_contour_integral, def:contour, lem:integral_concatenation}
   %\lean{}
   % \leanok
   Let $f : A \to \bC$ be a continuous function defined on a subset $A \subset \bC$.
@@ -135,7 +212,7 @@ to integrals along piecewise smooth paths.
 \end{definition}
 \begin{definition}[Arc-length integral along a path]
   \label{def:arc_length_integral}
-  \uses{def:smooth_arc_length_integral, def:piecewise_smooth_path, lem:integral_concatenation}
+  \uses{def:smooth_arc_length_integral, def:contour, lem:integral_concatenation}
   %\lean{}
   % \leanok
   Let $f : A \to \bC$ be a continuous function defined on a subset $A \subset \bC$.
@@ -149,7 +226,7 @@ to integrals along piecewise smooth paths.
 
 \begin{lemma}[Reparametrization invariance of integrals \Palka{Lem~IV.2.1(v)}]
   \label{lem:reparametrization_invariance_of_integral}
-  \uses{def:contour_integral, def:arc_length_integral, def:piecewise_smooth_reparametrization}
+  \uses{def:contour_integral, def:arc_length_integral, def:path_reparametrization}
   %\lean{}
   % \leanok
   Let $\gamma$ be a piecewise smooth path in~$A$,
