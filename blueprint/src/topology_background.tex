@@ -517,8 +517,7 @@
 \begin{proof}
   \uses{lem:continuous_complex}
   % \leanok
-
-
+  \ldots
 \end{proof}
 
 \begin{lemma}[Operations with continuous complex-valued functions]
@@ -747,6 +746,21 @@
   See \MetSpCourse{}.
 \end{proof}
 
+\begin{lemma}[Continuous bijection from a compact domain is a homeomorphism]
+  \label{lem:continuous_bijection_homeomorphism}
+  \uses{def:compact, def:continuous}
+  % \lean{}
+  % \leanok
+  Let $X$ and $Y$ be metric spaces and assume that $X$ is compact.
+  Then for any continuous bijection $f \colon X \to Y$,
+  also the inverse $f^{-1} \colon Y \to X$ is continuous.
+\end{lemma}
+\begin{proof}
+  \uses{lem:continuity_characterization}
+  % \leanok
+  See \MetSpCourse{}.
+\end{proof}
+
 \begin{theorem}[Cantor's intersection theorem]
   \label{thm:intersect_nested_compacts}
   \uses{def:compact}
@@ -754,5 +768,10 @@
   % \leanok
   \ldots
 \end{theorem}
+\begin{proof}
+  % \uses{}
+  % \leanok
+  See \MetSpCourse{}.
+\end{proof}
 
 \section{Convexity}
