@@ -1,3 +1,73 @@
+\section{Complex-valued integrals}
+
+\begin{definition}[Integral of a complex-valued function]
+  \label{def:complex_valued_integral}
+  \uses{def:riemann_integral, lem:continuous_complex, lem:continuous_implies_riemann_integrable}
+  % \lean{}
+  % \leanok
+  Let $f \colon [a,b] \to \bC$ be a complex-valued continuous function
+  defined on a closed interval $[a,b] \subset \bR$. We define the
+  \term{integral} of $f$ as
+  \begin{align*}
+    \int_a^b f(t) \, \ud t
+      \; = \; \int_a^b \re \big( f(t) \big) \, \ud t
+              \; + \; \ii \int_a^b \im \big( f(t) \big) \, \ud t .
+  \end{align*}
+
+  (Note that on the right hand side we have just Riemann integrals
+  of the continuous real-valued functions $t \mapsto \re \big( f(t) \big)$
+  and $t \mapsto \im \big( f(t) \big)$.)
+\end{definition}
+
+\begin{lemma}[Complex linearity of complex-valued integrals]
+  \label{lem:linearity_of_complex_integral}
+  \uses{def:complex_valued_integral, def:linear}
+  % \lean{}
+  % \leanok
+  If $f, g \colon [a,b] \to \bC$ are complex-valued continuous
+  functions defined on a closed interval $[a,b] \subset \bR$,
+  then the integral of their sum is
+  \begin{align*}
+    \int_a^b \big( f(t) + g(t) \big) \, \ud t
+      \; = \; \int_a^b f(t) \, \ud t + \int_a^b g(t) \, \ud t .
+  \end{align*}
+
+  If $f \colon [a,b] \to \bC$ is a complex-valued continuous
+  function defined on a closed interval $[a,b] \subset \bR$,
+  and $\lambda \in \bC$ is a complex number, then the integral of
+  the scalar multiple of $f$ is
+  \begin{align*}
+    \int_a^b \lambda \, f(t) \, \ud t
+      \; = \; \lambda \int_a^b f(t) \, \ud t .
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  % \uses{}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{lemma}[Fundamental theorem of calculus for complex-valued integrals]
+  \label{lem:ftc_for_complex_valued_integrals}
+  \uses{def:complex_valued_integral}
+  % \lean{}
+  % \leanok
+  Suppose that $f \colon [a,b] \to \bC$ is a continuously differentiable
+  complex-valued function on a closed interval $[a,b] \subset \bR$.
+  Denote its derivative by $\dot{f}(t) = \frac{\ud}{\ud t} f(t)$.
+  Then for the integral of the derivative of $f$ we have
+  \begin{align*}
+    \int_a^b \dot{f}(t) \, \ud t \; = \; f(b) - f(a) .
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  % \uses{}
+  % \leanok
+  \ldots
+\end{proof}
+
+
+
 \section{Paths in the complex plane}
 
 \begin{definition}[Path \Palka{Sec.~IV.1.1}]
@@ -10,6 +80,9 @@
 
   When $A \subset \bC$ is a subset of the complex plane, we say that $\gamma$ is a path in $A$
   if $\gamma(t) \in A$ for all $t \in [a,b]$.
+
+  If the starting point and the end point of the path~$\gamma$ are the same,
+  $\gamma(a) = \gamma(b)$, then we say that $\gamma$ is a \term{closed path}.
 \end{definition}
 
 \begin{definition}[Smooth path \Palka{Sec.~IV.1.2}]
@@ -36,7 +109,12 @@
   A \term{contour} (also called a \term{piecewise smooth path})
   is a continuous function $\gamma \colon [a,b] \to \bC$
   such that for some finite subdivision $a = t_0 < t_1 < \ldots < t_n = b$,
-  the restrictions $\gamma|_{[t_{j-1},t_j]}$, $j = 1, \ldots, n$ are smooth paths.
+  the restrictions $\gamma|_{[t_{j-1},t_j]}$
+  to the subintervals $[t_{j-1},t_j] \subset [a,b]$
+  are smooth paths for each $j = 1, \ldots, n$.
+
+  If the starting point and the end point of the contour~$\gamma$ are the same,
+  $\gamma(a) = \gamma(b)$, then we say that $\gamma$ is a \term{closed contour}.
 \end{definition}
 
 \begin{definition}[Reverse path \Palka{Sec.~IV.1.4}]
@@ -85,7 +163,7 @@
   bijection $\phi \colon [c,d] \to [a,b]$, we define the \term{reparametrization}
   of $\gamma$ by $\phi$ as the path
   \begin{align*}
-    \gamma \circ \phi \colon \, [c,d] \, \to \; & \bC
+    \gamma \circ \phi \, \colon \, [c,d] \, \to \; & \bC \\
     t \, \mapsto \; & \gamma(\phi(t)) .
   \end{align*}
 
@@ -95,34 +173,15 @@
       bijection (a continuous bijection from the
       compact $[a,b]$ is automatically a homeomorphism; see ) and
       reparametrization can be undone by rereparametrizing by $\phi^{-1}$;
-    \item If both $\gamma$ and the reparametrization function $\phi$ are
+      \item If both $\gamma$ and the reparametrization function $\phi$ are
+      smooth (continuously differentiable), then the reparametrized
+      path $\gamma \circ \phi$ is also smooth;
+      \item If both $\gamma$ and the reparametrization function $\phi$ are
       piecewise smooth, then the reparametrized path $\gamma \circ \phi$
-      is also piecewise smooth (i.e., a contour).
+      is also piecewise smooth, i.e., a contour.
   \end{itemize}
 \end{definition}
 
-
-
-\section{Complex-valued integrals}
-
-\begin{definition}[Integral of a complex-valued function]
-  \label{def:complex_valued_integral}
-  \uses{def:riemann_integral, lem:continuous_complex, lem:continuous_implies_riemann_integrable}
-  % \lean{}
-  % \leanok
-  Let $f \colon [a,b] \to \bC$ be a complex-valued continuous function
-  defined on a closed interval $[a,b] \subset \bR$. We define the
-  \term{integral} of $f$ as
-  \begin{align*}
-    \int_a^b f(t) \, \ud t
-      \; = \; \int_a^b \re \big( f(t) \big) \, \ud t
-              \; + \; \ii \int_a^b \im \big( f(t) \big) \, \ud t .
-  \end{align*}
-
-  (Note that on the right hand side we have just Riemann integrals
-  of the continuous real-valued functions $t \mapsto \re \big( f(t) \big)$
-  and $t \mapsto \im \big( f(t) \big)$.)
-\end{definition}
 
 
 \section{Integrals along paths}
@@ -149,8 +208,8 @@
 \end{definition}
 
 Sometimes it is appropriate to integrate functions with respect to the
-arc-length in the following sense.
-\begin{definition}[Arc-length integral along a smooth path \Palka{Sec.~IV.2.1}]
+arc length in the following sense.
+\begin{definition}[Arc length integral along a smooth path \Palka{Sec.~IV.2.1}]
   \label{def:smooth_arc_length_integral}
   \uses{def:complex_valued_integral, lem:continuous_implies_riemann_integrable, def:smooth_path}
   %\lean{}
@@ -162,10 +221,14 @@ arc-length in the following sense.
   We define the \term{integral of $f$ with respect to the arc length of $\gamma$} as
   \begin{align*}
     \int_\gamma f(z) \, |dz|
-    \; = \; \int_a^b f \big( \gamma(t) \big) \, |\gamma'(t)| \; \ud t .
+    \; = \; \int_a^b f \big( \gamma(t) \big) \, |\dot{\gamma}(t)| \; \ud t .
     %= \; \int_a^b u \big( \gamma(t) \big) \gamma'(t) \, \ud t
     %     + \ii \int_a^b v \big( \gamma(t) \big) \gamma'(t) \, \ud t .
   \end{align*}
+
+  (Here $\dot{\gamma}(t) = \frac{\ud}{\ud t} \gamma(t) \in \bC$ denotes the
+  derivative of the smooth path $\gamma$ with respect to its parameter $t$,
+  and $|\dot{\gamma}(t)| \ge 0$ denotes the absolute value of this derivative.)
 \end{definition}
 
 In order to extend the definition of contour integrals to piecewise smooth paths,
@@ -197,7 +260,7 @@ we note that the definition behaves additively under path concatenation.
 
 By virtue of the above, the following gives a well-defined meaning
 to integrals along piecewise smooth paths.
-\begin{definition}[Contour integral along a path \Palka{Sec.~IV.2.1}]
+\begin{definition}[Contour integral \Palka{Sec.~IV.2.1}]
   \label{def:contour_integral}
   \uses{def:smooth_contour_integral, def:contour, lem:integral_concatenation}
   %\lean{}
@@ -210,7 +273,8 @@ to integrals along piecewise smooth paths.
     \int_\gamma f(z) \, dz \; = \; \sum_{j=1}^n \int_{\eta_j} f(z) \, dz .
   \end{align*}
 \end{definition}
-\begin{definition}[Arc-length integral along a path]
+
+\begin{definition}[Arc-length integral]
   \label{def:arc_length_integral}
   \uses{def:smooth_arc_length_integral, def:contour, lem:integral_concatenation}
   %\lean{}
@@ -269,18 +333,43 @@ to integrals along piecewise smooth paths.
 \begin{lemma}[Linearity of integrals \Palka{Lem~IV.2.1(i-ii)}]
   \label{lem:integral_linearity}
   \uses{def:contour_integral, def:arc_length_integral, def:linear}
-  %\lean{}
-  % \leanok
+
+  Let $A \subset \bC$ be a subset of the complex plane let and $\gamma \colon [a,b] \to A$
+  be a contour in~$A$.
+
+  If $f, g \colon A \to \bC$ are continuous
+  functions defined on $A$, then the contour integral
+  and the arc length integral of their sum are
   \begin{align*}
-    \int_\gamma \Big( f_1(z) + f_2(z) \Big) \, \ud z
-    \; = \; \int_\gamma f_1(z) \, \ud z + \int_\gamma f_2(z) \, \ud z
+    \int_\gamma \big( f(z) + g(z) \big) \, \ud z
+      \; = \; & \int_\gamma f(z) \, \ud z + \int_\gamma g(z) \, \ud z \\
+    \int_\gamma \big( f(z) + g(z) \big) \, |\ud z|
+      \; = \; & \int_\gamma f(z) \, |\ud z| + \int_\gamma g(z) \, |\ud z| .
   \end{align*}
+
+  If $f \colon A \to \bC$ is a complex-valued continuous
+  function defined on $A$,
+  and $\lambda \in \bC$ is a complex number, then the contour
+  integral and the arc length integral of the scalar multiple of $f$ are
   \begin{align*}
-    \int_\gamma c \, f(z) \, \ud z \; = \; c \int_\gamma f(z) \, \ud z .
+    \int_\gamma \lambda \, f(z) \, \ud z
+      \; = \; & \lambda \int_\gamma f(z) \, \ud z \\
+    \int_\gamma \lambda \, f(z) \, |\ud z|
+      \; = \; & \lambda \int_\gamma f(z) \, |\ud z| .
   \end{align*}
+  %
+  %%\lean{}
+  %% \leanok
+  %\begin{align*}
+  %  \int_\gamma \Big( f_1(z) + f_2(z) \Big) \, \ud z
+  %  \; = \; \int_\gamma f_1(z) \, \ud z + \int_\gamma f_2(z) \, \ud z
+  %\end{align*}
+  %\begin{align*}
+  %  \int_\gamma c \, f(z) \, \ud z \; = \; c \int_\gamma f(z) \, \ud z .
+  %\end{align*}
 \end{lemma}
 \begin{proof}
-  %\uses{}
+  \uses{lem:linearity_of_complex_integral}
   % \leanok
   \ldots
 \end{proof}
@@ -290,12 +379,35 @@ to integrals along piecewise smooth paths.
   \uses{def:contour_integral, def:arc_length_integral}
   %\lean{}
   % \leanok
+  Let $f : A \to \bC$ be a continuous function defined on $A \subset \bC$,
+  and let $\gamma$ be a contour in $A$. Then we have
   \begin{align*}
     \left| \int_\gamma f(z) \, \ud z \right| \; \le \; \int_\gamma |f(z)| \, |dz| .
   \end{align*}
 \end{lemma}
 \begin{proof}
   %\uses{}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{corollary}[An a priori bound for contour integrals]
+  \label{lem:contour_integral_bound}
+  \uses{def:contour_integral}
+  % \lean{}
+  % \leanok
+  Let $f : A \to \bC$ be a continuous function defined on $A \subset \bC$,
+  and let $\gamma$ be a contour in $A$.
+  Assume that $|f(z)| \le M$ for all points $z$ on the contour $\gamma$.
+  Then we have
+  \begin{align*}
+    \left| \int_\gamma f(z) \, \ud z \right| \; \le \; M \, \ell(\gamma) ,
+  \end{align*}
+  where $\ell(\gamma) = \int_\gamma |\ud z|$ denotes the length of
+  the contour $\gamma$.
+\end{corollary}
+\begin{proof}
+  \uses{lem:integral_triangle_inequality}
   % \leanok
   \ldots
 \end{proof}
@@ -325,12 +437,41 @@ to integrals along piecewise smooth paths.
   Suppose that $f \colon U \to \bC$ is a continuous function
   on an open set $U \subset \bC$, and that $f$ has a
   primitive $F \colon U \to \bC$.
-  Then for any piecewise smooth path $\gamma \colon [a,b] \to U$ we have
+  Then for any contour $\gamma \colon [a,b] \to U$ we have
   \begin{align*}
     \int_\gamma f(z) \, dz \; = \; F \big( \gamma(b) \big) - F \big( \gamma(a) \big) .
   \end{align*}
-  In particular for any closed path $\gamma$ in $U$, we have
+  In particular for any closed contour $\gamma$ in $U$, we have
   \begin{align*}
     \oint_\gamma f(z) \, dz \; = \; 0 .
   \end{align*}
 \end{theorem}
+\begin{proof}
+  \uses{lem:ftc_for_complex_valued_integrals}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{lemma}[Existence of primitives for monomials]
+  \label{lem:monomial_primitive}
+  \uses{def:primitive, def:polynomial, def:rational_function}
+  % \lean{}
+  % \leanok
+  For $n \in \set{0,1,2,\ldots}$, the monomial
+  function $f(z) = z^n$ has a primitive
+  $F(z) = \frac{1}{n+1} z^{n+1} + c$ (with $c \in \bC$ arbitrary)
+  in the whole complex plane~$\bC$.
+
+  For $n \in \set{-2,-3,-4,\ldots}$, the monomial
+  function $f(z) = z^n$ has a primitive
+  $F(z) = \frac{1}{n+1} z^{n+1} + c$ (with $c \in \bC$ arbitrary)
+  in the punctured complex plane~$\bC \setminus \set{0}$.
+
+  The monomial function $f(z) = z^{-1} = \frac{1}{z}$ does not have
+  a primitive in the punctured complex plane~$\bC \setminus \set{0}$.
+\end{lemma}
+\begin{proof}
+  \uses{thm:ftc_for_contour_integrals}
+  % \leanok
+  \ldots
+\end{proof}
