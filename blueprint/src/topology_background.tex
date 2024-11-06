@@ -700,7 +700,11 @@
   \uses{def:limit}
   %\lean{}
   % \leanok
-  \ldots
+  Let $X$ be a metric space.
+  A subset $K \subset X$ is \term{compact} if every sequence
+  $(x_n)_{n \in \bN}$ of points $x_n \in K$ has a subsequence
+  $(x_{n_k})_{k \in \bN}$ which converges to a limit
+  $\lim_{k \to \infty} x_{n_k} \in K$ in the set $K$.
 \end{definition}
 
 \begin{theorem}[Bolzano-Weierstrass theorem]
@@ -761,12 +765,15 @@
   See \MetSpCourse{}.
 \end{proof}
 
-\begin{theorem}[Cantor's intersection theorem]
+\begin{theorem}[Cantor's intersection theorem \Palka{Thm~II.4.5}]
   \label{thm:intersect_nested_compacts}
   \uses{def:compact}
   %\lean{}
   % \leanok
-  \ldots
+  Let $X$ be a metric space.
+  Suppose that $K_1, K_2, K_3, \ldots$ are nonempty compact
+  subsets of $X$ nested so that $K_1 \supset K_2 \supset K_3 \supset \cdots$.
+  Then the intersection $\bigcap_{n=1}^\infty K_n$ is nonempty.
 \end{theorem}
 \begin{proof}
   % \uses{}
@@ -778,10 +785,55 @@
 
 \section{Simple connectedness}
 
-%\begin{definition}[Path homotopy]
-%  \label{def:path_homotopy}
-%  \uses{def:path, def:continuous}
-%  % \lean{}
-%  % \leanok
-%  Let $X$   be a metric space
-%\end{definition}
+\begin{definition}[Path homotopy for closed paths]
+  \label{def:path_homotopy}
+  \uses{def:path, def:continuous}
+  % \lean{}
+  % \leanok
+  Let $X$ be a metric space and
+  $\gamma_0 \colon [a,b] \to X$ and $\gamma_0 \colon [a,b] \to X$
+  two closed paths in $X$.
+  %with the same endpoints $\gamma_0(a) = \gamma_1(a)$
+  %and $\gamma_0(b) = \gamma_1(b)$.
+  If there exists a
+  continuous function (called a \term{homotopy})
+  \begin{align*}
+    \Gamma \colon [0,1] \times [a,b] \to X
+  \end{align*}
+  such that
+  \begin{align*}
+    & \Gamma(0,t) = \gamma_0(t)
+      \quad \text{ and } \quad
+      \Gamma(1,t) = \gamma_1(t)
+      \qquad \text{for all $t \in [a,b]$} %, \\
+    %& \Gamma(s,a) = \Gamma(s,b) \qquad \text{for all $s \in [0,1]$,}
+    %& \Gamma(s,a) = \gamma_0(a) \quad \text{ and } \Gamma(s,b) = \gamma_0(b)
+    %  \qquad \text{for all $s \in [0,1]$},
+  \end{align*}
+  and
+  \begin{align*}
+    \Gamma(s,a) = \Gamma(s,b) \qquad \text{for all $s \in [0,1]$,}
+  \end{align*}
+  then we say that the closed paths $\gamma_0$ and $\gamma_1$
+  are \term{homotopic}.
+\end{definition}
+
+\begin{definition}[Contractible path]
+  \label{def:contractible}
+  \uses{def:path_homotopy}
+  % \lean{}
+  % \leanok
+  Let $X$ be a metric space.
+  A closed path $\gamma \colon [a,b] \to X$ is called
+  \term{contractible} if it is homotopic to a constant path.
+\end{definition}
+
+\begin{definition}[Simple connectedness]
+  \label{def:simply_connected}
+  \uses{def:contractible}
+  % \lean{}
+  % \leanok
+  A metric space is said to be \term{simply connected}
+  if every closed path $\gamma \colon [a,b] \to X$ in $X$
+  is contractible.
+\end{definition}

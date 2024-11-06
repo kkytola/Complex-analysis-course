@@ -475,3 +475,25 @@ to integrals along piecewise smooth paths.
   % \leanok
   \ldots
 \end{proof}
+
+\begin{theorem}[Characterization of the existence of primitives]
+  \label{thm:primitive_characterization}
+  \uses{def:primitive}
+  % \lean{}
+  % \leanok
+  Let $f \colon U \to \bC$ be a continuous function on an open
+  set $U \subset \bC$. Then the following conditions are equivalent:
+  \begin{itemize}
+    \item[(a)] $f$ has a primitive on $U$;
+    \item[(b)] the contour integrals $\int_\gamma f(z) \, \ud z$
+      of $f$ along contours $\gamma$ in $U$ only depend on the
+      starting point and the end point of $\gamma$;
+    \item[(c)] for all closed contours $\gamma$ in $U$ we have
+      $\oint_\gamma f(z) \, \ud z = 0$.
+  \end{itemize}
+\end{theorem}
+\begin{proof}
+  \uses{thm:ftc_for_contour_integrals}
+  % \leanok
+  \ldots
+\end{proof}
