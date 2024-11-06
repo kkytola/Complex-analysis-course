@@ -1,3 +1,66 @@
+\section{Convex, star-shaped, and simply connected domains}
+
+\begin{definition}[Line segment]
+  \label{def:line_segment}
+  \uses{lem:complex_number_field, def:path}
+  % \lean{}
+  % \leanok
+  Given two points $z_1, z_2 \in \bC$ in the complex plane,
+  the \term{line segment} between $z_1$ and $z_2$ is the path
+  \begin{align*}
+    \gamma \colon [0,1] & \; \to \bC \\
+    \gamma(t) & \; = z_1 + t \, (z_2 - z_1) .
+  \end{align*}
+
+  We also often view the line segment as a subset of~$\bC$
+  rather than a parametrized path, and we then denote it by
+  \begin{align*}
+    [z_1, z_2] = \set{z_1 + t \, (z_2 - z_1) \; \big| \; t \in [0,1] } .
+  \end{align*}
+\end{definition}
+
+\begin{definition}[Convex set]
+  \label{def:convex}
+  \uses{def:line_segment}
+  % \lean{}
+  % \leanok
+  A subset $A \subset \bC$ of the complex plane is called
+  \term{convex} if for any two points $z_1, z_2 \in A$,
+  the line segment between them is contained in the subset,
+  \begin{align*}
+    [z_1, z_2] \, \subset \, A .
+  \end{align*}
+\end{definition}
+
+\begin{definition}[Star-shaped set]
+  \label{def:star_shaped}
+  \uses{def:line_segment}
+  % \lean{}
+  % \leanok
+  A subset $A \subset \bC$ of the complex plane is called
+  \term{star-shaped} if there exists a point $z_* \in A$
+  such that for any $z \in A$,
+  the line segment between $z_*$ and $z$ is contained in the subset,
+  \begin{align*}
+    [z_*, z] \, \subset \, A .
+  \end{align*}
+\end{definition}
+
+\begin{lemma}[Convex sets are star-shaped]
+  \label{lem:convex_implies_star_shaped}
+  \uses{def:convex, def:star_shaped}
+  % \lean{}
+  % \leanok
+  Any nonempty convex set is star-shaped.
+\end{lemma}
+\begin{proof}
+  % \uses{}
+  % \leanok
+  \ldots
+\end{proof}
+
+
+
 \section{Cauchy's integral theorem}
 
 \begin{lemma}[Goursat's lemma \Palka{Lem~V.1.1}]
