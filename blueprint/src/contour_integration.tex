@@ -280,11 +280,23 @@ to integrals along piecewise smooth paths.
   %\lean{}
   % \leanok
   Let $f : A \to \bC$ be a continuous function defined on a subset $A \subset \bC$.
-  Let $\gamma \colon [a,b] \to A$ be a piecewise smooth path in~$A$,
+  Let $\gamma \colon [a,b] \to A$ be a piecewise smooth path (i.e., a contour) in~$A$,
   which is a concatenation of smooth paths $\eta_1, \ldots, \eta_n$.
   We define the \term{integral of $f$ along $\gamma$} as
   \begin{align*}
     \int_\gamma f(z) \, dz \; = \; \sum_{j=1}^n \int_{\eta_j} f(z) \, dz .
+  \end{align*}
+\end{definition}
+
+\begin{definition}[Length of a path or a contour]
+  \label{def:length}
+  \uses{def:arc_length_integral}
+  % \lean{}
+  % \leanok
+  Let $\gamma \colon [a,b] \to \bC$ be a piecewise smooth path (i.e., a contour)
+  in $\bC$. The \term{length} $\ell(\gamma)$ of $\gamma$ is defined as
+  \begin{align*}
+    \ell(\gamma) = \int_\gamma |\ud z| .
   \end{align*}
 \end{definition}
 
@@ -393,7 +405,7 @@ to integrals along piecewise smooth paths.
 
 \begin{corollary}[An a priori bound for contour integrals]
   \label{lem:contour_integral_bound}
-  \uses{def:contour_integral}
+  \uses{def:contour_integral, def:length}
   % \lean{}
   % \leanok
   Let $f : A \to \bC$ be a continuous function defined on $A \subset \bC$,
@@ -423,7 +435,7 @@ to integrals along piecewise smooth paths.
   % \leanok
   Let $f : U \to \bC$ be a function defined on an open subset $U \subset \bC$.
   A \term{primitive} of $f$ is a function $F : U \to \bC$ such that
-  $F$ is holomorphic (i.e., complex differentiable) on $U$,
+  $F$ is analytic (i.e., complex differentiable) on $U$,
   \begin{align*}
     F'(z) = f(z) \qquad \text{ for all } z \in U .
   \end{align*}
