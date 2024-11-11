@@ -128,6 +128,25 @@
   \ldots
 \end{proof}
 
+\begin{corollary}[Local Cauchy's integral theorem \Palka{Thm~V.5.1}]
+  \label{cor:local_cauchy_theorem}
+  \uses{def:analytic_function, def:contour_integral, def:contractible}
+  %\lean{}
+  % \leanok
+  Suppose that a function $f \colon U \to \bC$ is analytic on a open
+  set $U \subset \bC$.
+  Then for any disk $B \subset U$ contained in the domain $U$
+  and any closed contour $\gamma$ in $B$ we have
+  \begin{align*}
+    \oint_\gamma f(z) \, \ud z = 0 .
+  \end{align*}
+\end{corollary}
+\begin{proof}
+  \uses{lem:goursat, thm:cauchy_theorem_star_shaped}
+  % \leanok
+  \ldots
+\end{proof}
+
 \begin{theorem}[Cauchy's integral theorem \Palka{Thm~V.5.1}]
   \label{thm:cauchy_theorem}
   \uses{def:analytic_function, def:contour_integral, def:contractible}
@@ -140,14 +159,14 @@
     \oint_\gamma f(z) \, \ud z = 0 .
   \end{align*}
 
-  In particular, if $U$ is simply connected, then the integral
-  Then for any closed contour $\gamma$ in~$U$ we have
+  In particular, if $U$ is simply connected, then
+  for any closed contour $\gamma$ in~$U$ we have
   \begin{align*}
     \oint_\gamma f(z) \, \ud z = 0 .
   \end{align*}
 \end{theorem}
 \begin{proof}
-  \uses{lem:goursat, thm:cauchy_theorem_star_shaped}
+  \uses{lem:goursat, thm:cauchy_theorem_star_shaped, cor:local_cauchy_theorem}
   % \leanok
   \ldots
 \end{proof}
@@ -155,6 +174,26 @@
 
 
 \section{Cauchy's integral formula}
+
+\begin{theorem}[Cauchy's integral formula, star-shaped case \Palka{Thm~V.2.3}]
+  \label{thm:cauchy_formula_star_shaped}
+  \uses{def:analytic_function, def:contour_integral}
+  %\lean{}
+  % \leanok
+  Suppose that a function $f \colon U \to \bC$ is analytic on an open
+  set $U \subset \bC$, and suppose that $\gamma$ is a closed contour
+  in $U$ parametrizing the boundary of a star-shaped Jordan domain
+  $V \subset U$ in a counterclockwise orientation.
+  Then for any point $z \in V$ we have
+  \begin{align*}
+    f(z) = \frac{1}{2\pi \ii} \oint_\gamma \frac{f(\zeta)}{\zeta - z} \, \ud \zeta .
+  \end{align*}
+\end{theorem}
+\begin{proof}
+  \uses{thm:cauchy_theorem_star_shaped}
+  % \leanok
+  \ldots
+\end{proof}
 
 \begin{definition}[Winding number]
   \label{def:winding_number}
@@ -169,6 +208,58 @@
   \end{align*}
 \end{definition}
 
+\begin{lemma}[Winding number concatenation and reversal]
+  \label{lem:winding_additivity}
+  \uses{def:winding_number}
+  % \lean{}
+  % \leanok
+  Let $\gamma$ and $\eta$ be closed contours in $\bC$
+  both starting and ending at the same point $z_0 \in \bC$.
+  Then for any point $z \in \bC \setminus (\gamma \cup \eta)$
+  we have
+  \begin{align*}
+    \windN{\gamma \concat \eta}{z}
+    \; = \; \windN{\gamma}{z} + \windN{\eta}{z}
+  \end{align*}
+  and for any point $z \in \bC \setminus \gamma$ we have
+  \begin{align*}
+    \windN{\opp{\gamma}}{z}
+    \; = \; -\windN{\gamma}{z} .
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  % \uses{}
+  % \leanok
+  \ldots
+\end{proof}
+
+
+\begin{lemma}[Winding number properties]
+  \label{lem:winding_number_properties}
+  \uses{def:winding_number}
+  % \lean{}
+  % \leanok
+  Let $\gamma$ be a closed contour in $\bC$. Then the winding
+  numbers $\windN{\gamma}{z}$ of points $z \in \bC \setminus \gamma$
+  satisfy:
+  \begin{itemize}
+    \item[(a)] $z \mapsto \windN{\gamma}{z}$ is constant on
+      each connected component of $\bC \setminus \gamma$;
+    \item[(b)] $\windN{\gamma}{z} = 0$ for all $z$ in the
+      unbounded connected component of $\bC \setminus \gamma$;
+    \item[(c)] If $\gamma$ is a Jordan contour and
+      $V \subset \bC \setminus \gamma$ is the bounded connected
+      component of $\bC \setminus \gamma$, then
+      either $\windN{\gamma}{z} = 1$ for all $z \in V$
+      or $\windN{\gamma}{z} = -1$ for all $z \in V$.
+  \end{itemize}
+\end{lemma}
+\begin{proof}
+  % \uses{}
+  % \leanok
+  \ldots
+\end{proof}
+
 \begin{theorem}[Cauchy's integral formula \Palka{Thm~V.2.3}]
   \label{thm:CAUCHY_FORMULA}
   \uses{def:analytic_function, def:contour_integral, def:winding_number}
@@ -178,12 +269,12 @@
   set $U \subset \bC$ containing the disk $\DiskRC{r}{z} \subset U$.
   Then for any closed contour $\gamma$ in $\DiskRC{r}{z}$ we have
   \begin{align*}
-    \windN{\gamma}{z} \, f(z)
-      = \frac{1}{2\pi \ii} \oint_\gamma \frac{f(\zeta)}{\zeta - z} \, \ud \zeta .
+    \oint_\gamma \frac{f(\zeta)}{\zeta - z} \, \ud \zeta
+    \; = \; 2\pi \ii \, \windN{\gamma}{z} \, f(z) .
   \end{align*}
 \end{theorem}
 \begin{proof}
-  \uses{thm:cauchy_theorem}
+  \uses{thm:cauchy_theorem, thm:cauchy_formula_star_shaped}
   % \leanok
   \ldots
 \end{proof}
