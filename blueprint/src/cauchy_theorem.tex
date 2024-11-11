@@ -166,7 +166,7 @@
   \end{align*}
 \end{theorem}
 \begin{proof}
-  \uses{lem:goursat, thm:cauchy_theorem_star_shaped, cor:local_cauchy_theorem}
+  \uses{lem:goursat, cor:local_cauchy_theorem, lem:homotopy_invariance}
   % \leanok
   \ldots
 \end{proof}
@@ -260,6 +260,24 @@
   \ldots
 \end{proof}
 
+\begin{lemma}[Homotopy invariance of winding numbers]
+  \label{lem:winding_homotopy_invariance}
+  \uses{def:winding_number, def:path_homotopy}
+  % \lean{}
+  % \leanok
+  Let $z \in \bC$ be a point and let $\gamma$ and $\eta$ be two
+  closed contours in $\bC \setminus \set{z}$ which are homotopic
+  to each other in $\bC \setminus \set{z}$. Then we have
+  \begin{align*}
+    \windN{\gamma}{z} = \windN{\eta}{z} .
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  \uses{lem:homotopy_invariance}
+  % \leanok
+  \ldots
+\end{proof}
+
 \begin{theorem}[Cauchy's integral formula \Palka{Thm~V.2.3}]
   \label{thm:CAUCHY_FORMULA}
   \uses{def:analytic_function, def:contour_integral, def:winding_number}
@@ -278,3 +296,25 @@
   % \leanok
   \ldots
 \end{proof}
+
+
+
+\section{Ideas underlying the generalizations}
+
+The generalizations of Cauchy's integral theorem and Cauchy's integral
+formula are based on the following homotopy invariance property of
+contour integrals.
+
+\begin{lemma}[Homotopy invariance of contour integrals]
+  \label{lem:homotopy_invariance}
+  \uses{def:path_homotopy, def:contour_integral}
+  % \lean{}
+  % \leanok
+  Let $f \colon U \to \bC$ be an analytic function on an open
+  set $U \subset \bC$, and let $\gamma_0$ and $\gamma_1$ be two
+  closed contours in $U$ which are homotopic to each other in $U$.
+  Then we have
+  \begin{align*}
+    \oint_{\gamma_0} f(z) \, \ud z = \oint_{\gamma_1} f(z) \, \ud z .
+  \end{align*}
+\end{lemma}
