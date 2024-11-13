@@ -1,5 +1,30 @@
 \section{Analyticity of derivatives}
 
+\begin{lemma}[\Palka{Lemma~V.1.6}]
+  \label{lem:derivative_auxiliary_integral}
+  \uses{def:contour_integral, def:analytic_function}
+  % \lean{}
+  % \leanok
+  Let $\gamma$ be a contour in $\bC$, and let $h \colon \gamma \to \bC$
+  be a continuous function on the contour (we slightly abuse the notation
+  here to identify the contour as a subset $\gamma \subset \bC$).
+  Let $k \in \bN$ be a positive integer.
+  Define $H \colon \bC \setminus \gamma \to \bC$ by
+  \begin{align*}
+    H(z) = \int_\gamma \frac{h(\zeta)}{(\zeta - z)^{k}} \, \ud \zeta .
+  \end{align*}
+  Then $H$ is analytic on $\bC \setminus \gamma$, and its derivative
+  at $z \in \bC \setminus \gamma$ is given by
+  \begin{align*}
+    H'(z) = k \, \int_\gamma \frac{h(\zeta)}{(\zeta - z)^{k+1}} \, \ud \zeta .
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  % \uses{}
+  % \leanok
+  \ldots
+\end{proof}
+
 \begin{lemma}[Analyticity of derivatives \Palka{Thm~V.3.1}]
   \label{lem:derivative_analytic}
   \uses{def:analytic_function}
@@ -11,7 +36,7 @@
   $f \in \ContDiff{1}(U)$.
 \end{lemma}
 \begin{proof}
-  \uses{thm:CAUCHY_FORMULA}%\uses{lem:lemma_1_6}
+  \uses{thm:CAUCHY_FORMULA, lem:derivative_auxiliary_integral}%\uses{lem:lemma_1_6}
   % \leanok
   \ldots
 \end{proof}
@@ -23,7 +48,7 @@
   % \leanok
   If a function $f \colon U \to \bC$ is analytic on an open set $U \subset \bC$,
   then all its derivatives $f', f'', \ldots, f^{(k)}, \ldots$ are also analytic on $U$.
-  In particular, then $f$ is infinitely differentiable (i.e., smooth),
+  In particular, then $f$ is infinitely differentiable,
   $f \in \Smooth(U)$.
 \end{corollary}
 \begin{proof}

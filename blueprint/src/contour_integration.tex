@@ -83,6 +83,16 @@
 
   If the starting point and the end point of the path~$\gamma$ are the same,
   $\gamma(a) = \gamma(b)$, then we say that $\gamma$ is a \term{closed path}.
+
+  We sometimes want to disregard the parametrization, and view a path
+  $\gamma \colon [a,b] \to \bC$ as a subset of the complex plane.
+  This subset is the range
+  $\big\{ \gamma(t) \, \big| \, t \in [a,b] \big\} \subset \bC$ of the
+  parametrizing function, but with a slight abuse of notation we often just
+  write $\gamma \subset \bC$ also for this subset.
+
+  (Note that the subset $\gamma \subset \bC$ is compact, by continuity of
+  $\gamma \colon [a,b] \to \bC$ and compactness of $[a,b]$.)
 \end{definition}
 
 \begin{definition}[Smooth path \Palka{Sec.~IV.1.2}]
@@ -96,7 +106,8 @@
     \dot{\gamma}(t) = \frac{\ud}{\ud t} \gamma(t)
   \end{align*}
   with respect to the parameter $t$
-  exists for all $t \in [a,b]$ (one-sided derivative at the end points),
+  exists for all $t \in [a,b]$ (one-sided derivatives at the interval
+  end points $a$ and~$b$),
   and defines a continuous complex-valued function $t \mapsto \dot{\gamma}(t)$
   on $[a,b]$.
 \end{definition}
@@ -171,7 +182,8 @@
   \begin{itemize}
     \item $\phi^{-1} \colon [a,b] \to [c,d]$ is also a continuous increasing
       bijection (a continuous bijection from the
-      compact $[a,b]$ is automatically a homeomorphism; see ) and
+      compact $[a,b]$ is automatically a homeomorphism; see
+      Lemma~\ref{lem:continuous_bijection_homeomorphism}) and
       reparametrization can be undone by rereparametrizing by $\phi^{-1}$;
       \item If both $\gamma$ and the reparametrization function $\phi$ are
       smooth (continuously differentiable), then the reparametrized
