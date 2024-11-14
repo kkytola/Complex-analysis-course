@@ -101,12 +101,17 @@
   %\lean{}
   % \leanok
   Suppose that a function $f \colon U \to \bC$ is analytic on an open
-  set $U \subset \bC$ containing the disk $\DiskRC{r}{z} \subset U$,
+  set $U \subset \bC$ containing the disk $\DiskRC{r}{z_0} \subset U$,
   and suppose that there exists a constant $M>0$ such that
-  $|f(z)| \le M$ for all $z \in \DiskRC{r}{z}$.
-  Then for any $n \in \bN$ we have
+  $|f(z)| \le M$ for all $z \in \DiskRC{r}{z_0}$.
+  Then for any $n \in \bN$ and any $z \in \DiskRC{r}{z_0}$ we have
+  the following bound for the $n$th derivative $f^{(n)}$ of $f$:
   \begin{align*}
-    \big| f^{(n)}(z) \big| \le n! \, M \, r^{-n} .
+    \big| f^{(n)}(z) \big| \le \frac{n! \, M \, r}{( r - |z-z_0| )^{n+1}} .
+  \end{align*}
+  In particular, for the center point $z_0$ of the disk, we have
+  \begin{align*}
+    \big| f^{(n)}(z_0) \big| \le n! \, M \, r^{-n} .
   \end{align*}
 \end{lemma}
 \begin{proof}
