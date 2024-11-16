@@ -101,7 +101,15 @@
   \uses{def:uniform_limit}
   %\lean{}
   % \leanok
-  \ldots
+  Let $f_n \colon A \to \bC$, $n \in \bN$
+  be complex-valued functions defined on the same set $A$.
+  Then the sequence $(f_n)_{n \in \bN}$ converges uniformly on $A$
+  if and only if for every $\eps > 0$ there exists an $N \in \bN$
+  such that for all $m,n \ge N$ and all $z \in A$
+  we have $|f_n(z) - f_m(z)| < \eps$.
+
+  (When $(f_n)_{n \in \bN}$ satisfies the condition above, it could
+  be called a \term{uniform Cauchy sequence} on~$A$.)
 \end{lemma}
 \begin{proof}
   \uses{lem:complex_complete}
@@ -118,7 +126,22 @@
   \uses{def:limit, thm:complex_number_field}
   %\lean{}
   % \leanok
-  \ldots
+  Let $z_1, z_2, z_3, \ldots \in \bC$ be complex numbers.
+  Define their \term{partial sums} as
+  \begin{align*}
+    S_N \; = \; \sum_{n=1}^N z_n \; = \; z_1 + z_2 + \cdots + z_N
+    \qquad \text{ for } N \in \bN \,.
+  \end{align*}
+  We say that the series $\sum_{n=1}^\infty z_n$ \term{converges}
+  if the sequence $(S_N)_{N \in \bN}$ of partial sums has
+  a limit, and we then denote
+  \begin{align*}
+    \sum_{n=1}^\infty z_n = \lim_{N \to \infty} \; \sum_{n=1}^N z_n .
+  \end{align*}
+
+  (Obvious modifications to the above definition are made
+  if the terms' indexing starts from $n=0$ or some other index, and
+  the notation is correspondingly changed to, e.g., $\sum_{n=0}^\infty$.)
 \end{definition}
 
 
@@ -130,7 +153,29 @@
   \uses{def:limit, def:uniform_limit, def:complex_series}
   %\lean{}
   % \leanok
-  \ldots
+  Let $f_1, f_2, f_3, \ldots$ be complex-valued functions on a set~$A$.
+  Define their \term{partial sums} as the functions given by
+  \begin{align*}
+    F_N(z) \; = \; \sum_{n=1}^N f_n(z) \; = \; f_1(z) + f_2(z) + \cdots + f_N(z)
+    \qquad \text{ for } N \in \bN \text{ and } z \in A \, .
+  \end{align*}
+  We say that the function series $\sum_{n=1}^\infty f_n$
+  \term{converges pointwise}
+  if the sequence $\big(F_N(z)\big)_{N \in \bN}$ of partial sums has
+  a limit at every $z \in A$.
+  We say that the function series $\sum_{n=1}^\infty f_n$
+  \term{converges uniformly} on $A$
+  if the sequence $(F_N)_{N \in \bN}$ of partial sum functions
+  converges uniformly on~$A$.
+
+  Notation $\sum_{n=1}^\infty f_n$ is then used to denote the limit function.
+  %\begin{align*}
+  %  \sum_{n=1}^\infty f_n = \lim_{N \to \infty} \; \sum_{n=1}^N F_n .
+  %\end{align*}
+
+  (Obvious modifications to the above are made
+  if the terms' indexing starts from $n=0$ or some other index, and
+  the notation is correspondingly changed to, e.g., $\sum_{n=0}^\infty$.)
 \end{definition}
 
 \begin{lemma}[Weierstrass M-test \Palka{Thm~VII.2.2}]
