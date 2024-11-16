@@ -192,15 +192,16 @@
 
 \begin{lemma}[Hadamard's formula for the radius of convergence \Palka{Thm~VII.3.3}]
   \label{lem:radius_of_convergence}
-  \uses{def:power_series}
+  \uses{def:power_series, def:limsup}
   %\lean{}
   % \leanok
   Let $z_0 \in \bC$ be a point in the complex plane
   and let $a_0,a_1,a_2\ldots \in \bC$ be coefficients.
   Define
   \begin{align*}
-    R = \frac{1}{\limsup_{n \to \infty} \sqrt[n]{|a_n|}} .
+    R = \frac{1}{\limsup_{n \to \infty} \sqrt[n]{|a_n|}} ,
   \end{align*}
+  with the conventions $\frac{1}{+\infty}=0$ and $\frac{1}{0} = +\infty$.
   Then the power series
   \begin{align*}
     \sum_{n=0}^\infty a_n \, (z-z_0)^n

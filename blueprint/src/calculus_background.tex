@@ -137,3 +137,136 @@ substitute that more general notion of integral everywhere.)
   % \leanok
   \ldots
 \end{proof}
+
+
+
+\section{Supremum, infimum, limit superior, and limit inferior}
+
+\begin{definition}[Supremum]
+  \label{def:supremum}
+  %\uses{}
+  % \lean{}
+  % \leanok
+  The \term{supremum}, or the \term{least upper bound}, of a set $A \subset \bR$
+  is the smallest real number $s$ such that $a \le s$ for all $a \in A$,
+  and is denoted by $s = \sup A$.
+
+  By the completeness axiom of real numbers,
+  every nonempty set ($A \ne \emptyset$) of real numbers which is bounded
+  from above (for some $u \in \bR$ we have $a \le u$ for all $a \in A$)
+  has a supremum $\sup A \in \bR$. We adopt the notational conventions
+  that $\sup \emptyset = -\infty$, and that $\sup A = +\infty$ if $A$ is not
+  bounded from above.
+
+  For convenience, we also adopt some flexibility in the
+  notation:
+  % to avoid the need to literally write down the set
+  % of real numbers when this is merely cumbersome.
+  for example the supremum of values of a real-valued
+  function on a set $D$ is denoted by
+  \begin{align*}
+    \sup_{x \in D} f(x) \; := \; \sup \big\{ f(x) \; \big| \; x \in D \big\}
+  \end{align*}
+  and the supremum of values in the tail of a real-number
+  sequence $(x_n)$ starting from index $m$ is denoted by
+  \begin{align*}
+    \sup_{n \ge m} x_n \; := \; \sup \big\{ x_n \; \big| \; m \ge n \big\} \, .
+  \end{align*}
+\end{definition}
+
+\begin{definition}[Infimum]
+  \label{def:infimum}
+  %\uses{}
+  % \lean{}
+  % \leanok
+  The \term{infimum}, or the \term{greatest lower bound}, of a set $A \subset \bR$
+  is the greatest real number $i$ such that $a \ge i$ for all $a \in A$,
+  and is denoted by $i = \inf A$.
+
+  By the completeness axiom of real numbers,
+  every nonempty set ($A \ne \emptyset$) of real numbers which is bounded
+  from below (for some $\ell \in \bR$ we have $a \ge \ell$ for all $a \in A$)
+  has an infimum $\inf A \in \bR$. We adopt the notational conventions
+  that $\inf \emptyset = +\infty$, and that $\inf A = -\infty$ if $A$ is not
+  bounded from below.
+
+  For convenience, we also adopt some flexibility in the
+  notation for infimums of function values or sequence
+  values, similarly as with supremums.
+\end{definition}
+
+\begin{definition}[Limit superior]
+  \label{def:limsup}
+  \uses{def:supremum}
+  % \lean{}
+  % \leanok
+  Let $(x_n)_{n \in \bN}$ be a sequence of real numbers.
+  Then the \term{limit superior} of the sequence is defined as
+  \begin{align*}
+    \limsup_{n \to \infty} x_n \; := \; \lim_{m \to \infty} \Big( \sup_{n \ge m} x_n \Big) .
+  \end{align*}
+
+  With the following conventions, the limit superior of a sequence always exists
+  as either a real number or one of the symbols $\pm\infty$.
+  If the sequence is not bounded from above, then by
+  conventions regarding the supremum, we have
+  $\sup_{n \ge m} x_n = +\infty$ for every $m$, so we correspondingly
+  set $\limsup_{n \to \infty} x_n = +\infty$.
+  Otherwise the sequence $(\sup_{n \ge m} x_n)_{m \in \bN}$
+  is a decreasing sequence of real numbers, so either it is
+  bounded from below and converges to
+  $\lim_{m \to \infty} \big( \sup_{n \ge m} x_n \big) \, = \,
+  \inf_{m \in \bN} \big( \sup_{n \ge m} x_n \big) \in \bR$,
+  or it is not bounded from below and we set
+  $\limsup_{n \to \infty} x_n \, = \,
+  \inf_{m \in \bN} \big( \sup_{n \ge m} x_n \big) = -\infty$.
+\end{definition}
+
+\begin{definition}[Limit inferior]
+  \label{def:liminf}
+  \uses{def:infimum}
+  % \lean{}
+  % \leanok
+  Let $(x_n)_{n \in \bN}$ be a sequence of real numbers.
+  Then the \term{limit inferior} of the sequence is defined as
+  \begin{align*}
+    \liminf_{n \to \infty} x_n \; := \; \lim_{m \to \infty} \Big( \inf_{n \ge m} x_n \Big) .
+  \end{align*}
+
+  With the following conventions, the limit inferior of a sequence always exists
+  as either a real number or one of the symbols $\pm \infty$.
+  If the sequence is not bounded from below, then by
+  conventions regarding the infimum, we have
+  $\inf_{n \ge m} x_n = -\infty$ for every $m$, so we correspondingly
+  set $\liminf_{n \to \infty} x_n = -\infty$.
+  Otherwise the sequence $(\inf_{n \ge m} x_n)_{m \in \bN}$
+  is an increasing sequence of real numbers, so either it is
+  bounded from above and converges to
+  $\lim_{m \to \infty} \big( \inf_{n \ge m} x_n \big) \, = \,
+  \sup_{m \in \bN} \big( \inf_{n \ge m} x_n \big) \in \bR$,
+  or it is not bounded from above and we set
+  $\liminf_{n \to \infty} x_n \, = \,
+  \sup_{m \in \bN} \big( \inf_{n \ge m} x_n \big) = +\infty$.
+\end{definition}
+
+\begin{lemma}[Limit with limsup and liminf]
+  \label{lem:limit_with_limsup_liminf}
+  \uses{def:limsup, def:liminf, def:limit}
+  % \lean{}
+  % \leanok
+  Let $(x_n)_{n \in \bN}$ be a sequence of real numbers, and let $x \in \bR$.
+  Then the following are equivalent:
+  \begin{itemize}
+    \item The limit $\lim_{n \to \infty} x_n$ exists and equals $x$.
+    \item We have both $\limsup_{n \to \infty} x_n = x$ and
+      $\liminf_{n \to \infty} x_n = x$.
+  \end{itemize}
+
+  (With the usual conventions of $\pm\infty$ as possible limits of real-number sequences,
+  the above equivalence of conditions also extends to the cases $x = \pm \infty$.)
+\end{lemma}
+\begin{proof}
+  % \uses{}
+  % \leanok
+  \ldots
+\end{proof}
