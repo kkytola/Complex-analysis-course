@@ -436,6 +436,39 @@ to integrals along piecewise smooth paths.
   \ldots
 \end{proof}
 
+The following slightly technical auxiliary result will only be used later
+(for winding number properties and for Cauchy's formula for the derivative).
+But since the result only requires contour integration,
+the natural logical place for it is here. Also, strictly speaking, we
+only need the cases $k = 1$ and $k = 2$ in this lemma; but including
+general $k \in \bN$ gives the quickest route to Cauchy's formula for
+higher order derivatives.
+
+\begin{lemma}[\Palka{Lemma~V.1.6}]
+  \label{lem:derivative_auxiliary_integral}
+  \uses{def:contour_integral, def:analytic_function}
+  % \lean{}
+  % \leanok
+  Let $\gamma$ be a contour in $\bC$, and let $h \colon \gamma \to \bC$
+  be a continuous function on the contour (we slightly abuse the notation
+  here to identify the contour as a subset $\gamma \subset \bC$).
+  Let $k \in \bN$ be a positive integer.
+  Define $H \colon \bC \setminus \gamma \to \bC$ by
+  \begin{align*}
+    H(z) = \int_\gamma \frac{h(\zeta)}{(\zeta - z)^{k}} \, \ud \zeta .
+  \end{align*}
+  Then $H$ is analytic on $\bC \setminus \gamma$, and its derivative
+  at $z \in \bC \setminus \gamma$ is given by
+  \begin{align*}
+    H'(z) = k \, \int_\gamma \frac{h(\zeta)}{(\zeta - z)^{k+1}} \, \ud \zeta .
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  \uses{lem:contour_integral_bound}
+  % \leanok
+  \ldots
+\end{proof}
+
 
 
 \section{Primitives}
