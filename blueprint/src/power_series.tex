@@ -162,6 +162,90 @@
   the notation is correspondingly changed to, e.g., $\sum_{n=0}^\infty$.)
 \end{definition}
 
+\begin{lemma}[Terms of a convergent series tend to zero]
+  \label{lem:terms_tend_to_zero}
+  \uses{def:complex_series}
+  % \lean{}
+  % \leanok
+  If a complex series $\sum_{n=1}^\infty z_n$ converges,
+  then we have
+  \begin{align*}
+    \lim_{n \to \infty} z_n = 0 .
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  % \uses{}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{lemma}[Geometric series]
+  \label{lem:geometric_series}
+  \uses{def:complex_series}
+  % \lean{}
+  % \leanok
+  The geometric series
+  \begin{align*}
+    \sum_{n=0}^\infty z^n \; = \; 1 + z + z^2 + z^3 + \cdots ,
+  \end{align*}
+  with ratio $z \in \bC$ converges if and only if
+  $|z| < 1$. In that case its sum is
+  \begin{align*}
+    \sum_{n=0}^\infty z^n \; = \; \frac{1}{1-z} .
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  % \uses{}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{definition}[Absolute convergence of a complex series]
+  \label{def:absolute_convergence}
+  \uses{def:complex_series, def:absolute_value}
+  % \lean{}
+  % \leanok
+  A complex series $\sum_{n=1}^\infty z_n$ is said to
+  \term{converge absolutely} if the series of absolute values
+  $\sum_{n=1}^\infty |z_n|$ converges.
+\end{definition}
+
+\begin{lemma}[Absolute convergence implies convergence]
+  \label{lem:absolute_convergence_implies_convergence}
+  \uses{def:absolute_convergence, def:complex_series, }
+  % \lean{}
+  % \leanok
+  If a complex series %$\sum_{n=1}^\infty z_n$
+  converges absolutely, then it converges.
+\end{lemma}
+\begin{proof}
+  \uses{lem:complex_complete}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{lemma}[D'Alembert's ratio test]
+  \label{lem:ratio_test}
+  \uses{def:complex_series, def:absolute_convergence}
+  % \lean{}
+  % \leanok
+  Suppose that $\sum_{n=1}^\infty z_n$ is a complex
+  series such that the limit
+  \begin{align*}
+    r = \lim_{n \to \infty} \frac{|z_{n+1}|}{|z_n|}
+  \end{align*}
+  exists. Then:
+  \begin{itemize}
+    \item[(i)] If $r < 1$, then the series $\sum_{n=1}^\infty z_n$ converges absolutely.
+    \item[(ii)] If $r > 1$, then the series $\sum_{n=1}^\infty z_n$ does not converge.
+  \end{itemize}
+\end{lemma}
+\begin{proof}
+  \uses{lem:terms_tend_to_zero, lem:geometric_series, lem:absolute_convergence_implies_convergence}
+  % \leanok
+  \ldots
+\end{proof}
+
 
 
 \section{Series of functions}
@@ -258,41 +342,116 @@
   is called a \term{power series} centered at $z_0$.
 \end{definition}
 
-\begin{lemma}[Hadamard's formula for the radius of convergence \Palka{Thm~VII.3.3}]
-  \label{lem:radius_of_convergence}
-  \uses{def:power_series, def:limsup}
+\begin{lemma}[Abel's theorem]
+  \label{lem:abel}
+  \uses{def:power_series, def:absolute_convergence}
+  % \lean{}
+  % \leanok
+  If a power series
+  \begin{align*}
+    \sum_{n=0}^\infty a_n \, (z-z_0)^n
+  \end{align*}
+  converges at $z = w \in \bC$, then it converges
+  absolutely for all $z \in \bC$ such that $|z-z_0| < |w-z_0|$.
+\end{lemma}
+\begin{proof}
+  \uses{lem:absolute_convergence_implies_convergence}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{corollary}[Abel's theorem in the contrapositive]
+  \label{cor:abel_contrapositive}
+  \uses{def:power_series, def:absolute_convergence}
+  % \lean{}
+  % \leanok
+  If a power series
+  \begin{align*}
+    \sum_{n=0}^\infty a_n \, (z-z_0)^n
+  \end{align*}
+  does not converge at $z = w \in \bC$, then it does not converge
+  at any $z \in \bC$ such that $|z-z_0| > |w-z_0|$.
+\end{corollary}
+\begin{proof}
+  \uses{lem:abel}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{definition}[Radius of convergence]
+  \label{def:radius_of_convergence}
+  \uses{def:power_series, lem:abel, cor:abel_contrapositive}
+  % \lean{}
+  % \leanok
+  The \term{radius of convergence} of a power series
+  \begin{align*}
+    \sum_{n=0}^\infty a_n \, (z-z_0)^n
+  \end{align*}
+  is defined as
+  \begin{align*}
+    R \; := \;
+      \sup \bigg\{ |z-z_0| \; \bigg| \;
+        \sum_{n=0}^\infty a_n \, (z-z_0)^n \, \text{ converges} \bigg\} .
+  \end{align*}
+
+  From Lemma~\ref{lem:abel} and Corollary~\ref{cor:abel_contrapositive}
+  it follows that the power series $\sum_{n=0}^\infty a_n \, (z-z_0)^n$
+  converges for all $z \in \bC$ such that $|z-z_0| < R$
+  and diverges for all $z \in \bC$ such that $|z-z_0| > R$.
+  The disk $\DiskRC{R}{z_0}$ is called the \term{disk of convergence}
+  of the power series $\sum_{n=0}^\infty a_n \, (z-z_0)^n$.
+
+  (If $R=+\infty$, we interpret $\DiskRC{R}{z_0} = \bC$.)
+\end{definition}
+
+\begin{lemma}[D'Alembert's ratio test for the radius of convergence]
+  \label{lem:ratio_test_radius_of_convergence}
+  \uses{def:radius_of_convergence}
+  % \lean{}
+  % \leanok
+  Suppose that for the coefficients of a power series
+  \begin{align*}
+    \sum_{n=0}^\infty a_n \, (z-z_0)^n
+  \end{align*}
+  the limit
+  \begin{align*}
+    \rho = \lim_{n \to \infty} \frac{|a_n|}{|a_{n+1}|}
+  \end{align*}
+  exists. Then the radius of convergence $R$ of the power series
+  is $R = \rho$.
+\end{lemma}
+\begin{proof}
+  \uses{lem:ratio_test}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{theorem}[Hadamard's formula for the radius of convergence \Palka{Thm~VII.3.3}]
+  \label{thm:hadamard_formula}
+  \uses{def:radius_of_convergence, def:limsup}
   %\lean{}
   % \leanok
   Let $z_0 \in \bC$ be a point in the complex plane
   and let $a_0,a_1,a_2\ldots \in \bC$ be coefficients.
-  Define
+  The radius of convergence of a power series
+  \begin{align*}
+    \sum_{n=0}^\infty a_n \, (z-z_0)^n
+  \end{align*}
+  is given by the formula
   \begin{align*}
     R = \frac{1}{\limsup_{n \to \infty} \sqrt[n]{|a_n|}} ,
   \end{align*}
   with the conventions $\frac{1}{+\infty}=0$ and $\frac{1}{0} = +\infty$.
-  Then the power series
-  \begin{align*}
-    \sum_{n=0}^\infty a_n \, (z-z_0)^n
-      = a_0 + a_1 \, (z - z_0) + a_2 \, (z - z_0)^2 + \cdots
-  \end{align*}
-  diverges for any $z \in \bC$ such that $|z-z_0| > R$
-  and converges for any $z \in \bC$ such that $|z-z_0| < R$.
-  Moreover, the convergence is uniform on compact subsets
-  of $\BallRC{R}{z_0}$.
-  %(Warning: The convergence is not necessarily uniform on $\BallRC{R}{z_0}$).
-
-  (The number $R$ above is called the \term{radius of convergence}
-  of the power series.)
-\end{lemma}
+\end{theorem}
 \begin{proof}
-  \uses{lem:weierstrass_test}
+  \uses{lem:weierstrass_test, lem:terms_tend_to_zero}
   % \leanok
   \ldots
 \end{proof}
 
 \begin{lemma}[Analyticity of power series \Palka{Thm~VII.3.3}]
   \label{lem:power_series_analytic}
-  \uses{def:power_series, def:analytic_function, lem:radius_of_convergence}
+  \uses{def:power_series, def:analytic_function, thm:hadamard_formula}
   %\lean{}
   % \leanok
   Let $z_0 \in \bC$ be a point in the complex plane
