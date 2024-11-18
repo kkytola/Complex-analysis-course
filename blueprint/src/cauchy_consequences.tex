@@ -11,7 +11,7 @@
   $f \in \ContDiff{1}(U)$.
 \end{lemma}
 \begin{proof}
-  \uses{thm:CAUCHY_FORMULA}%\uses{lem:lemma_1_6}
+  \uses{thm:CAUCHY_FORMULA, lem:derivative_auxiliary_integral}%\uses{lem:lemma_1_6}
   % \leanok
   \ldots
 \end{proof}
@@ -23,11 +23,11 @@
   % \leanok
   If a function $f \colon U \to \bC$ is analytic on an open set $U \subset \bC$,
   then all its derivatives $f', f'', \ldots, f^{(k)}, \ldots$ are also analytic on $U$.
-  In particular, then $f$ is infinitely differentiable (i.e., smooth),
+  In particular, then $f$ is infinitely differentiable,
   $f \in \Smooth(U)$.
 \end{corollary}
 \begin{proof}
-  \uses{lem:derivative_analytic}
+  \uses{lem:derivative_analytic, lem:derivative_auxiliary_integral}
   % \leanok
   Straightforward induction using Lemma~\ref{lem:derivative_analytic}.
 \end{proof}
@@ -65,7 +65,7 @@
   \end{align*}
 \end{theorem}
 \begin{proof}
-  \uses{thm:CAUCHY_FORMULA}
+  \uses{thm:CAUCHY_FORMULA, lem:derivative_auxiliary_integral}
   % \leanok
   \ldots
 \end{proof}
@@ -76,12 +76,17 @@
   %\lean{}
   % \leanok
   Suppose that a function $f \colon U \to \bC$ is analytic on an open
-  set $U \subset \bC$ containing the disk $\DiskRC{r}{z} \subset U$,
+  set $U \subset \bC$ containing the disk $\DiskRC{r}{z_0} \subset U$,
   and suppose that there exists a constant $M>0$ such that
-  $|f(z)| \le M$ for all $z \in \DiskRC{r}{z}$.
-  Then for any $n \in \bN$ we have
+  $|f(z)| \le M$ for all $z \in \DiskRC{r}{z_0}$.
+  Then for any $n \in \bN$ and any $z \in \DiskRC{r}{z_0}$ we have
+  the following bound for the $n$th derivative $f^{(n)}$ of $f$:
   \begin{align*}
-    \big| f^{(n)}(z) \big| \le n! \, M \, r^{-n} .
+    \big| f^{(n)}(z) \big| \le \frac{n! \, M \, r}{( r - |z-z_0| )^{n+1}} .
+  \end{align*}
+  In particular, for the center point $z_0$ of the disk, we have
+  \begin{align*}
+    \big| f^{(n)}(z_0) \big| \le n! \, M \, r^{-n} .
   \end{align*}
 \end{lemma}
 \begin{proof}

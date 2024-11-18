@@ -91,7 +91,21 @@
   \end{align*}
 \end{lemma}
 \begin{proof}
-  \uses{thm:intersect_nested_compacts}
+  \uses{thm:intersect_nested_compacts, lem:local_linear_approximation}
+  % \leanok
+  \ldots
+\end{proof}
+
+\begin{lemma}[Existence of primitives in star-shaped domains]
+  \label{lem:primitive_star_shaped}
+  \uses{def:primitive, def:star_shaped}
+  % \lean{}
+  % \leanok
+  Every analytic function $f \colon U \to \bC$ on a star-shaped
+  domain~$U \subset \bC$ has a primitive in~$U$.
+\end{lemma}
+\begin{proof}
+  \uses{lem:goursat}
   % \leanok
   \ldots
 \end{proof}
@@ -109,21 +123,7 @@
   \end{align*}
 \end{theorem}
 \begin{proof}
-  \uses{lem:goursat, thm:primitive_characterization}
-  % \leanok
-  \ldots
-\end{proof}
-
-\begin{corollary}[Existence of primitives in star-shaped domains]
-  \label{cor:primitive_star_shaped}
-  \uses{def:primitive, def:star_shaped}
-  % \lean{}
-  % \leanok
-  Every analytic function $f \colon U \to \bC$ on a star-shaped
-  domain~$U \subset \bC$ has a primitive in~$U$.
-\end{corollary}
-\begin{proof}
-  \uses{thm:cauchy_theorem_star_shaped}
+  \uses{thm:primitive_characterization, lem:primitive_star_shaped}
   % \leanok
   \ldots
 \end{proof}
@@ -147,35 +147,11 @@
   \ldots
 \end{proof}
 
-\begin{theorem}[Cauchy's integral theorem \Palka{Thm~V.5.1}]
-  \label{thm:cauchy_theorem}
-  \uses{def:analytic_function, def:contour_integral, def:contractible}
-  %\lean{}
-  % \leanok
-  Suppose that a function $f \colon U \to \bC$ is analytic on a open
-  set $U \subset \bC$.
-  Then for any contractible closed contour $\gamma$ we have
-  \begin{align*}
-    \oint_\gamma f(z) \, \ud z = 0 .
-  \end{align*}
-
-  In particular, if $U$ is simply connected, then
-  for any closed contour $\gamma$ in~$U$ we have
-  \begin{align*}
-    \oint_\gamma f(z) \, \ud z = 0 .
-  \end{align*}
-\end{theorem}
-\begin{proof}
-  \uses{lem:goursat, cor:local_cauchy_theorem, lem:homotopy_invariance}
-  % \leanok
-  \ldots
-\end{proof}
-
 
 
 \section{Cauchy's integral formula}
 
-\begin{theorem}[Cauchy's integral formula, star-shaped case \Palka{Thm~V.2.3}]
+\begin{theorem}[Cauchy's integral formula for star-shaped subdomains \Palka{Thm~V.2.3}]
   \label{thm:cauchy_formula_star_shaped}
   \uses{def:analytic_function, def:contour_integral}
   %\lean{}
@@ -194,6 +170,88 @@
   % \leanok
   \ldots
 \end{proof}
+
+By far the most commonly used special case of
+Theorem~\ref{thm:cauchy_formula_star_shaped}
+is when the contour $\gamma$ is a circle, encircling a disk
+whose closure is contained in the domain of the analytic function
+(recall that disks are convex and therefore star-shaped).
+
+\begin{corollary}[Cauchy's integral formula for circles]
+  \label{cor:cauchy_formula_circle}
+  \uses{def:analytic_function, def:contour_integral}
+  % \lean{}
+  % \leanok
+  Suppose that a function $f \colon U \to \bC$ is analytic on an open
+  set $U \subset \bC$.
+  Let $\CDiskRC{r}{z_0} \subset U$ be a closed disk contained in~$U$.
+  Then for any point $z \in \DiskRC{r}{z_0}$ we have
+  \begin{align*}
+    f(z) = \frac{1}{2\pi \ii}
+        \oint_{\bdry \DiskRC{z_0}{r}} \frac{f(\zeta)}{\zeta - z} \, \ud \zeta
+  \end{align*}
+  where the circle $\bdry \DiskRC{z_0}{r}$ is parametrized in the
+  counterclockwise orientation.
+\end{corollary}
+\begin{proof}
+  \uses{thm:cauchy_formula_star_shaped}
+  % \leanok
+  \ldots
+\end{proof}
+
+
+
+\section{Ideas underlying the generalizations}
+
+The generalizations of Cauchy's integral theorem and Cauchy's integral
+formula are based on the following homotopy invariance property of
+contour integrals.
+
+\begin{lemma}[Homotopy invariance of contour integrals]
+  \label{lem:homotopy_invariance}
+  \uses{def:path_homotopy, def:contour_integral}
+  % \lean{}
+  % \leanok
+  Let $f \colon U \to \bC$ be an analytic function on an open
+  set $U \subset \bC$, and let $\gamma_0$ and $\gamma_1$ be two
+  closed contours in $U$ which are homotopic to each other in $U$.
+  Then we have
+  \begin{align*}
+    \oint_{\gamma_0} f(z) \, \ud z = \oint_{\gamma_1} f(z) \, \ud z .
+  \end{align*}
+\end{lemma}
+
+This readily implies the following generalization of Cauchy's integral
+theorem.
+
+\begin{theorem}[Cauchy's integral theorem \Palka{Thm~V.5.1}]
+  \label{thm:cauchy_theorem}
+  \uses{def:analytic_function, def:contour_integral, def:contractible}
+  %\lean{}
+  % \leanok
+  Suppose that a function $f \colon U \to \bC$ is analytic on a open
+  set $U \subset \bC$.
+  Then for any contractible closed contour $\gamma$ we have
+  \begin{align*}
+    \oint_\gamma f(z) \, \ud z = 0 .
+  \end{align*}
+
+  In particular, if $U$ is simply connected, then
+  for any closed contour $\gamma$ in~$U$ we have
+  \begin{align*}
+    \oint_\gamma f(z) \, \ud z = 0 ,
+  \end{align*}
+  and the analytic function $f$ has a primitive in~$U$.
+\end{theorem}
+\begin{proof}
+  \uses{lem:goursat, cor:local_cauchy_theorem, lem:homotopy_invariance}
+  % \leanok
+  \ldots
+\end{proof}
+
+The other ingredient of generalization of Cauchy's integral formula
+to arbitrary contours and points not lying on those contours is
+the winding number of a contour around a point.
 
 \begin{definition}[Winding number]
   \label{def:winding_number}
@@ -233,7 +291,6 @@
   \ldots
 \end{proof}
 
-
 \begin{lemma}[Winding number properties]
   \label{lem:winding_number_properties}
   \uses{def:winding_number}
@@ -255,7 +312,7 @@
   \end{itemize}
 \end{lemma}
 \begin{proof}
-  % \uses{}
+  \uses{lem:derivative_auxiliary_integral}
   % \leanok
   \ldots
 \end{proof}
@@ -278,6 +335,12 @@
   \ldots
 \end{proof}
 
+The following is then a version of Cauchy's integral formula
+which has no restrictions on the closed contour and
+no restrictions on the position of the point with respect to
+the contour, except that the point must not lie on the contour
+(for otherwise there is a singularity in the integrand).
+
 \begin{theorem}[Cauchy's integral formula \Palka{Thm~V.2.3}]
   \label{thm:CAUCHY_FORMULA}
   \uses{def:analytic_function, def:contour_integral, def:winding_number}
@@ -296,25 +359,3 @@
   % \leanok
   \ldots
 \end{proof}
-
-
-
-\section{Ideas underlying the generalizations}
-
-The generalizations of Cauchy's integral theorem and Cauchy's integral
-formula are based on the following homotopy invariance property of
-contour integrals.
-
-\begin{lemma}[Homotopy invariance of contour integrals]
-  \label{lem:homotopy_invariance}
-  \uses{def:path_homotopy, def:contour_integral}
-  % \lean{}
-  % \leanok
-  Let $f \colon U \to \bC$ be an analytic function on an open
-  set $U \subset \bC$, and let $\gamma_0$ and $\gamma_1$ be two
-  closed contours in $U$ which are homotopic to each other in $U$.
-  Then we have
-  \begin{align*}
-    \oint_{\gamma_0} f(z) \, \ud z = \oint_{\gamma_1} f(z) \, \ud z .
-  \end{align*}
-\end{lemma}
