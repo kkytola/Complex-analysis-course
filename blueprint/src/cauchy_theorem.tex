@@ -158,7 +158,7 @@
   % \leanok
   Suppose that a function $f \colon U \to \bC$ is analytic on an open
   set $U \subset \bC$, and suppose that $\gamma$ is a closed contour
-  in $U$ parametrizing the boundary of a star-shaped Jordan domain
+  in $U$ parametrizing the boundary of a star-shaped Jordan subdomain
   $V \subset U$ in a counterclockwise orientation.
   Then for any point $z \in V$ we have
   \begin{align*}
@@ -188,9 +188,9 @@ whose closure is contained in the domain of the analytic function
   Then for any point $z \in \DiskRC{r}{z_0}$ we have
   \begin{align*}
     f(z) = \frac{1}{2\pi \ii}
-        \oint_{\bdry \DiskRC{z_0}{r}} \frac{f(\zeta)}{\zeta - z} \, \ud \zeta
+        \oint_{\bdry \DiskRC{r}{z_0}} \frac{f(\zeta)}{\zeta - z} \, \ud \zeta
   \end{align*}
-  where the circle $\bdry \DiskRC{z_0}{r}$ is parametrized in the
+  where the circle $\bdry \DiskRC{r}{z_0}$ is parametrized in the
   counterclockwise orientation.
 \end{corollary}
 \begin{proof}
@@ -205,7 +205,7 @@ whose closure is contained in the domain of the analytic function
 
 The generalizations of Cauchy's integral theorem and Cauchy's integral
 formula are based on the following homotopy invariance property of
-contour integrals.
+contour integrals (whose proof we do not do in detail in this course).
 
 \begin{lemma}[Homotopy invariance of contour integrals]
   \label{lem:homotopy_invariance}
@@ -347,8 +347,10 @@ the contour, except that the point must not lie on the contour
   %\lean{}
   % \leanok
   Suppose that a function $f \colon U \to \bC$ is analytic on an open
-  set $U \subset \bC$ containing the disk $\DiskRC{r}{z} \subset U$.
-  Then for any closed contour $\gamma$ in $\DiskRC{r}{z}$ we have
+  simply connected subset $U \subset \bC$ of the complex plane.
+  %containing the disk $\DiskRC{r}{z} \subset U$.
+  Then for any closed contour $\gamma$ %in $\DiskRC{r}{z}$
+  in $U$ we have
   \begin{align*}
     \oint_\gamma \frac{f(\zeta)}{\zeta - z} \, \ud \zeta
     \; = \; 2\pi \ii \, \windN{\gamma}{z} \, f(z) .

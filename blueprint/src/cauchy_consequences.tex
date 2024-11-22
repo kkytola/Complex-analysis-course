@@ -22,9 +22,9 @@
   %\lean{}
   % \leanok
   If a function $f \colon U \to \bC$ is analytic on an open set $U \subset \bC$,
-  then all its derivatives $f', f'', \ldots, f^{(k)}, \ldots$ are also analytic on $U$.
-  In particular, then $f$ is infinitely differentiable,
-  $f \in \Smooth(U)$.
+  then its derivatives $f', f'', \ldots, f^{(k)}, \ldots$ of all orders are
+  also analytic on $U$.
+  In particular, then $f$ is infinitely differentiable, $f \in \Smooth(U)$.
 \end{corollary}
 \begin{proof}
   \uses{lem:derivative_analytic, lem:derivative_auxiliary_integral}
@@ -56,9 +56,10 @@
   %\lean{}
   % \leanok
   Suppose that a function $f \colon U \to \bC$ is analytic on an open
-  set $U \subset \bC$ containing the disk $\DiskRC{r}{z} \subset U$.
-  Then for any closed contour $\gamma$ in $\DiskRC{r}{z}$
-  and $n \in \bN$ we have
+  simply connected subset $U \subset \bC$ of the complex plane.
+  % containing the disk $\DiskRC{r}{z_0} \subset U$.
+  Then for any closed contour $\gamma$ %in $\DiskRC{r}{z_0}$,
+  in $U$, any $n \in \bN$, and any point $z \in U$ we have
   \begin{align*}
     \windN{\gamma}{z} \, f^{(n)}(z)
       = \frac{n!}{2\pi \ii} \oint_\gamma \frac{f(\zeta)}{(\zeta - z)^{n+1}} \, \ud \zeta .
@@ -131,7 +132,7 @@
   \ldots
 \end{proof}
 
-\begin{corollary}[Fundamental theorem of algebra \Palka{Thm~V.3.9}]
+\begin{corollary}[Polynomial factorization \Palka{Thm~V.3.9}]
   \label{cor:complex_polynomial_factorization}
   \uses{def:polynomial}
   %\lean{}
