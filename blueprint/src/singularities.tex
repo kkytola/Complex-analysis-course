@@ -1,3 +1,31 @@
+\section{The extended complex plane}
+
+\begin{definition}[The Riemann sphere]
+  \label{def:riemann_sphere}
+  \uses{lem:metric_on_C, def:limit}
+  % \lean{}
+  % \leanok
+  The \term{extended complex plane} is the set
+  \begin{align*}
+    \hat{\bC} = \bC \cup \set{\infty} \, ,
+  \end{align*}
+  where $\infty$ is a symbol added to $\bC$ to represent a single point
+  at infinity. The set $\hat{\bC}$ is given a topology
+  in such a way that open sets in $\bC$ remain open in $\hat{\bC}$,
+  and sets of the form $\big\{z \in \bC \; \big| \; |z|>M \big\}$ for $M>0$
+  form a neighborhood basis at $\infty$.
+
+  (This topology makes $\hat{\bC}$ homeomorphic to the 2-dimensional sphere in
+  three-dimensional space, and $\hat{\bC}$ is also called the \term{Riemann sphere}.)
+
+  For example a function $f \colon U \to \bC$ has limit
+  $\lim_{z \to z_0} f(z) = \infty$ at $z_0$ if for any $M>0$
+  there exists a $\delta > 0$ such that
+  $|f(z)|>M$ whenever $0 < |z-z_0| < \delta$.
+\end{definition}
+
+
+
 \section{Isolated singularities of analytic functions}
 
 \begin{definition}[Isolated singularity \Palka{Sec.~VIII.2.1}]
@@ -30,7 +58,7 @@
     \item $f$ has a \term{removable singularity} at $z_0$ if $a_n = 0$ for all $n < 0$;
     \item $f$ has a \term{pole of order $m \in \bN$} at $z_0$
       if $a_{-m} \ne 0$ and $a_n = 0$ for all $n < -m$;
-    \item $f$ has an \term{essential singularity} at $z_0$
+    \item $f$ has an \term{essential singularity} at $z_0$ if
       $a_n \ne 0$ for infinitely many $n < 0$.
   \end{itemize}
 \end{definition}
@@ -53,34 +81,63 @@
   and is denoted $\ResAtOf{z_0}{f} = a_{-1} \in \bC$.
 \end{definition}
 
-\begin{theorem}[Riemann extension theorem \Palka{Thm~VIII.2.1}]
+\begin{theorem}[Removable singularity characterization \Palka{Thm~VIII.2.1 and Thm~VIII.2.2}]
   \label{thm:removable_singularity}
   \uses{def:singularity_classification}
-  %\lean{}
+  % \lean{}
   % \leanok
   Let $z_0 \in \bC$ be an isolated singularity of
   an analytic function $f : U \to \bC$.
-  Then the singularity is removable if and only if
-  $f$ is bounded in some punctured disk $\BallRC{r}{z_0} \setminus \{z_0\}$
-  with $r>0$.
+  Then the following conditions are equivalent:
+  \begin{description}
+    \item[(R-1)] The singularity of $f$ at $z_0$ is removable (i.e., all negative
+      index Laurent series coefficients of $f$ expanded near $z_0$ vanish).
+    \item[(R-2)] There exists an analytic function $\tilde{f} \colon U \cup \set{z_0} \to \bC$
+      such that $f(z) = \tilde{f}(z)$ for all $z \in U$.
+    \item[(R-3)] The limit $\lim_{z \to z_0} f(z)$ exists in $\bC$.
+    \item[(R-4)] The function $f$ is bounded in some punctured disk
+      $\BallRC{r}{z_0} \setminus \set{z_0}$ with $r>0$.
+  \end{description}
 \end{theorem}
 \begin{proof}
-  %\uses{}
+  % \uses{}
   % \leanok
   \ldots
 \end{proof}
 
-\begin{theorem}[Characterization of poles \Palka{Thm~VIII.2.4}]
+%\begin{theorem}[Riemann extension theorem \Palka{Thm~VIII.2.1}]
+%  \label{thm:removable_singularity}
+%  \uses{def:singularity_classification}
+%  %\lean{}
+%  % \leanok
+%  Let $z_0 \in \bC$ be an isolated singularity of
+%  an analytic function $f : U \to \bC$.
+%  Then the singularity is removable if and only if
+%  $f$ is bounded in some punctured disk $\BallRC{r}{z_0} \setminus \{z_0\}$
+%  with $r>0$.
+%\end{theorem}
+%\begin{proof}
+%  %\uses{}
+%  % \leanok
+%  \ldots
+%\end{proof}
+
+\begin{theorem}[Characterization of poles \Palka{Thm~VIII.2.3 and Thm~VIII.2.4}]
   \label{thm:pole}
-  \uses{def:singularity_classification}
+  \uses{def:singularity_classification, def:riemann_sphere}
   %\lean{}
   % \leanok
   Let $z_0 \in \bC$ be an isolated singularity of
   an analytic function $f : U \to \bC$.
-  Then the singularity is a pole if and only if
-  \begin{align*}
-    \lim_{z \to z_0} | f(z) | = \infty .
-  \end{align*}
+  Then the following conditions are equivalent:
+  \begin{description}
+    \item[(P-1)] The singularity of $f$ at $z_0$ is a pole (i.e.,
+      finitely many Laurent series coefficients of $f$ near $z_0$ are nonzero).
+    \item[(P-2)] There exists an $m \in \bN = \set{1,2,\ldots}$
+      such that $z \mapsto (z-z_0)^m \, f(z)$ has a removable singularity
+      and a nonzero limit as $z \to z_0$.
+    \item[(P-3)] The function $f$ has the limit $\lim_{z \to z_0} f(z) = \infty$ at $z_0$.
+  \end{description}
 \end{theorem}
 \begin{proof}
   %\uses{}
@@ -88,22 +145,63 @@
   \ldots
 \end{proof}
 
-\begin{theorem}[Characterization of poles \Palka{Thm~VIII.2.4}]
+%\begin{theorem}[Characterization of poles \Palka{Thm~VIII.2.3 and Thm~VIII.2.4}]
+%  \label{thm:pole}
+%  \uses{def:singularity_classification}
+%  %\lean{}
+%  % \leanok
+%  Let $z_0 \in \bC$ be an isolated singularity of
+%  an analytic function $f : U \to \bC$.
+%  Then the singularity is a pole if and only if
+%  \begin{align*}
+%    \lim_{z \to z_0} | f(z) | = \infty .
+%  \end{align*}
+%\end{theorem}
+%\begin{proof}
+%  %\uses{}
+%  % \leanok
+%  \ldots
+%\end{proof}
+
+\begin{theorem}[Characterization of essential singularities \Palka{Thm~VIII.2.6 and Thm~VIII.2.7}]
   \label{thm:essential_singularity}
-  \uses{def:singularity_classification}
+  \uses{def:singularity_classification, def:riemann_sphere}
   %\lean{}
   % \leanok
   Let $z_0 \in \bC$ be an isolated singularity of
   an analytic function $f : U \to \bC$.
-  Then the singularity is an essential singularity if and only if
-  for any $r>0$ such that $\PDisk = \BallRC{r}{z_0} \setminus \{z_0\} \subset U$
-  we have that the image $f[\PDisk] \subset \bC$ is dense.
+  Then the following conditions are equivalent:
+  \begin{description}
+    \item[(E-1)] The singularity of $f$ at $z_0$ is essential (i.e.,
+      infinitely many Laurent series coefficients of $f$ near $z_0$ are nonzero).
+    \item[(E-2)] For any small $\delta > 0$, the image
+      $f \big[ \BallRC{\delta}{z_0} \setminus \set{z_0} \big]$ is dense in $\bC$.
+    \item[(E-3)] The limit $\lim_{z \to z_0} f(z)$ does not exist
+      in the extended complex plane $\hat{\bC} = \bC \cup \set{\infty}$.
+  \end{description}
 \end{theorem}
 \begin{proof}
   %\uses{}
   % \leanok
   \ldots
 \end{proof}
+
+%\begin{theorem}[Characterization of essential singularities \Palka{Thm~VIII.2.6 and Thm~VIII.2.7}]
+%  \label{thm:essential_singularity}
+%  \uses{def:singularity_classification}
+%  %\lean{}
+%  % \leanok
+%  Let $z_0 \in \bC$ be an isolated singularity of
+%  an analytic function $f : U \to \bC$.
+%  Then the singularity is an essential singularity if and only if
+%  for any $r>0$ such that $\PDisk = \BallRC{r}{z_0} \setminus \{z_0\} \subset U$
+%  we have that the image $f[\PDisk] \subset \bC$ is dense.
+%\end{theorem}
+%\begin{proof}
+%  %\uses{}
+%  % \leanok
+%  \ldots
+%\end{proof}
 
 
 
