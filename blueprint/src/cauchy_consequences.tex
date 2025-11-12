@@ -238,12 +238,16 @@
   set $U \subset \bC$ containing the closed disk $\CDiskRC{r}{z} \subset U$.
   Then we have
   \begin{align*}
-    f(z) = \frac{1}{2 \pi r} \oint_{\bdry \DiskRC{r}{z}}
-            \frac{f(\zeta)}{\zeta - z} \, |\ud \zeta| .
+    f(z)
+    \, = \; & \frac{1}{2 \pi r} \int_{\bdry \DiskRC{r}{z}}
+            f(\zeta)\, |\ud \zeta|
+    \, = \, \frac{1}{2 \pi} \int_{0}^{2\pi}
+            f(r + r e^{\ii \theta}) \, \ud \theta .
   \end{align*}
 \end{theorem}
 \begin{proof}
-  \uses{thm:CAUCHY_FORMULA}
+  \uses{cor:cauchy_formula_circle}
+  %\uses{thm:CAUCHY_FORMULA}
   % \leanok
   \ldots
 \end{proof}
