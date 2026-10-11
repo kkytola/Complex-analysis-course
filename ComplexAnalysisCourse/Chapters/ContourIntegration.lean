@@ -13,13 +13,9 @@ open Informal
 file := "contour-integration"
 %%%
 
-:::group "grp_contour_integration"
-Contour integration
-:::
-
 # Complex-valued integrals
 
-:::definition "def_complex_valued_integral" (parent := "grp_contour_integration") (uses := "def_riemann_integral, lem_continuous_complex, lem_continuous_implies_riemann_integrable")
+:::definition "def_complex_valued_integral" (uses := "def_riemann_integral, lem_continuous_complex, lem_continuous_implies_riemann_integrable")
 {nodetitle}[Integral of a complex-valued function]
 
 Let $`f \colon [a,b] \to \bC` be a complex-valued continuous function
@@ -38,7 +34,7 @@ of the continuous real-valued functions $`t \mapsto \re \big( f(t) \big)`
 and $`t \mapsto \im \big( f(t) \big)`.)
 :::
 
-:::lemma_ "lem_linearity_of_complex_integral" (parent := "grp_contour_integration") (uses := "def_complex_valued_integral, def_linear")
+:::lemma_ "lem_linearity_of_complex_integral" (uses := "def_complex_valued_integral, def_linear")
 {nodetitle}[Complex linearity of complex-valued integrals]
 
 If $`f, g \colon [a,b] \to \bC` are complex-valued continuous
@@ -67,7 +63,7 @@ $$`
 …
 :::
 
-:::lemma_ "lem_ftc_for_complex_valued_integrals" (parent := "grp_contour_integration") (uses := "def_complex_valued_integral")
+:::lemma_ "lem_ftc_for_complex_valued_integrals" (uses := "def_complex_valued_integral")
 {nodetitle}[Fundamental theorem of calculus for complex-valued integrals]
 
 Suppose that $`f \colon [a,b] \to \bC` is a continuously differentiable
@@ -87,7 +83,7 @@ $$`
 
 # Paths in the complex plane
 
-:::definition "def_path" (parent := "grp_contour_integration") (uses := "def_continuous")
+:::definition "def_path" (uses := "def_continuous")
 {nodetitle}[Path] {palka}[Sec. IV.1.1]
 
 A {term}[path] in the complex plane is a continuous function $`\gamma \colon [a,b] \to \bC`
@@ -110,7 +106,7 @@ write $`\gamma \subset \bC` also for this subset.
 $`\gamma \colon [a,b] \to \bC` and compactness of $`[a,b]`.)
 :::
 
-:::definition "def_smooth_path" (parent := "grp_contour_integration") (uses := "def_path, def_continuous")
+:::definition "def_smooth_path" (uses := "def_path, def_continuous")
 {nodetitle}[Smooth path] {palka}[Sec. IV.1.2]
 
 A path $`\gamma \colon [a,b] \to \bC` is {term}[smooth]
@@ -127,7 +123,7 @@ and defines a continuous complex-valued function $`t \mapsto \dot{\gamma}(t)`
 on $`[a,b]`.
 :::
 
-:::definition "def_contour" (parent := "grp_contour_integration") (uses := "def_smooth_path, def_continuous")
+:::definition "def_contour" (uses := "def_smooth_path, def_continuous")
 {nodetitle}[Contour / piecewise smooth path] {palka}[Sec. IV.1.2]
 
 A {term}[contour] (also called a {term}[piecewise smooth path])
@@ -141,7 +137,7 @@ If the starting point and the end point of the contour $`\gamma` are the same,
 $`\gamma(a) = \gamma(b)`, then we say that $`\gamma` is a {term}[closed contour].
 :::
 
-:::definition "def_reverse_path" (parent := "grp_contour_integration") (uses := "def_path")
+:::definition "def_reverse_path" (uses := "def_path")
 {nodetitle}[Reverse path] {palka}[Sec. IV.1.4]
 
 Given a path $`\gamma \colon [a,b] \to \bC`,
@@ -154,7 +150,7 @@ $$`
 `
 :::
 
-:::definition "def_path_concatenation" (parent := "grp_contour_integration") (uses := "def_path")
+:::definition "def_path_concatenation" (uses := "def_path")
 {nodetitle}[Concatenation of paths] {palka}[Sec. IV.1.4]
 
 Given path $`\gamma \colon [a,b] \to \bC` and
@@ -178,7 +174,7 @@ $`b-a` and $`d-c` to each other, and we have, somewhat arbitrarily,
 chosen to glue them to form the interval $`[a,b+d-c]`.)
 :::
 
-:::definition "def_path_reparametrization" (parent := "grp_contour_integration") (uses := "def_path, lem_continuous_bijection_homeomorphism, def_contour")
+:::definition "def_path_reparametrization" (uses := "def_path, lem_continuous_bijection_homeomorphism, def_contour")
 {nodetitle}[Reparametrization of paths] {palka}[Sec. IV.1.5]
 
 Given a path $`\gamma \colon [a,b] \to \bC` and a continuous increasing
@@ -208,7 +204,7 @@ Note that
 
 # Integrals along paths
 
-:::definition "def_smooth_contour_integral" (parent := "grp_contour_integration") (uses := "def_complex_valued_integral, def_smooth_path")
+:::definition "def_smooth_contour_integral" (uses := "def_complex_valued_integral, def_smooth_path")
 {nodetitle}[Contour integral along a smooth path] {palka}[Sec. IV.2.1]
 
 Let $`f : A \to \bC` be a continuous function defined on a subset $`A \subset \bC`.
@@ -228,7 +224,7 @@ the smooth path $`\gamma` with respect to its parameter $`t`.)
 Sometimes it is appropriate to integrate functions with respect to the
 arc length in the following sense.
 
-:::definition "def_smooth_arc_length_integral" (parent := "grp_contour_integration") (uses := "def_complex_valued_integral, lem_continuous_implies_riemann_integrable, def_smooth_path")
+:::definition "def_smooth_arc_length_integral" (uses := "def_complex_valued_integral, lem_continuous_implies_riemann_integrable, def_smooth_path")
 {nodetitle}[Arc length integral along a smooth path] {palka}[Sec. IV.2.1]
 
 Let $`f : A \to \bC` be a continuous function defined on a subset $`A \subset \bC`.
@@ -249,7 +245,7 @@ and $`|\dot{\gamma}(t)| \ge 0` denotes the absolute value of this derivative.)
 In order to extend the definition of contour integrals to piecewise smooth paths,
 we note that the definition behaves additively under path concatenation.
 
-:::lemma_ "lem_integral_concatenation" (parent := "grp_contour_integration") (uses := "def_smooth_contour_integral, def_smooth_arc_length_integral, def_path_concatenation")
+:::lemma_ "lem_integral_concatenation" (uses := "def_smooth_contour_integral, def_smooth_arc_length_integral, def_path_concatenation")
 {nodetitle}[Contour integrals and smooth path concatenation] {palka}[Lem IV.2.1(iv)]
 
 If a smooth path $`\gamma` in $`A` is a concatenation of smooth
@@ -276,7 +272,7 @@ $$`
 By virtue of the above, the following gives a well-defined meaning
 to integrals along piecewise smooth paths.
 
-:::definition "def_contour_integral" (parent := "grp_contour_integration") (uses := "def_smooth_contour_integral, def_contour, lem_integral_concatenation")
+:::definition "def_contour_integral" (uses := "def_smooth_contour_integral, def_contour, lem_integral_concatenation")
 {nodetitle}[Contour integral] {palka}[Sec. IV.2.1]
 
 Let $`f : A \to \bC` be a continuous function defined on a subset $`A \subset \bC`.
@@ -290,7 +286,7 @@ $$`
 `
 :::
 
-:::definition "def_arc_length_integral" (parent := "grp_contour_integration") (uses := "def_smooth_arc_length_integral, def_contour, lem_integral_concatenation")
+:::definition "def_arc_length_integral" (uses := "def_smooth_arc_length_integral, def_contour, lem_integral_concatenation")
 {nodetitle}[Arc-length integral]
 
 Let $`f : A \to \bC` be a continuous function defined on a subset $`A \subset \bC`.
@@ -304,7 +300,7 @@ $$`
 `
 :::
 
-:::definition "def_length" (parent := "grp_contour_integration") (uses := "def_arc_length_integral")
+:::definition "def_length" (uses := "def_arc_length_integral")
 {nodetitle}[Length of a path or a contour]
 
 Let $`\gamma \colon [a,b] \to \bC` be a piecewise smooth path (i.e., a contour)
@@ -316,7 +312,7 @@ $$`
 `
 :::
 
-:::lemma_ "lem_reparametrization_invariance_of_integral" (parent := "grp_contour_integration") (uses := "def_contour_integral, def_arc_length_integral, def_path_reparametrization")
+:::lemma_ "lem_reparametrization_invariance_of_integral" (uses := "def_contour_integral, def_arc_length_integral, def_path_reparametrization")
 {nodetitle}[Reparametrization invariance of integrals] {palka}[Lem IV.2.1(v)]
 
 Let $`\gamma` be a piecewise smooth path in $`A`,
@@ -336,7 +332,7 @@ $$`
 `
 :::
 
-:::lemma_ "lem_integral_reversal" (parent := "grp_contour_integration") (uses := "def_contour_integral, def_arc_length_integral, def_reverse_path")
+:::lemma_ "lem_integral_reversal" (uses := "def_contour_integral, def_arc_length_integral, def_reverse_path")
 {nodetitle}[Contour integrals and path reversal] {palka}[Lem IV.2.1(iii)]
 
 If $`f : A \to \bC` is a continuous function defined on $`A \subset \bC`,
@@ -360,7 +356,7 @@ $$`
 …
 :::
 
-:::lemma_ "lem_integral_linearity" (parent := "grp_contour_integration") (uses := "def_contour_integral, def_arc_length_integral, def_linear")
+:::lemma_ "lem_integral_linearity" (uses := "def_contour_integral, def_arc_length_integral, def_linear")
 {nodetitle}[Linearity of integrals] {palka}[Lem IV.2.1(i-ii)]
 
 Let $`A \subset \bC` be a subset of the complex plane let and $`\gamma \colon [a,b] \to A`
@@ -396,7 +392,7 @@ $$`
 …
 :::
 
-:::lemma_ "lem_integral_triangle_inequality" (parent := "grp_contour_integration") (uses := "def_contour_integral, def_arc_length_integral")
+:::lemma_ "lem_integral_triangle_inequality" (uses := "def_contour_integral, def_arc_length_integral")
 {nodetitle}[Triangle inequality for contour integrals] {palka}[Lem IV.2.1(vi)]
 
 Let $`f : A \to \bC` be a continuous function defined on $`A \subset \bC`,
@@ -412,7 +408,7 @@ $$`
 …
 :::
 
-:::corollary "lem_contour_integral_bound" (parent := "grp_contour_integration") (uses := "def_contour_integral, def_length")
+:::corollary "lem_contour_integral_bound" (uses := "def_contour_integral, def_length")
 {nodetitle}[An a priori bound for contour integrals]
 
 Let $`f : A \to \bC` be a continuous function defined on $`A \subset \bC`,
@@ -440,7 +436,7 @@ only need the cases $`k = 1` and $`k = 2` in this lemma; but including
 general $`k \in \bN` gives the quickest route to Cauchy's formula for
 higher order derivatives.
 
-:::lemma_ "lem_derivative_auxiliary_integral" (parent := "grp_contour_integration") (uses := "def_contour_integral, def_analytic_function")
+:::lemma_ "lem_derivative_auxiliary_integral" (uses := "def_contour_integral, def_analytic_function")
 {palka}[Lemma V.1.6]
 
 Let $`\gamma` be a contour in $`\bC`, and let $`h \colon \gamma \to \bC`
@@ -468,7 +464,7 @@ $$`
 
 # Primitives
 
-:::definition "def_primitive" (parent := "grp_contour_integration") (uses := "def_analytic_function")
+:::definition "def_primitive" (uses := "def_analytic_function")
 {nodetitle}[Primitive of a function] {palka}[Sec. IV.2.3]
 
 Let $`f : U \to \bC` be a function defined on an open subset $`U \subset \bC`.
@@ -481,7 +477,7 @@ $$`
 `
 :::
 
-:::theorem "thm_ftc_for_contour_integrals" (parent := "grp_contour_integration") (uses := "def_primitive, def_contour_integral")
+:::theorem "thm_ftc_for_contour_integrals" (uses := "def_primitive, def_contour_integral")
 {nodetitle}[Fundamental theorem of calculus for contour integrals] {palka}[Thm IV.2.2]
 
 Suppose that $`f \colon U \to \bC` is a continuous function
@@ -505,7 +501,7 @@ $$`
 …
 :::
 
-:::lemma_ "lem_monomial_primitive" (parent := "grp_contour_integration") (uses := "def_primitive, def_polynomial, def_rational_function")
+:::lemma_ "lem_monomial_primitive" (uses := "def_primitive, def_polynomial, def_rational_function")
 {nodetitle}[Existence of primitives for monomials]
 
 For $`n \in \set{0,1,2,\ldots}`, the monomial
@@ -526,7 +522,7 @@ a primitive in the punctured complex plane $`\bC \setminus \set{0}`.
 …
 :::
 
-:::theorem "thm_primitive_characterization" (parent := "grp_contour_integration") (uses := "def_primitive")
+:::theorem "thm_primitive_characterization" (uses := "def_primitive")
 {nodetitle}[Characterization of the existence of primitives]
 
 Let $`f \colon U \to \bC` be a continuous function on an open

@@ -13,13 +13,9 @@ open Informal
 file := "complex-numbers"
 %%%
 
-:::group "grp_complex_numbers"
-The complex number system
-:::
-
 # The field of complex numbers
 
-:::definition "def_complex_numbers" (parent := "grp_complex_numbers")
+:::definition "def_complex_numbers"
 {nodetitle}[Complex numbers and their arithmetic operations] {palka}[Sec. I.1.1]
 
 The set of {term}[complex numbers] is $`\bC = \bR \times \bR`, i.e.,
@@ -46,7 +42,7 @@ The compex number $`\ii = (0,1) \in \bC` is called the {term}[imaginary unit].
 
 Typically used variable names for complex number are $`z,w,\zeta \in \bC` etc.
 
-:::theorem "thm_complex_number_field" (parent := "grp_complex_numbers") (uses := "def_complex_numbers")
+:::theorem "thm_complex_number_field" (uses := "def_complex_numbers")
 {nodetitle}[The field of complex numbers] {palka}[Sec. I.1.1]
 
 The set $`\bC` of compex numbers with its operations of addition and multiplication,
@@ -73,14 +69,14 @@ Straightforward calculations using the definitions of the operations
 
 # Conjugate, modulus, and argument
 
-:::definition "def_complex_conjugate" (parent := "grp_complex_numbers") (uses := "def_complex_numbers")
+:::definition "def_complex_conjugate" (uses := "def_complex_numbers")
 {nodetitle}[Complex conjugate] {palka}[Sec. I.1.2]
 
 The {term}[complex conjugate] of a complex number $`z = x + \ii y`
 (where $`x,y \in \bR`) is the complex number $`\cconj{z} = x - \ii y`.
 :::
 
-:::lemma_ "lem_complex_conjugate_properties" (parent := "grp_complex_numbers") (uses := "def_complex_conjugate")
+:::lemma_ "lem_complex_conjugate_properties" (uses := "def_complex_conjugate")
 {nodetitle}[Properties of complex conjugate] {palka}[Sec. I.1.2 (1.1)]
 
 For any $`z , w \in \bC`, we have
@@ -103,7 +99,7 @@ $$`
 Direct calculations.
 :::
 
-:::definition "def_absolute_value" (parent := "grp_complex_numbers") (uses := "def_complex_numbers")
+:::definition "def_absolute_value" (uses := "def_complex_numbers")
 {nodetitle}[Absolute value (modulus)] {palka}[Sec. I.1.2]
 
 The {term}[absolute value] (or {term}[modulus]) of a
@@ -111,7 +107,7 @@ complex number $`z = x + \ii y` (where $`x,y \in \bR`)
 is the nonnegative real number $`|z| = \sqrt{x^2 + y^2} \ge 0`.
 :::
 
-:::lemma_ "lem_absolute_value_properties" (parent := "grp_complex_numbers") (uses := "def_absolute_value, def_complex_conjugate")
+:::lemma_ "lem_absolute_value_properties" (uses := "def_absolute_value, def_complex_conjugate")
 {nodetitle}[Properties of absolute value] {palka}[Sec. I.1.2 (1.2)]
 
 For any $`z, w \in \bC`, we have
@@ -147,7 +143,7 @@ $$`
 Straightforward.
 :::
 
-:::definition "def_argument" (parent := "grp_complex_numbers") (uses := "def_complex_numbers, def_absolute_value")
+:::definition "def_argument" (uses := "def_complex_numbers, def_absolute_value")
 {nodetitle}[Argument] {palka}[Sec. I.1.2]
 
 A real number $`\theta \in \bR` is an {term}[argument] of a complex
@@ -168,7 +164,7 @@ is its unique argument on the interval $`(-\pi, \pi]`, and it is denoted
 by $`\Arg(z)`.
 :::
 
-:::lemma_ "lem_discontinuity_of_principal_arg" (parent := "grp_complex_numbers") (uses := "def_argument, def_continuous, lem_metric_on_C")
+:::lemma_ "lem_discontinuity_of_principal_arg" (uses := "def_argument, def_continuous, lem_metric_on_C")
 {nodetitle}[Discontinuity of the principal argument]
 
 The principal argument
@@ -179,7 +175,7 @@ discontinuous on the negative real axis $`(-\infty,0]`.
 
 # The polar form
 
-:::definition "def_complex_exp" (parent := "grp_complex_numbers") (uses := "def_complex_numbers, thm_complex_number_field")
+:::definition "def_complex_exp" (uses := "def_complex_numbers, thm_complex_number_field")
 {nodetitle}[Complex exponential function]
 
 We define the {term}[complex exponential function] $`\exp : \bC \to \bC` by
@@ -202,7 +198,7 @@ $$`
 `
 :::
 
-:::lemma_ "lem_complex_exp_properties" (parent := "grp_complex_numbers") (uses := "def_complex_exp")
+:::lemma_ "lem_complex_exp_properties" (uses := "def_complex_exp")
 {nodetitle}[Properties of the complex exponential]
 
 For any $`z,w \in \bC` we have
@@ -229,7 +225,7 @@ $`e^{z} = e^{w}` if and only if $`z = w + 2 \pi \ii n` for some $`n \in \bZ`.
 …
 :::
 
-:::lemma_ "lem_polar_form" (parent := "grp_complex_numbers") (uses := "def_complex_exp, def_argument, def_absolute_value")
+:::lemma_ "lem_polar_form" (uses := "def_complex_exp, def_argument, def_absolute_value")
 {nodetitle}[Polar form]
 
 Every complex number $`z \in \bC` can be written in the {term}[polar form]
@@ -248,7 +244,7 @@ i.e., $`\theta = \Arg(z) + 2 \pi m` for some $`m \in \bZ`.
 …
 :::
 
-:::lemma_ "lem_multiplication_polar" (parent := "grp_complex_numbers") (uses := "thm_complex_number_field, lem_polar_form")
+:::lemma_ "lem_multiplication_polar" (uses := "thm_complex_number_field, lem_polar_form")
 {nodetitle}[Multiplication in polar form] {palka}[Sec. I.1.2 (1.6)]
 
 For any $`z,w \in \bC`, written in polar form as
@@ -273,7 +269,7 @@ $$`
 …
 :::
 
-:::theorem "lem_de_moivre" (parent := "grp_complex_numbers") (uses := "thm_complex_number_field")
+:::theorem "lem_de_moivre" (uses := "thm_complex_number_field")
 {nodetitle}[De Moivre's formula] {palka}[Sec. I.1.2 (1.7)]
 
 For any $`\theta \in \bR` and $`n \in \bZ`, we have
@@ -288,7 +284,7 @@ $$`
 Induction using {bpref "lem_multiplication_polar"}[].
 :::
 
-:::lemma_ "lem_roots_of_unity" (parent := "grp_complex_numbers") (uses := "thm_complex_number_field")
+:::lemma_ "lem_roots_of_unity" (uses := "thm_complex_number_field")
 {nodetitle}[Roots of unity]
 
 For any $`n \in \bN`, the solutions $`z \in \bC` to the equation
@@ -323,7 +319,7 @@ $$`
 
 ## Polynomials and rational functions
 
-:::definition "def_polynomial" (parent := "grp_complex_numbers") (uses := "thm_complex_number_field")
+:::definition "def_polynomial" (uses := "thm_complex_number_field")
 {nodetitle}[Polynomial]
 
 Polynomial functions are functions $`p : \bC \to \bC` of the form
@@ -335,7 +331,7 @@ $$`
 where $`a_0,a_1,\ldots,a_{n-1},a_n \in \bC` are coefficients.
 :::
 
-:::definition "def_rational_function" (parent := "grp_complex_numbers") (uses := "def_polynomial")
+:::definition "def_rational_function" (uses := "def_polynomial")
 {nodetitle}[Rational function]
 
 Rational functions are functions $`f : D \to \bC` which can be written as
@@ -346,7 +342,7 @@ where the denominator polynomial $`q` has no zeroes.
 
 ## Exponentials and branches of logarithms
 
-:::definition "def_principal_complex_log" (parent := "grp_complex_numbers") (uses := "def_argument")
+:::definition "def_principal_complex_log" (uses := "def_argument")
 {nodetitle}[Principal complex logarithm]
 
 The {term}[principal logarithm] is the function
@@ -367,7 +363,7 @@ All complex solutions $`w` to $`e^w = z` are of the
 form $`w = \Log(z) + 2 \pi \ii n` where $`n \in \bZ`.)
 :::
 
-:::definition "def_branch_of_log" (parent := "grp_complex_numbers") (uses := "def_complex_exp, def_open_set, def_continuous, def_principal_complex_log")
+:::definition "def_branch_of_log" (uses := "def_complex_exp, def_open_set, def_continuous, def_principal_complex_log")
 {nodetitle}[Branches of complex logarithm]
 
 A {term}[branch of the logarithm] is a continuous function
@@ -391,7 +387,7 @@ definition, $`0 \notin U`.)
 
 ## Complex power functions
 
-:::definition "def_principal_complex_power" (parent := "grp_complex_numbers") (uses := "def_principal_complex_log")
+:::definition "def_principal_complex_power" (uses := "def_principal_complex_log")
 {nodetitle}[Principal complex power function]
 
 Let $`\alpha \in \bC`. The {term}[principal (complex) $`\alpha`th
@@ -425,7 +421,7 @@ power functions, we have $`z^\alpha z^\beta = z^{\alpha + \beta}`.
 
 ## Branches of $`n`th roots
 
-:::definition "def_principal_complex_nth_root" (parent := "grp_complex_numbers") (uses := "def_principal_complex_log, def_principal_complex_power, lem_roots_of_unity")
+:::definition "def_principal_complex_nth_root" (uses := "def_principal_complex_log, def_principal_complex_power, lem_roots_of_unity")
 {nodetitle}[Principal $`n`th root function]
 
 Let $`n \in \bN`. The {term}[principal (complex) $`n`th

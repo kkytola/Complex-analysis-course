@@ -13,13 +13,9 @@ open Informal
 file := "power-series"
 %%%
 
-:::group "grp_power_series"
-Power series
-:::
-
 # Uniform convergence
 
-:::definition "def_uniform_limit" (parent := "grp_power_series") (uses := "def_limit")
+:::definition "def_uniform_limit" (uses := "def_limit")
 {nodetitle}[Uniform convergence] {palka}[Sec. VII.1.1]
 
 Let $`(f_n)_{n \in \bN}` be a sequence of functions
@@ -36,7 +32,7 @@ $$`
 `
 :::
 
-:::lemma_ "lem_cauchy_uniform_limit_criterion" (parent := "grp_power_series") (uses := "def_uniform_limit")
+:::lemma_ "lem_cauchy_uniform_limit_criterion" (uses := "def_uniform_limit")
 {nodetitle}[Cauchy criterion for uniform convergence] {palka}[Thm VII.1.2]
 
 Let $`f_n \colon A \to \bC`, $`n \in \bN`,
@@ -54,7 +50,7 @@ be called a {term}[uniform Cauchy sequence] on $`A`.)
 …
 :::
 
-:::lemma_ "lem_uniform_limit_continuous" (parent := "grp_power_series") (uses := "def_uniform_limit, def_continuous")
+:::lemma_ "lem_uniform_limit_continuous" (uses := "def_uniform_limit, def_continuous")
 {nodetitle}[Continuity is preserved in uniform limits] {palka}[Thm VII.1.1]
 
 Let $`X` be a metric space (e.g., $`\bR`, $`\bC`, or a subset of these).
@@ -67,7 +63,7 @@ $`f \colon X \to \bC`, then $`f` is continuous.
 See *MS-C1541 Metric Spaces*.
 :::
 
-:::lemma_ "lem_uniform_limit_integral" (parent := "grp_power_series") (uses := "def_uniform_limit, def_continuous, def_riemann_integral, lem_uniform_limit_continuous")
+:::lemma_ "lem_uniform_limit_integral" (uses := "def_uniform_limit, def_continuous, def_riemann_integral, lem_uniform_limit_continuous")
 {nodetitle}[Integration commutes with uniform limits] {palka}[Thm VII.1.1]
 
 If a sequence $`(f_n)_{n \in \bN}` of continuous functions
@@ -86,7 +82,7 @@ $$`
 …
 :::
 
-:::corollary "cor_uniform_limit_contour_integral" (parent := "grp_power_series") (uses := "def_uniform_limit, def_continuous, def_contour_integral")
+:::corollary "cor_uniform_limit_contour_integral" (uses := "def_uniform_limit, def_continuous, def_contour_integral")
 {nodetitle}[Contour integration commutes with uniform limits] {palka}[Thm VII.1.1]
 
 If a sequence $`(f_n)_{n \in \bN}` of continuous functions
@@ -107,7 +103,7 @@ This follows straightforwardly from the definition of contour integration
 and {bpref "lem_uniform_limit_integral"}[] above.
 :::
 
-:::definition "def_uoc_limit" (parent := "grp_power_series") (uses := "def_uniform_limit")
+:::definition "def_uoc_limit" (uses := "def_uniform_limit")
 {nodetitle}[Convergence uniformly on compacts] {palka}[Sec. VII.1.2]
 
 Let $`(f_n)_{n \in \bN}` be a sequence of functions
@@ -127,7 +123,7 @@ $$`
 {term}[locally uniform convergence] and {term}[normal convergence].)
 :::
 
-:::lemma_ "lem_uoc_limit_analytic" (parent := "grp_power_series") (uses := "def_uoc_limit, def_analytic_function")
+:::lemma_ "lem_uoc_limit_analytic" (uses := "def_uoc_limit, def_analytic_function")
 {nodetitle}[UOC limit of analytic functions] {palka}[Thm VII.3.1]
 
 Suppose that functions $`f_1, f_2, \ldots \colon U \to \bC`
@@ -144,7 +140,7 @@ of $`k`th derivatives converges uniformly on compacts to $`f^{(k)}`.
 
 # Complex series
 
-:::definition "def_complex_series" (parent := "grp_power_series") (uses := "def_limit, thm_complex_number_field")
+:::definition "def_complex_series" (uses := "def_limit, thm_complex_number_field")
 {nodetitle}[Complex series] {palka}[Sec. VII.2.1]
 
 Let $`z_1, z_2, z_3, \ldots \in \bC` be complex numbers.
@@ -168,7 +164,7 @@ if the terms' indexing starts from $`n=0` or some other index, and
 the notation is correspondingly changed to, e.g., $`\sum_{n=0}^\infty`.)
 :::
 
-:::lemma_ "lem_terms_tend_to_zero" (parent := "grp_power_series") (uses := "def_complex_series")
+:::lemma_ "lem_terms_tend_to_zero" (uses := "def_complex_series")
 {nodetitle}[Terms of a convergent series tend to zero]
 
 If a complex series $`\sum_{n=1}^\infty z_n` converges,
@@ -184,7 +180,7 @@ $$`
 …
 :::
 
-:::lemma_ "lem_geometric_series" (parent := "grp_power_series") (uses := "def_complex_series")
+:::lemma_ "lem_geometric_series" (uses := "def_complex_series")
 {nodetitle}[Geometric series]
 
 The geometric series
@@ -206,7 +202,7 @@ $$`
 …
 :::
 
-:::definition "def_absolute_convergence" (parent := "grp_power_series") (uses := "def_complex_series, def_absolute_value")
+:::definition "def_absolute_convergence" (uses := "def_complex_series, def_absolute_value")
 {nodetitle}[Absolute convergence of a complex series]
 
 A complex series $`\sum_{n=1}^\infty z_n` is said to
@@ -214,7 +210,7 @@ A complex series $`\sum_{n=1}^\infty z_n` is said to
 $`\sum_{n=1}^\infty |z_n|` converges.
 :::
 
-:::lemma_ "lem_absolute_convergence_implies_convergence" (parent := "grp_power_series") (uses := "def_absolute_convergence, def_complex_series")
+:::lemma_ "lem_absolute_convergence_implies_convergence" (uses := "def_absolute_convergence, def_complex_series")
 {nodetitle}[Absolute convergence implies convergence]
 
 If a complex series
@@ -225,7 +221,7 @@ converges absolutely, then it converges.
 …
 :::
 
-:::lemma_ "lem_ratio_test" (parent := "grp_power_series") (uses := "def_complex_series, def_absolute_convergence")
+:::lemma_ "lem_ratio_test" (uses := "def_complex_series, def_absolute_convergence")
 {nodetitle}[D'Alembert's ratio test]
 
 Suppose that $`\sum_{n=1}^\infty z_n` is a complex
@@ -247,7 +243,7 @@ exists. Then:
 
 # Series of functions
 
-:::definition "def_function_series" (parent := "grp_power_series") (uses := "def_limit, def_uniform_limit, def_complex_series")
+:::definition "def_function_series" (uses := "def_limit, def_uniform_limit, def_complex_series")
 {nodetitle}[Series of functions] {palka}[Sec. VII.2.2]
 
 Let $`f_1, f_2, f_3, \ldots` be complex-valued functions on a set $`A`.
@@ -278,7 +274,7 @@ if the terms' indexing starts from $`n=0` or some other index, and
 the notation is correspondingly changed to, e.g., $`\sum_{n=0}^\infty`.)
 :::
 
-:::lemma_ "lem_weierstrass_test" (parent := "grp_power_series") (uses := "def_function_series")
+:::lemma_ "lem_weierstrass_test" (uses := "def_function_series")
 {nodetitle}[Weierstrass M-test] {palka}[Thm VII.2.2]
 
 Suppose that $`M_1,M_2,\ldots \ge 0` are nonnegative
@@ -294,7 +290,7 @@ converges absolutely and uniformly on $`X`.
 …
 :::
 
-:::lemma_ "lem_uoc_analytic_series" (parent := "grp_power_series") (uses := "def_uniform_limit, def_function_series, def_analytic_function")
+:::lemma_ "lem_uoc_analytic_series" (uses := "def_uniform_limit, def_function_series, def_analytic_function")
 {nodetitle}[Series of analytic functions] {palka}[Thm VII.3.2]
 
 Suppose that functions $`f_1, f_2, \ldots \colon U \to \bC`
@@ -312,7 +308,7 @@ of $`k`th derivatives converges uniformly on compacts to $`f^{(k)}`.
 
 # Power series
 
-:::definition "def_power_series" (parent := "grp_power_series") (uses := "def_function_series")
+:::definition "def_power_series" (uses := "def_function_series")
 {nodetitle}[Power series] {palka}[Sec. VII.3.3]
 
 Let $`z_0 \in \bC` be a point in the complex plane
@@ -327,7 +323,7 @@ $$`
 is called a {term}[power series] centered at $`z_0`.
 :::
 
-:::lemma_ "lem_abel" (parent := "grp_power_series") (uses := "def_power_series, def_absolute_convergence")
+:::lemma_ "lem_abel" (uses := "def_power_series, def_absolute_convergence")
 {nodetitle}[Abel's theorem]
 
 If a power series
@@ -344,7 +340,7 @@ absolutely for all $`z \in \bC` such that $`|z-z_0| < |w-z_0|`.
 …
 :::
 
-:::corollary "cor_abel_contrapositive" (parent := "grp_power_series") (uses := "def_power_series, def_absolute_convergence")
+:::corollary "cor_abel_contrapositive" (uses := "def_power_series, def_absolute_convergence")
 {nodetitle}[Abel's theorem in the contrapositive]
 
 If a power series
@@ -361,7 +357,7 @@ at any $`z \in \bC` such that $`|z-z_0| > |w-z_0|`.
 …
 :::
 
-:::definition "def_radius_of_convergence" (parent := "grp_power_series") (uses := "def_power_series, lem_abel, cor_abel_contrapositive")
+:::definition "def_radius_of_convergence" (uses := "def_power_series, lem_abel, cor_abel_contrapositive")
 {nodetitle}[Radius of convergence]
 
 The {term}[radius of convergence] of a power series
@@ -389,7 +385,7 @@ of the power series $`\sum_{n=0}^\infty a_n \, (z-z_0)^n`.
 (If $`R=+\infty`, we interpret $`\DiskRC{R}{z_0} = \bC`.)
 :::
 
-:::lemma_ "lem_ratio_test_radius_of_convergence" (parent := "grp_power_series") (uses := "def_radius_of_convergence")
+:::lemma_ "lem_ratio_test_radius_of_convergence" (uses := "def_radius_of_convergence")
 {nodetitle}[D'Alembert's ratio test for the radius of convergence]
 
 Suppose that for the coefficients of a power series
@@ -412,7 +408,7 @@ is $`R = \rho`.
 …
 :::
 
-:::theorem "thm_hadamard_formula" (parent := "grp_power_series") (uses := "def_radius_of_convergence, def_limsup")
+:::theorem "thm_hadamard_formula" (uses := "def_radius_of_convergence, def_limsup")
 {nodetitle}[Hadamard's formula for the radius of convergence] {palka}[Thm VII.3.3]
 
 Let $`z_0 \in \bC` be a point in the complex plane
@@ -436,7 +432,7 @@ with the conventions $`\frac{1}{+\infty}=0` and $`\frac{1}{0} = +\infty`.
 …
 :::
 
-:::lemma_ "lem_power_series_analytic" (parent := "grp_power_series") (uses := "def_power_series, def_analytic_function, thm_hadamard_formula")
+:::lemma_ "lem_power_series_analytic" (uses := "def_power_series, def_analytic_function, thm_hadamard_formula")
 {nodetitle}[Analyticity of power series] {palka}[Thm VII.3.3]
 
 Let $`z_0 \in \bC` be a point in the complex plane
@@ -468,7 +464,7 @@ $$`
 …
 :::
 
-:::lemma_ "lem_power_series_uniqueness" (parent := "grp_power_series") (uses := "def_power_series")
+:::lemma_ "lem_power_series_uniqueness" (uses := "def_power_series")
 {nodetitle}[Uniqueness of power series representation]
 
 Suppose that two power series $`\sum_{n=0}^\infty a_n \, (z-z_0)^n`
@@ -492,7 +488,7 @@ $`a_n = b_n` for all $`n`.
 
 # Taylor series and local representation of analytic functions
 
-:::theorem "thm_analytic_function_taylor_series" (parent := "grp_power_series") (uses := "def_power_series, def_analytic_function")
+:::theorem "thm_analytic_function_taylor_series" (uses := "def_power_series, def_analytic_function")
 {nodetitle}[Taylor series of analytic functions] {palka}[Thm VII.3.4]
 
 Suppose that $`f \colon U \to \bC` is an analytic function
@@ -513,7 +509,7 @@ that representats $`f` in a neighborhood of $`z_0`.
 …
 :::
 
-:::theorem "thm_TFAE_ANALYTIC" (parent := "grp_power_series") (uses := "def_analytic_function, def_power_series, def_primitive")
+:::theorem "thm_TFAE_ANALYTIC" (uses := "def_analytic_function, def_power_series, def_primitive")
 {nodetitle}[Equivalent characterizations of analyticity]
 
 Let $`f \colon U \to \bC` be a continuous function on an open
@@ -531,7 +527,7 @@ Then the following are equivalent:
 …
 :::
 
-:::lemma_ "lem_no_vanishing_of_all_order_derivatives" (parent := "grp_power_series") (uses := "def_analytic_function, lem_higher_derivatives_analytic")
+:::lemma_ "lem_no_vanishing_of_all_order_derivatives" (uses := "def_analytic_function, lem_higher_derivatives_analytic")
 {nodetitle}[No vanishing of all derivatives at a point] {palka}[Thm VIII.1.1]
 
 Suppose that $`f \colon \Domain \to \bC` is an analytic function
@@ -545,7 +541,7 @@ function.
 …
 :::
 
-:::theorem "thm_factor_theorem_for_analytic_functions" (parent := "grp_power_series") (uses := "def_analytic_function")
+:::theorem "thm_factor_theorem_for_analytic_functions" (uses := "def_analytic_function")
 {nodetitle}[Factor theorem for analytic functions] {palka}[Thm VIII.1.2]
 
 Suppose that $`f \colon \Domain \to \bC` is a non-constant analytic function
@@ -565,7 +561,7 @@ function such that $`g(z_0) \ne 0`.
 …
 :::
 
-:::corollary "cor_analytic_local_representation" (parent := "grp_power_series") (uses := "def_analytic_function")
+:::corollary "cor_analytic_local_representation" (uses := "def_analytic_function")
 {nodetitle}[Local representation of analytic functions] {palka}[Cor VIII.1.3]
 
 Suppose that $`f \colon \Domain \to \bC` is a non-constant analytic function
@@ -585,7 +581,7 @@ Apply {bpref "thm_factor_theorem_for_analytic_functions"}[] to the
 function $`z \mapsto f(z) - f(z_0)`.
 :::
 
-:::theorem "thm_l_hospital_rule" (parent := "grp_power_series") (uses := "def_analytic_function")
+:::theorem "thm_l_hospital_rule" (uses := "def_analytic_function")
 {nodetitle}[L'Hospital's rule for analytic functions] {palka}[Thm VIII.1.4]
 
 Let $`f` and $`g` be functions that are analytic in a neighborhood of $`z_0`
@@ -603,7 +599,7 @@ to each other, or else neither limit exists.
 …
 :::
 
-:::theorem "thm_discrete_mapping_theorem" (parent := "grp_power_series") (uses := "def_analytic_function")
+:::theorem "thm_discrete_mapping_theorem" (uses := "def_analytic_function")
 {nodetitle}[Discrete mapping theorem] {palka}[Thm VIII.1.5]
 
 Suppose that $`f \colon \Domain \to \bC` is a non-constant
@@ -618,7 +614,7 @@ for all $`z \in \BallRC{r}{z_0} \setminus \set{z_0}`.
 …
 :::
 
-:::corollary "cor_ANALYTIC_CONTINUATION" (parent := "grp_power_series") (uses := "def_analytic_function")
+:::corollary "cor_ANALYTIC_CONTINUATION" (uses := "def_analytic_function")
 {nodetitle}[Principle of analytic continuation] {palka}[Cor VIII.1.6]
 
 Let $`f, g \colon \Domain \to \bC` be two analytic functions on a connected
@@ -634,7 +630,7 @@ then we have $`f(z) = g(z)` for all $`z \in \Domain`.
 
 # Laurent series
 
-:::definition "def_doubly_infinite_series" (parent := "grp_power_series") (uses := "def_complex_series")
+:::definition "def_doubly_infinite_series" (uses := "def_complex_series")
 {nodetitle}[Doubly infinite series] {palka}[Sec. VII.2.1]
 
 A doubly infinite series of complex numbers is a series of the form
@@ -655,7 +651,7 @@ $$`
 `
 :::
 
-:::lemma_ "lem_convergence_doubly_infinite" (parent := "grp_power_series") (uses := "def_doubly_infinite_series")
+:::lemma_ "lem_convergence_doubly_infinite" (uses := "def_doubly_infinite_series")
 {nodetitle}[Convergence of doubly infinite series] {palka}[Lem VII.2.1]
 
 A doubly infinite series
@@ -673,7 +669,7 @@ $`\sum_{n=0}^\infty z_n` and $`\sum_{n=1}^\infty z_{-n}` converge.
 …
 :::
 
-:::definition "def_laurent_series" (parent := "grp_power_series") (uses := "def_doubly_infinite_series")
+:::definition "def_laurent_series" (uses := "def_doubly_infinite_series")
 {nodetitle}[Laurent series] {palka}[Sec. VII.3.4]
 
 A {term}[Laurent series] centered at $`z_0 \in \bC` is a doubly infinite series
@@ -687,7 +683,7 @@ $$`
 `
 :::
 
-:::lemma_ "lem_laurent_series_analytic" (parent := "grp_power_series") (uses := "def_laurent_series")
+:::lemma_ "lem_laurent_series_analytic" (uses := "def_laurent_series")
 {nodetitle}[Annulus of convergence of Laurent power series] {palka}[Thm VII.3.5]
 
 Consider a Laurent series
@@ -720,7 +716,7 @@ function $`f(z)` on the annulus $`\AnnRRC{\rho_-}{\rho_+}{z_0}`.
 …
 :::
 
-:::theorem "thm_ANALYTIC_FUNCTION_LAURENT_SERIES" (parent := "grp_power_series") (uses := "def_laurent_series, def_analytic_function")
+:::theorem "thm_ANALYTIC_FUNCTION_LAURENT_SERIES" (uses := "def_laurent_series, def_analytic_function")
 {nodetitle}[Laurent series for analytic functions] {palka}[Thm VII.3.6]
 
 Suppose that $`f \colon U \to \bC` is an analytic function

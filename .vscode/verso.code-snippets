@@ -4,7 +4,7 @@
     "prefix": "dfn",
     "description": "Verso Blueprint definition node (label kind_name, titled lead-in)",
     "body": [
-      ":::definition \"${1:dfn_label}\" (parent := \"${2:grp_chapter}\") (uses := \"${3}\")",
+      ":::definition \"${1:dfn_label}\" (uses := \"${3}\")",
       "{nodetitle}[$4] {palka}[$5]",
       "",
       "$0",
@@ -16,7 +16,7 @@
     "prefix": "thm",
     "description": "Verso Blueprint theorem node",
     "body": [
-      ":::theorem \"${1:thm_label}\" (parent := \"${2:grp_chapter}\") (uses := \"${3}\")",
+      ":::theorem \"${1:thm_label}\" (uses := \"${3}\")",
       "{nodetitle}[$4] {palka}[$5]",
       "",
       "$0",
@@ -28,7 +28,7 @@
     "prefix": "lem",
     "description": "Verso Blueprint lemma node (directive is `lemma_`)",
     "body": [
-      ":::lemma_ \"${1:lem_label}\" (parent := \"${2:grp_chapter}\") (uses := \"${3}\")",
+      ":::lemma_ \"${1:lem_label}\" (uses := \"${3}\")",
       "{nodetitle}[$4] {palka}[$5]",
       "",
       "$0",
@@ -40,7 +40,7 @@
     "prefix": "prop",
     "description": "Verso Blueprint proposition node",
     "body": [
-      ":::proposition \"${1:prop_label}\" (parent := \"${2:grp_chapter}\") (uses := \"${3}\")",
+      ":::proposition \"${1:prop_label}\" (uses := \"${3}\")",
       "{nodetitle}[$4] {palka}[$5]",
       "",
       "$0",
@@ -52,7 +52,7 @@
     "prefix": "cor",
     "description": "Verso Blueprint corollary node",
     "body": [
-      ":::corollary \"${1:cor_label}\" (parent := \"${2:grp_chapter}\") (uses := \"${3}\")",
+      ":::corollary \"${1:cor_label}\" (uses := \"${3}\")",
       "{nodetitle}[$4] {palka}[$5]",
       "",
       "$0",
@@ -130,16 +130,6 @@
       "{uses \"$1\"}[]"
     ]
   },
-  "Chapter group": {
-    "scope": "lean4",
-    "prefix": "group",
-    "description": "Graph group of a chapter (declare at the top of the chapter module)",
-    "body": [
-      ":::group \"${1:grp_chapter}\"",
-      "${2:Chapter title}",
-      ":::"
-    ]
-  },
   "Chapter module header": {
     "scope": "lean4",
     "prefix": "chapter",
@@ -160,11 +150,7 @@
       "file := \"${2:chapter-slug}\"",
       "%%%",
       "",
-      ":::group \"${3:grp_chapter}\"",
-      "$1",
-      ":::",
-      "",
-      "# ${4:First section}",
+      "# ${3:First section}",
       "",
       "$0"
     ]

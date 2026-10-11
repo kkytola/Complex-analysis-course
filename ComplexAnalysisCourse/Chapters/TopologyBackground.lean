@@ -13,13 +13,9 @@ open Informal
 file := "topology-background"
 %%%
 
-:::group "grp_topology_background"
-Topological preliminaries
-:::
-
 # Metrics and related concepts
 
-:::definition "def_metric_space" (parent := "grp_topology_background")
+:::definition "def_metric_space"
 {nodetitle}[Metric]
 
 A {term}[metric] on a set $`X` is a function
@@ -39,7 +35,7 @@ The set $`X` equipped with the metric $`\genmet` on
 it is called a {term}[metric space].
 :::
 
-:::lemma_ "lem_metric_on_C" (parent := "grp_topology_background") (uses := "def_metric_space, def_absolute_value")
+:::lemma_ "lem_metric_on_C" (uses := "def_metric_space, def_absolute_value")
 {nodetitle}[Metric in the complex plane]
 
 The formula
@@ -60,7 +56,7 @@ with the metric given by the above formula restricted to the subset.)
 …
 :::
 
-:::definition "def_ball" (parent := "grp_topology_background") (uses := "def_metric_space")
+:::definition "def_ball" (uses := "def_metric_space")
 {nodetitle}[Ball (disk)]
 
 Let $`X` be a metric space with metric $`\genmet \colon X \times X \to [0,\infty)`.
@@ -86,7 +82,7 @@ is called a {term}[closed ball] in $`X`, centered at $`p_0`, and with radius $`r
 is often used instead of the general metric space theory term {term}[ball].)
 :::
 
-:::definition "def_interior" (parent := "grp_topology_background") (uses := "def_ball")
+:::definition "def_interior" (uses := "def_ball")
 {nodetitle}[Interior point]
 
 Let $`X` be a metric space, and $`A \subset X` a subset.
@@ -94,7 +90,7 @@ A point $`p \in A` is said to be an {term}[interior point] of $`A`
 if for some $`r > 0` we have $`\BallRC{r}{p} \subset A`.
 :::
 
-:::definition "def_exterior" (parent := "grp_topology_background") (uses := "def_ball, def_interior")
+:::definition "def_exterior" (uses := "def_ball, def_interior")
 {nodetitle}[Exterior point]
 
 Let $`X` be a metric space, and $`A \subset X` a subset.
@@ -105,7 +101,7 @@ if for some $`r > 0` we have $`\BallRC{r}{p} \subset X \setminus A`.
 points)
 :::
 
-:::definition "def_boundary" (parent := "grp_topology_background") (uses := "def_ball, def_interior, def_exterior")
+:::definition "def_boundary" (uses := "def_ball, def_interior, def_exterior")
 {nodetitle}[Boundary]
 
 Let $`X` be a metric space, and $`A \subset X` a subset.
@@ -122,7 +118,7 @@ the set of points of $`X` which are neither interior nor exterior points
 of $`A`.)
 :::
 
-:::definition "def_open_set" (parent := "grp_topology_background") (uses := "def_metric_space, def_ball, def_interior")
+:::definition "def_open_set" (uses := "def_metric_space, def_ball, def_interior")
 {nodetitle}[Open set]
 
 Let $`X` be a metric space.
@@ -130,7 +126,7 @@ A subset $`U \subset X` is said to be an {term}[open set] if
 each point $`p \in U` is an interior point of $`U`.
 :::
 
-:::definition "def_closed_set" (parent := "grp_topology_background") (uses := "def_open_set, def_exterior")
+:::definition "def_closed_set" (uses := "def_open_set, def_exterior")
 {nodetitle}[Closed set]
 
 Let $`X` be a metric space.
@@ -141,7 +137,7 @@ the complement $`X \setminus F \subset X` is an open set.
 of $`F` is an exterior point of $`F`.)
 :::
 
-:::definition "def_bounded" (parent := "grp_topology_background") (uses := "def_metric_space")
+:::definition "def_bounded" (uses := "def_metric_space")
 {nodetitle}[Boundedness]
 
 Let $`X` be a metric space.
@@ -165,7 +161,7 @@ for all $`z \in Z`.)
 
 # Limits
 
-:::definition "def_limit" (parent := "grp_topology_background") (uses := "def_metric_space")
+:::definition "def_limit" (uses := "def_metric_space")
 {nodetitle}[Limit]
 
 Let $`X` be a metric space and
@@ -208,7 +204,7 @@ we have $`\genmet_Y \big( f(p), y \big) < \eps` whenever
 $`0 < \genmet_X (p,p_0) < \delta`.)
 :::
 
-:::lemma_ "lem_complex_limit" (parent := "grp_topology_background") (uses := "def_limit, lem_metric_on_C")
+:::lemma_ "lem_complex_limit" (uses := "def_limit, lem_metric_on_C")
 {nodetitle}[Limits in the complex plane]
 
 For a sequence $`(z_n)_{n \in \bN}` of complex numbers
@@ -250,7 +246,7 @@ $$`
 …
 :::
 
-:::lemma_ "lem_complex_limit_properties" (parent := "grp_topology_background") (uses := "lem_complex_limit, thm_complex_number_field")
+:::lemma_ "lem_complex_limit_properties" (uses := "lem_complex_limit, thm_complex_number_field")
 {nodetitle}[Operations with complex limits]
 
 Let $`(z_n)_{n \in \bN}` and $`(w_n)_{n \in \bN}`
@@ -302,13 +298,13 @@ The arguments are similar to the proofs given in
 {metSpCourse}[] for the real-valued cases.
 :::
 
-:::definition "def_cauchy_sequence" (parent := "grp_topology_background") (uses := "def_metric_space")
+:::definition "def_cauchy_sequence" (uses := "def_metric_space")
 {nodetitle}[Cauchy sequence]
 
 …
 :::
 
-:::lemma_ "lem_real_complete" (parent := "grp_topology_background") (uses := "def_cauchy_sequence, def_limit")
+:::lemma_ "lem_real_complete" (uses := "def_cauchy_sequence, def_limit")
 {nodetitle}[Every real Cauchy sequence converges]
 
 If a real number sequence $`(x_n)_{n \in \bN}` is Cauchy,
@@ -321,7 +317,7 @@ then it converges to a limit $`\lim_{n \to \infty} x_n \in \bR`.
 See {metSpCourse}[].
 :::
 
-:::lemma_ "lem_complex_complete" (parent := "grp_topology_background") (uses := "def_cauchy_sequence, def_limit, lem_metric_on_C")
+:::lemma_ "lem_complex_complete" (uses := "def_cauchy_sequence, def_limit, lem_metric_on_C")
 {nodetitle}[Every complex Cauchy sequence converges]
 
 If a complex number sequence $`(z_n)_{n \in \bN}` is Cauchy,
@@ -340,7 +336,7 @@ a subsequence of a subsequence.)
 
 # Continuity
 
-:::definition "def_continuous" (parent := "grp_topology_background") (uses := "def_metric_space, def_limit")
+:::definition "def_continuous" (uses := "def_metric_space, def_limit")
 {nodetitle}[Continuity]
 
 Let $`X` and $`Y` be metric spaces.
@@ -355,7 +351,7 @@ A function $`f \colon X \to Y` is said to be {term}[continuous] if
 it is continuous at every point $`p_0 \in X`.
 :::
 
-:::lemma_ "lem_continuous_complex" (parent := "grp_topology_background") (uses := "def_continuous")
+:::lemma_ "lem_continuous_complex" (uses := "def_continuous")
 {nodetitle}[Continuity of complex-valued functions]
 
 Let $`X` be a metric space, and let $`f \colon X \to \bC` be
@@ -369,7 +365,7 @@ and $`p \mapsto \im \big( f(p) \big)` are continuous at $`p_0`.
 …
 :::
 
-:::corollary "cor_coordinate_continuous" (parent := "grp_topology_background") (uses := "def_continuous")
+:::corollary "cor_coordinate_continuous" (uses := "def_continuous")
 {nodetitle}[Continuity of coordinate projections]
 
 The coordinate projections
@@ -389,7 +385,7 @@ are continuous functions.
 …
 :::
 
-:::lemma_ "lem_complex_continuity_properties" (parent := "grp_topology_background") (uses := "def_continuous, thm_complex_number_field")
+:::lemma_ "lem_complex_continuity_properties" (uses := "def_continuous, thm_complex_number_field")
 {nodetitle}[Operations with continuous complex-valued functions]
 
 Let $`X` be a metric space, let $`p_0 \in X`
@@ -416,7 +412,7 @@ is continuous at $`p_0`.
 …
 :::
 
-:::lemma_ "lem_continuity_characterization" (parent := "grp_topology_background") (uses := "def_continuous, def_open_set, def_closed_set")
+:::lemma_ "lem_continuity_characterization" (uses := "def_continuous, def_open_set, def_closed_set")
 {nodetitle}[Continuity characterization]
 
 Let $`X` and $`Y` be metric spaces, and let $`f \colon X \to Y` be a function.
@@ -435,7 +431,7 @@ Then the following are equivalent:
 See {metSpCourse}[].
 :::
 
-:::lemma_ "lem_composition_continuous" (parent := "grp_topology_background") (uses := "def_continuous")
+:::lemma_ "lem_composition_continuous" (uses := "def_continuous")
 {nodetitle}[Composition of continuous functions]
 
 Let $`X`, $`Y`, and $`Z` be metric spaces, and
@@ -451,7 +447,7 @@ the formula $`(g \circ f)(x) = g \big( f(x) \big)`.)
 …
 :::
 
-:::corollary "cor_multivariate_polynomial_continuous" (parent := "grp_topology_background") (uses := "def_continuous")
+:::corollary "cor_multivariate_polynomial_continuous" (uses := "def_continuous")
 {nodetitle}[Real multivariate polynomials are continuous]
 
 Let $`N \in \bN` be a natural number, and let
@@ -469,7 +465,7 @@ is continuous.
 See {metSpCourse}[].
 :::
 
-:::definition "def_uniformly_continuous" (parent := "grp_topology_background") (uses := "def_metric_space")
+:::definition "def_uniformly_continuous" (uses := "def_metric_space")
 {nodetitle}[Uniform continuity]
 
 Let $`X` and $`Y` be metric spaces.
@@ -479,7 +475,7 @@ any $`p_0 \in X` and $`p \in \BallRC{\delta}{p_0}`
 we have $`f(p) \in \BallRC{\eps}{f(p_0)}`.
 :::
 
-:::lemma_ "lem_uniformly_continuous_implies_continuous" (parent := "grp_topology_background") (uses := "def_continuous, def_uniformly_continuous")
+:::lemma_ "lem_uniformly_continuous_implies_continuous" (uses := "def_continuous, def_uniformly_continuous")
 {nodetitle}[Uniform continuity implies continuity]
 
 If a function $`f \colon X \to Y` is uniformly continuous, then it is continuous.
@@ -493,7 +489,7 @@ See {metSpCourse}[].
 
 # Connectedness and path-connectedness
 
-:::definition "def_connected" (parent := "grp_topology_background") (uses := "def_metric_space")
+:::definition "def_connected" (uses := "def_metric_space")
 {nodetitle}[Connectedness]
 
 A set $`A \subset X` in a metric space $`X`
@@ -511,7 +507,7 @@ equivalent to the one we chose here by
 {bpref "lem_continuity_characterization"}[].)
 :::
 
-:::definition "def_path_connected" (parent := "grp_topology_background") (uses := "def_path")
+:::definition "def_path_connected" (uses := "def_path")
 {nodetitle}[Path-connectedness]
 
 A set $`A \subset X` in a metric space $`X`
@@ -521,7 +517,7 @@ such that $`\gamma(0) = p` and $`\gamma(1) = q`
 (a parametrized path in $`X` starting from $`p` and ending at $`q`).
 :::
 
-:::lemma_ "lem_path_connected_implies_connected" (parent := "grp_topology_background") (uses := "def_connected, def_path_connected")
+:::lemma_ "lem_path_connected_implies_connected" (uses := "def_connected, def_path_connected")
 {nodetitle}[Path-connectedness implies connectedness]
 
 If a metric space $`X` is path-connected, then it is connected.
@@ -531,7 +527,7 @@ If a metric space $`X` is path-connected, then it is connected.
 See {metSpCourse}[].
 :::
 
-:::lemma_ "lem_open_connected_iff_path_connected" (parent := "grp_topology_background") (uses := "def_connected, def_path_connected, def_open_set, lem_metric_on_C")
+:::lemma_ "lem_open_connected_iff_path_connected" (uses := "def_connected, def_path_connected, def_open_set, lem_metric_on_C")
 {nodetitle}[Open connected sets are path-connected]
 
 Suppose that $`U \subset \bC` is an open subset of the complex plane.
@@ -544,7 +540,7 @@ See {metSpCourse}[].
 
 # Compactness
 
-:::definition "def_compact" (parent := "grp_topology_background") (uses := "def_limit")
+:::definition "def_compact" (uses := "def_limit")
 {nodetitle}[Compactness]
 
 Let $`X` be a metric space.
@@ -554,7 +550,7 @@ $`(x_{n_k})_{k \in \bN}` which converges to a limit
 $`\lim_{k \to \infty} x_{n_k} \in K` in the set $`K`.
 :::
 
-:::theorem "thm_bolzano_weierstrass" (parent := "grp_topology_background") (uses := "def_compact, def_closed_set, lem_metric_on_C, def_bounded")
+:::theorem "thm_bolzano_weierstrass" (uses := "def_compact, def_closed_set, lem_metric_on_C, def_bounded")
 {nodetitle}[Bolzano-Weierstrass theorem]
 
 A subset $`B \subset \bR` of the real line is compact
@@ -568,7 +564,7 @@ if an only if it is closed and bounded.
 See {metSpCourse}[].
 :::
 
-:::theorem "thm_continuous_on_compact_implies_bounded" (parent := "grp_topology_background") (uses := "def_compact, def_bounded, def_continuous")
+:::theorem "thm_continuous_on_compact_implies_bounded" (uses := "def_compact, def_bounded, def_continuous")
 {nodetitle}[Boundedness of continuous functions on compacts]
 
 Suppose that $`X` is compact.
@@ -580,7 +576,7 @@ is bounded.
 …
 :::
 
-:::lemma_ "lem_on_compact_continuous_implies_uniformly_continuous" (parent := "grp_topology_background") (uses := "def_continuous, def_uniformly_continuous, def_compact")
+:::lemma_ "lem_on_compact_continuous_implies_uniformly_continuous" (uses := "def_continuous, def_uniformly_continuous, def_compact")
 {nodetitle}[On a compact domain continuity implies uniform continuity]
 
 If $`X` is compact and a function $`f \colon X \to Y` is continuous, then it is uniformly continuous.
@@ -590,7 +586,7 @@ If $`X` is compact and a function $`f \colon X \to Y` is continuous, then it is 
 See {metSpCourse}[].
 :::
 
-:::lemma_ "lem_continuous_bijection_homeomorphism" (parent := "grp_topology_background") (uses := "def_compact, def_continuous")
+:::lemma_ "lem_continuous_bijection_homeomorphism" (uses := "def_compact, def_continuous")
 {nodetitle}[Continuous bijection from a compact domain is a homeomorphism]
 
 Let $`X` and $`Y` be metric spaces and assume that $`X` is compact.
@@ -602,7 +598,7 @@ also the inverse $`f^{-1} \colon Y \to X` is continuous.
 See {metSpCourse}[].
 :::
 
-:::theorem "thm_intersect_nested_compacts" (parent := "grp_topology_background") (uses := "def_compact")
+:::theorem "thm_intersect_nested_compacts" (uses := "def_compact")
 {nodetitle}[Cantor's intersection theorem] {palka}[Thm II.4.5]
 
 Let $`X` be a metric space.
@@ -617,7 +613,7 @@ See {metSpCourse}[].
 
 # Simple connectedness
 
-:::definition "def_path_homotopy" (parent := "grp_topology_background") (uses := "def_path, def_continuous")
+:::definition "def_path_homotopy" (uses := "def_path, def_continuous")
 {nodetitle}[Path homotopy for closed paths]
 
 Let $`X` be a metric space and
@@ -649,7 +645,7 @@ then we say that the closed paths $`\gamma_0` and $`\gamma_1`
 are {term}[homotopic].
 :::
 
-:::definition "def_contractible" (parent := "grp_topology_background") (uses := "def_path_homotopy")
+:::definition "def_contractible" (uses := "def_path_homotopy")
 {nodetitle}[Contractible path]
 
 Let $`X` be a metric space.
@@ -657,7 +653,7 @@ A closed path $`\gamma \colon [a,b] \to X` is called
 {term}[contractible] if it is homotopic to a constant path.
 :::
 
-:::definition "def_simply_connected" (parent := "grp_topology_background") (uses := "def_contractible")
+:::definition "def_simply_connected" (uses := "def_contractible")
 {nodetitle}[Simple connectedness]
 
 A metric space is said to be {term}[simply connected]

@@ -13,7 +13,7 @@
  *
  * UPSTREAM HOOKS THIS FILE DEPENDS ON (re-check after every VersoBlueprint upgrade; look at the
  * graph page and at a statement header and make sure no amber/blue/green and no "LEAN" chip show):
- *   .bp_graph_fullwidth            wrapper of the graph block (also contains the group preview panel)
+ *   .bp_graph_fullwidth            wrapper of the graph block
  *   svg g.node                     Graphviz node groups (d3-graphviz output), containing
  *                                  <polygon>, <ellipse>, <path>, <polyline>, <text>
  *   .bp_graph_canvas               the drawing area (d3-graphviz renders an <svg> into it)
@@ -36,9 +36,8 @@
 
 /* ---- 1. Neutral nodes ------------------------------------------------------------------------
  * Presentation attributes (fill="..." / stroke="...") lose against any CSS rule, so plain rules
- * would do; `!important` is only a safeguard. Shapes (box = definition, ellipse = theorem-like,
- * tab = chapter in "Group View"), edges and the dashed chapter frames are left untouched.
- * `[fill]:not([fill="none"])` keeps unfilled lines (e.g. the tab line of group nodes) unfilled. */
+ * would do; `!important` is only a safeguard. Shapes (box = definition, ellipse = theorem-like) and
+ * edges are left untouched. `[fill]:not([fill="none"])` keeps unfilled lines unfilled. */
 .bp_graph_fullwidth svg g.node :is(polygon, ellipse, path)[fill]:not([fill="none"]) {
   fill: var(--cac-node-fill) !important;
 }

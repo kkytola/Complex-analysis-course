@@ -13,13 +13,9 @@ open Informal
 file := "singularities"
 %%%
 
-:::group "grp_singularities"
-Isolated singularities and residues
-:::
-
 # The extended complex plane
 
-:::definition "def_riemann_sphere" (parent := "grp_singularities") (uses := "lem_metric_on_C, def_limit")
+:::definition "def_riemann_sphere" (uses := "lem_metric_on_C, def_limit")
 {nodetitle}[The Riemann sphere]
 
 The {term}[extended complex plane] is the set
@@ -45,7 +41,7 @@ $`|f(z)|>M` whenever $`0 < |z-z_0| < \delta`.
 
 # Isolated singularities of analytic functions
 
-:::definition "def_isolated_singularity" (parent := "grp_singularities") (uses := "def_analytic_function")
+:::definition "def_isolated_singularity" (uses := "def_analytic_function")
 {nodetitle}[Isolated singularity] {palka}[Sec. VIII.2.1]
 
 Let $`f : U \to \bC` be an analytic function on an open set $`U \subset \bC`.
@@ -53,7 +49,7 @@ We say that $`f` has an {term}[isolated singularity] at $`z_0 \in \bC` if
 $`\BallRC{r}{z_0} \setminus \set{z_0} \subset U` for some $`r>0` but $`z_0 \notin U`.
 :::
 
-:::definition "def_singularity_classification" (parent := "grp_singularities") (uses := "def_isolated_singularity, thm_ANALYTIC_FUNCTION_LAURENT_SERIES")
+:::definition "def_singularity_classification" (uses := "def_isolated_singularity, thm_ANALYTIC_FUNCTION_LAURENT_SERIES")
 {nodetitle}[Classification of isolated singularities] {palka}[Sec. VIII.2.1]
 
 Let $`z_0 \in \bC` be an isolated singularity of
@@ -77,7 +73,7 @@ we distinguish three types of singularities:
   $`a_n \ne 0` for infinitely many $`n < 0`.
 :::
 
-:::definition "def_residue" (parent := "grp_singularities") (uses := "def_isolated_singularity, thm_ANALYTIC_FUNCTION_LAURENT_SERIES")
+:::definition "def_residue" (uses := "def_isolated_singularity, thm_ANALYTIC_FUNCTION_LAURENT_SERIES")
 {nodetitle}[Residue at an isolated singularity] {palka}[Sec. VIII.2.1]
 
 Let $`z_0 \in \bC` be an isolated singularity of
@@ -95,7 +91,7 @@ The coefficient $`a_{-1}` is called the {term}[residue] of $`f` at $`z_0`,
 and is denoted $`\ResAtOf{z_0}{f} = a_{-1} \in \bC`.
 :::
 
-:::theorem "thm_removable_singularity" (parent := "grp_singularities") (uses := "def_singularity_classification")
+:::theorem "thm_removable_singularity" (uses := "def_singularity_classification")
 {nodetitle}[Removable singularity characterization] {palka}[Thm VIII.2.1 and Thm VIII.2.2]
 
 Let $`z_0 \in \bC` be an isolated singularity of
@@ -115,7 +111,7 @@ Then the following conditions are equivalent:
 …
 :::
 
-:::theorem "thm_pole" (parent := "grp_singularities") (uses := "def_singularity_classification, def_riemann_sphere")
+:::theorem "thm_pole" (uses := "def_singularity_classification, def_riemann_sphere")
 {nodetitle}[Characterization of poles] {palka}[Thm VIII.2.3 and Thm VIII.2.4]
 
 Let $`z_0 \in \bC` be an isolated singularity of
@@ -134,7 +130,7 @@ Then the following conditions are equivalent:
 …
 :::
 
-:::theorem "thm_essential_singularity" (parent := "grp_singularities") (uses := "def_singularity_classification, def_riemann_sphere")
+:::theorem "thm_essential_singularity" (uses := "def_singularity_classification, def_riemann_sphere")
 {nodetitle}[Characterization of essential singularities] {palka}[Thm VIII.2.6 and Thm VIII.2.7]
 
 Let $`z_0 \in \bC` be an isolated singularity of
@@ -155,7 +151,7 @@ Then the following conditions are equivalent:
 
 # The residue theorem
 
-:::theorem "thm_RESIDUE_THEOREM" (parent := "grp_singularities") (uses := "def_residue")
+:::theorem "thm_RESIDUE_THEOREM" (uses := "def_residue")
 {nodetitle}[Residue theorem] {palka}[Thm VIII.3.1]
 
 Let $`U \subset \bC` be an open set and $`\gamma` a contractible closed contour in $`U`.
@@ -174,7 +170,7 @@ $$`
 …
 :::
 
-:::corollary "thm_jordan_residue_theorem" (parent := "grp_singularities") (uses := "def_residue")
+:::corollary "thm_jordan_residue_theorem" (uses := "def_residue")
 {nodetitle}[Residue theorem for Jordan contours] {palka}[Cor VIII.3.2]
 
 Let $`U \subset \bC` be an open set and $`S \subset U` a discrete subset of it.

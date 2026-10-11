@@ -61,7 +61,7 @@ file := "cauchy-theorem"
 ### Statements and proofs
 
 ````lean
-:::lemma_ "lem_goursat" (parent := "grp_cauchy_theorem") (uses := "def_triangle, def_complex_derivative")
+:::lemma_ "lem_goursat" (uses := "def_triangle, def_complex_derivative")
 {nodetitle}[Goursat's lemma] {palka}[Lem V.1.1]
 
 Let $`U \subset \bC` be an open set ... and
@@ -89,9 +89,10 @@ See {bpref "thm_cauchy_theorem"}[]; a defined term looks like {term}[star-shaped
   ("Lemma 2.3"), so do not write the word "Lemma" before it. Forward references are fine.
 * **Titles and references.** Verso node headers have no title slot, so the first line of the body holds
   `{nodetitle}[Title]` and, for the textbook, `{palka}[Thm V.1.5]` (shows `[Palka1991, Thm V.1.5]`).
-* **Groups.** Each chapter declares `:::group "grp_chapter"` + title at its top and all of its statements
-  carry `(parent := "grp_chapter")`; the dependency graph draws one cluster per chapter and offers
-  per-chapter views.
+* **No groups.** Statements are not grouped by chapter (`:::group` / `(parent := ..)`): Verso Blueprint's
+  group views only draw the dependencies *inside* a group or aggregated arrows between groups, so the
+  dependencies across chapters, which are the most instructive ones, would be hidden, and the chapter frames make
+  the full graph about twice as wide. The graph is therefore one graph of all statements.
 * **Numbering** is per chapter with one shared counter (`Lemma 2.2`, `Theorem 2.4`). The appendices are
   chapters 7 and 8 (Verso cannot letter them).
 
@@ -121,11 +122,15 @@ See {bpref "thm_cauchy_theorem"}[]; a defined term looks like {term}[star-shaped
 
 ## Site presentation (graph, pages)
 
-* **Dependency graph.** Verso Blueprint colours graph nodes by *formalization status*, which is meaningless
-  here, so `assets/neutral-graph.css` and `assets/neutral-graph.js` give all nodes one colour, remove the status
-  legend/tooltips and the Lean-status chips, start the graph in the chapter overview ("Group View") and add a
-  hint line. Open the full graph with `.../Dependency-Graph/?view=full` or one chapter with
-  `?view=parent:grp_power_series`. The full graph of all 193 statements is a very wide strip; use the zoom.
+* **Dependency graph.** One graph of all 193 statements (zoom with the mouse wheel, pan by dragging, click a
+  statement to read it). Verso Blueprint colours graph nodes by *formalization status*, which is meaningless
+  here, so `assets/neutral-graph.css` and `assets/neutral-graph.js` give all nodes one colour and remove the
+  status legend/tooltips and the Lean-status chips. The script also draws the **transitive reduction** of the
+  graph, as leanblueprint did with Graphviz `tred`: an arrow a → b is left out when b follows from a through
+  other arrows (131 of the 451 dependencies, 29 %). Only the drawing changes; the "uses"/"used by" chips of every
+  statement still list all dependencies. It works on the Graphviz source in the page's
+  `script.bp-graph-data` JSON (one edge per line); if an upgrade changes that format the script leaves the
+  graph unreduced.
 * The files hook into upstream class names (listed at the top of each file). After every upgrade of Verso
   Blueprint look at the graph page, a statement header and the root page: amber/blue nodes, a "Statement
   Border" legend or a "LEAN" chip mean that a selector needs adapting.
