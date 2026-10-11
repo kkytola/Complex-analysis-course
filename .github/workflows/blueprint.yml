@@ -1,105 +1,164 @@
 name: Compile blueprint
 
+# Builds the course site: the Jekyll home page (home_page/), the Verso Blueprint of the theory
+# (Lean sources, built with `lake exe vbp build`), its PDF and the dependency graph, and assembles
+# everything with scripts/build_site.sh.  The site is deployed to GitHub Pages only from `main`.
+#
+#   push to main        build + deploy
+#   workflow_dispatch   build (+ deploy when run on main)
+#   pull_request        build + upload the assembled site as a normal artifact "site-preview"
+#                       for review (download it from the run page); never deploys
+
 on:
   push:
     branches:
-      - main # Trigger on pushes to the default branch
-  workflow_dispatch:        # Allow manual triggering of the workflow from the GitHub Actions interface
+      - main
+  pull_request:
+  workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+# The build job only reads the repository; the deploy job asks for what Pages needs.
 permissions:
-  contents: read  # Read access to repository contents
-  pages: write    # Write access to GitHub Pages
-  id-token: write # Write access to ID tokens
+  contents: read
+
+# A newer run supersedes an older one on the same ref -- except on main, where a run that may be
+# in the middle of a deployment is never cancelled (a newer run waits for it).
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
-  build_project:
-    runs-on: ubuntu-latest
-    name: Build project
+  build:
+    name: Build site
+    # Pinned instead of `ubuntu-latest`: setup-ruby has Ruby 3.0 builds (see the Gemfile.lock of
+    # home_page) for 22.04 and 24.04 only, and the TeX Live package list below was checked on 24.04.
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
     steps:
-      - name: Checkout project
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # Fetch all history for all branches and tags
+      - name: Checkout
+        uses: actions/checkout@v7
 
+      # ---- Lean ---------------------------------------------------------------------------------
       - name: Install elan
-        run: curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y
-
-      - name: Get Mathlib cache
-        run: ~/.elan/bin/lake exe cache get || true
-
-      - name: Build project
-        run: ~/.elan/bin/lake build ComplexAnalysisCourse
-
-      - name: Cache mathlib API docs
-        uses: actions/cache@v4
-        with:
-          path: |
-            .lake/build/doc/Init
-            .lake/build/doc/Lake
-            .lake/build/doc/Lean
-            .lake/build/doc/Std
-            .lake/build/doc/Mathlib
-            .lake/build/doc/declarations
-            .lake/build/doc/find
-            .lake/build/doc/*.*
-            !.lake/build/doc/declarations/declaration-data-ComplexAnalysisCourse*
-          key: MathlibDoc-${{ hashFiles('lake-manifest.json') }}
-          restore-keys: MathlibDoc-
-
-      - name: Check for `home_page` folder # this is meant to detect a Jekyll-based website
-        id: check_home_page
         run: |
-          if [ -d home_page ]; then
-            echo "The 'home_page' folder exists in the repository."
-            echo "HOME_PAGE_EXISTS=true" >> $GITHUB_ENV
-          else
-            echo "The 'home_page' folder does not exist in the repository."
-            echo "HOME_PAGE_EXISTS=false" >> $GITHUB_ENV
-          fi
+          curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o "$RUNNER_TEMP/elan-init.sh"
+          sh "$RUNNER_TEMP/elan-init.sh" -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
 
-      - name: Build blueprint and copy to `home_page/blueprint`
-        uses: xu-cheng/texlive-action@v2
+      # Dependencies of the Lake project (VersoBlueprint, Verso, SubVerso, ...), sources *and* their
+      # compiled .olean files: compiling Verso from source takes ~10 minutes on a cold cache.
+      - name: Restore Lake packages cache
+        id: cache-packages
+        uses: actions/cache/restore@v6
         with:
-          docker_image: ghcr.io/xu-cheng/texlive-full:20231201
-          run: |
-            # Install necessary dependencies and build the blueprint
-            apk update
-            apk add --update make py3-pip git pkgconfig graphviz graphviz-dev gcc musl-dev
-            git config --global --add safe.directory $GITHUB_WORKSPACE
-            git config --global --add safe.directory `pwd`
-            python3 -m venv env
-            source env/bin/activate
-            pip install --upgrade pip requests wheel
-            pip install pygraphviz --global-option=build_ext --global-option="-L/usr/lib/graphviz/" --global-option="-R/usr/lib/graphviz/"
-            pip install leanblueprint
-            leanblueprint pdf
-            mkdir -p home_page
-            cp blueprint/print/print.pdf home_page/blueprint.pdf
-            leanblueprint web
-            cp -r blueprint/web home_page/blueprint
+          path: .lake/packages
+          key: lake-packages-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}
+          restore-keys: |
+            lake-packages-${{ runner.os }}-
 
-      - name: Check declarations mentioned in the blueprint exist in Lean code
+      # The project's own build products (Lake rebuilds only what changed).
+      - name: Restore Lake build cache
+        id: cache-build
+        uses: actions/cache/restore@v6
+        with:
+          path: .lake/build
+          key: lake-build-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-${{ hashFiles('*.lean', 'ComplexAnalysisCourse/**/*.lean') }}
+          restore-keys: |
+            lake-build-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.lean') }}-
+            lake-build-${{ runner.os }}-
+
+      - name: Show Lean versions
         run: |
-            ~/.elan/bin/lake exe checkdecls blueprint/lean_decls
+          lean --version
+          lake --version
 
-      - name: Bundle dependencies
+      # ---- Tools needed by the build ------------------------------------------------------------
+      # lualatex and the TeX files used by the generated TeX document of `vbp build --pdf`
+      # (memoir, tcolorbox, fvextra, mathtools, ulem, sourcecodepro/sourcesanspro/sourceserifpro,
+      # fontspec; DejaVu Sans Mono is the monospace font).  Checked with `lualatex -recorder` and
+      # `dpkg -S` against the files that are actually read.
+      - name: Install TeX Live packages for the PDF
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            texlive-luatex texlive-latex-extra texlive-fonts-recommended \
+            texlive-fonts-extra texlive-plain-generic fonts-dejavu-core
+          lualatex --version | head -n 1
+
+      # Verso Blueprint lints all maths with KaTeX through `node` and silently skips the lint when
+      # node is missing.  Fail loudly instead.
+      - name: Check that Node.js is available (maths lint)
+        run: |
+          node --version
+          node -e 'if (parseInt(process.versions.node, 10) < 18) { console.error("Node 18 or newer is required"); process.exit(1); }'
+
+      - name: Set up Ruby and the Jekyll gems
         uses: ruby/setup-ruby@v1
         with:
           working-directory: home_page
-          ruby-version: "3.0"  # Specify Ruby version
-          bundler-cache: true  # Enable caching for bundler
+          ruby-version: "3.0" # as before; the committed home_page/Gemfile.lock needs Ruby < 3.2
+          bundler-cache: true
 
-      - name: Build website using Jekyll
-        if: env.HOME_PAGE_EXISTS == 'true'
-        working-directory: home_page
-        run: JEKYLL_ENV=production bundle exec jekyll build  # Note this will also copy the blueprint and API doc into home_page/_site
+      # ---- Build --------------------------------------------------------------------------------
+      # lake build (fails on Lean errors and on "KaTeX rejected"), vbp build --pdf, Jekyll, assembly
+      # into home_page/_site.  See the header of the script.
+      - name: Build and assemble the site
+        run: bash scripts/build_site.sh
 
-      - name: "Upload website (API documentation, blueprint and any home page)"
-        uses: actions/upload-pages-artifact@v3
+      # Save the caches even when the build failed (a failing maths lint after a 10 minute cold
+      # build should not throw that work away), but not when the run was cancelled.  (The Lean toolchain
+      # itself is not cached: elan downloads it in well under a minute, and a ~3 GB cache entry would eat
+      # into the repository's cache quota.)
+      - name: Save Lake packages cache
+        if: ${{ !cancelled() && steps.cache-packages.outputs.cache-hit != 'true' }}
+        uses: actions/cache/save@v6
         with:
-          path: ${{ env.HOME_PAGE_EXISTS == 'true' && 'home_page/_site' || 'home_page/' }}
+          path: .lake/packages
+          key: ${{ steps.cache-packages.outputs.cache-primary-key }}
 
+      - name: Save Lake build cache
+        if: ${{ !cancelled() && steps.cache-build.outputs.cache-hit != 'true' }}
+        uses: actions/cache/save@v6
+        with:
+          path: .lake/build
+          key: ${{ steps.cache-build.outputs.cache-primary-key }}
+
+      # ---- Check and publish --------------------------------------------------------------------
+      # Every internal link, stylesheet and script of the assembled site, resolved as under the
+      # real URL https://kkytola.github.io/Complex-analysis-course/; also checks the redirect from
+      # the old graph URL (blueprint/dep_graph_document.html).
+      - name: Check the links of the assembled site
+        run: python3 scripts/check_site_links.py home_page/_site
+
+      # Pushes to main and manual runs on main: the artifact that the deploy job publishes.
+      - name: Upload the site for deployment
+        if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' }}
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: home_page/_site
+
+      # Pull requests and manual runs on other branches: a normal artifact to look at, no deployment.
+      - name: Upload the site for review
+        if: ${{ github.event_name == 'pull_request' || github.ref != 'refs/heads/main' }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: site-preview
+          path: home_page/_site
+          if-no-files-found: error
+          retention-days: 7
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

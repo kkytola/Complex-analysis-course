@@ -28,6 +28,6 @@ usemathjax: true
 ### Links
 
 * [Theory blueprint]({{ site.url }}/blueprint/)
-* [Dependency graph]({{ site.url }}/blueprint/dep_graph_document.html)
+* [Dependency graph]({{ site.url }}/blueprint/Dependency-Graph/)
 * [Blueprint as pdf]({{ site.url }}/blueprint.pdf) (not a replacement for the lecture notes!)
 * [MyCourses home page](https://mycourses.aalto.fi/course/view.php?id=44640)

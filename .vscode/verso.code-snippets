@@ -1,0 +1,172 @@
+{
+  "Definition": {
+    "scope": "lean4",
+    "prefix": "dfn",
+    "description": "Verso Blueprint definition node (label kind_name, titled lead-in)",
+    "body": [
+      ":::definition \"${1:dfn_label}\" (parent := \"${2:grp_chapter}\") (uses := \"${3}\")",
+      "{nodetitle}[$4] {palka}[$5]",
+      "",
+      "$0",
+      ":::"
+    ]
+  },
+  "Theorem": {
+    "scope": "lean4",
+    "prefix": "thm",
+    "description": "Verso Blueprint theorem node",
+    "body": [
+      ":::theorem \"${1:thm_label}\" (parent := \"${2:grp_chapter}\") (uses := \"${3}\")",
+      "{nodetitle}[$4] {palka}[$5]",
+      "",
+      "$0",
+      ":::"
+    ]
+  },
+  "Lemma": {
+    "scope": "lean4",
+    "prefix": "lem",
+    "description": "Verso Blueprint lemma node (directive is `lemma_`)",
+    "body": [
+      ":::lemma_ \"${1:lem_label}\" (parent := \"${2:grp_chapter}\") (uses := \"${3}\")",
+      "{nodetitle}[$4] {palka}[$5]",
+      "",
+      "$0",
+      ":::"
+    ]
+  },
+  "Proposition": {
+    "scope": "lean4",
+    "prefix": "prop",
+    "description": "Verso Blueprint proposition node",
+    "body": [
+      ":::proposition \"${1:prop_label}\" (parent := \"${2:grp_chapter}\") (uses := \"${3}\")",
+      "{nodetitle}[$4] {palka}[$5]",
+      "",
+      "$0",
+      ":::"
+    ]
+  },
+  "Corollary": {
+    "scope": "lean4",
+    "prefix": "cor",
+    "description": "Verso Blueprint corollary node",
+    "body": [
+      ":::corollary \"${1:cor_label}\" (parent := \"${2:grp_chapter}\") (uses := \"${3}\")",
+      "{nodetitle}[$4] {palka}[$5]",
+      "",
+      "$0",
+      ":::"
+    ]
+  },
+  "Proof": {
+    "scope": "lean4",
+    "prefix": "proof",
+    "description": "Proof of the node with the same label",
+    "body": [
+      ":::proof \"${1:label_of_statement}\" (uses := \"${2}\")",
+      "$0",
+      ":::"
+    ]
+  },
+  "Align": {
+    "scope": "lean4",
+    "prefix": "ali",
+    "description": "Display math with align*",
+    "body": [
+      "\\$`",
+      "\\begin{align*}",
+      "  $1",
+      "\\end{align*}",
+      "`"
+    ]
+  },
+  "Inline math": {
+    "scope": "lean4",
+    "prefix": "mm",
+    "description": "Inline math",
+    "body": [
+      "\\$`$1`"
+    ]
+  },
+  "Itemize": {
+    "scope": "lean4",
+    "prefix": "itz",
+    "description": "Bulleted list (blank line before!)",
+    "body": [
+      "* $1",
+      "* $2"
+    ]
+  },
+  "Defined term": {
+    "scope": "lean4",
+    "prefix": "term",
+    "description": "Defined term, replaces \\term{..}",
+    "body": [
+      "{term}[$1]"
+    ]
+  },
+  "Textbook reference": {
+    "scope": "lean4",
+    "prefix": "palka",
+    "description": "Palka reference, replaces \\Palka{..}",
+    "body": [
+      "{palka}[$1]"
+    ]
+  },
+  "Reference to a node": {
+    "scope": "lean4",
+    "prefix": "ref",
+    "description": "Link to a node without a dependency edge; shows 'Lemma 2.3'",
+    "body": [
+      "{bpref \"$1\"}[]"
+    ]
+  },
+  "Dependency in text": {
+    "scope": "lean4",
+    "prefix": "uses",
+    "description": "Dependency edge + link inside the text",
+    "body": [
+      "{uses \"$1\"}[]"
+    ]
+  },
+  "Chapter group": {
+    "scope": "lean4",
+    "prefix": "group",
+    "description": "Graph group of a chapter (declare at the top of the chapter module)",
+    "body": [
+      ":::group \"${1:grp_chapter}\"",
+      "${2:Chapter title}",
+      ":::"
+    ]
+  },
+  "Chapter module header": {
+    "scope": "lean4",
+    "prefix": "chapter",
+    "description": "Header of a new chapter module (the slug must be unique: it names the page)",
+    "body": [
+      "import Verso",
+      "import VersoManual",
+      "import VersoBlueprint",
+      "import ComplexAnalysisCourse.Macros",
+      "import ComplexAnalysisCourse.Roles",
+      "",
+      "open Verso.Genre",
+      "open Verso.Genre.Manual",
+      "open Informal",
+      "",
+      "#doc (Manual) \"${1:Chapter title}\" =>",
+      "%%%",
+      "file := \"${2:chapter-slug}\"",
+      "%%%",
+      "",
+      ":::group \"${3:grp_chapter}\"",
+      "$1",
+      ":::",
+      "",
+      "# ${4:First section}",
+      "",
+      "$0"
+    ]
+  }
+}

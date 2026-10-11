@@ -1,22 +1,21 @@
 import Lake
 open Lake DSL
 
-package «ComplexAnalysisCourse» where
-  -- add package configuration options here
+-- The theory skeleton is a pure Verso Blueprint document: there is no Lean formalization attached,
+-- so the toolchain simply follows the release line of VersoBlueprint (see lean-toolchain).
+require VersoBlueprint from git "https://github.com/leanprover/verso-blueprint" @ "v4.35.0"
 
-lean_lib «ComplexAnalysisCourse» where
-  -- add library configuration options here
+package ComplexAnalysisCourse where
+  precompileModules := false
+  leanOptions := #[
+    ⟨`experimental.module, true⟩,
+    -- Statement numbering per chapter with one shared counter, as in the legacy blueprint ("Lemma 2.2").
+    ⟨`weak.verso.blueprint.subNumberingPrefix, "first"⟩,
+    -- Proofs are collapsed by default (the old "show more" behaviour).
+    ⟨`weak.verso.blueprint.foldProofBlocks, true⟩
+  ]
 
+-- All modules below `ComplexAnalysisCourse` are built (including `MacroGallery`, which lints every macro).
 @[default_target]
-lean_exe «complexanalysiscourse» where
-  root := `Main
-  -- Enables the use of the Lean interpreter by the executable (e.g.,
-  -- `runFrontend`) at the expense of increased binary size on Linux.
-  -- Remove this line if you do not need such functionality.
-  supportInterpreter := true
-
-require checkdecls from git "https://github.com/PatrickMassot/checkdecls.git"
-
-meta if get_config? env = some "dev" then
-require «doc-gen4» from git
-  "https://github.com/leanprover/doc-gen4" @ "main"
+lean_lib ComplexAnalysisCourse where
+  globs := #[.andSubmodules `ComplexAnalysisCourse]
