@@ -143,7 +143,7 @@
   "Chapter module header": {
     "scope": "lean4",
     "prefix": "chapter",
-    "description": "Header of a new chapter module",
+    "description": "Header of a new chapter module (the slug must be unique: it names the page)",
     "body": [
       "import Verso",
       "import VersoManual",
@@ -156,12 +156,15 @@
       "open Informal",
       "",
       "#doc (Manual) \"${1:Chapter title}\" =>",
+      "%%%",
+      "file := \"${2:chapter-slug}\"",
+      "%%%",
       "",
-      ":::group \"${2:grp_chapter}\"",
+      ":::group \"${3:grp_chapter}\"",
       "$1",
       ":::",
       "",
-      "# ${3:First section}",
+      "# ${4:First section}",
       "",
       "$0"
     ]

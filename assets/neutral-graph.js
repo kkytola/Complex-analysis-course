@@ -8,6 +8,7 @@
  *   2. Adds a short hint paragraph above the graph.
  *   3. Removes formalization-status wording from the legend and from node tooltips (the project has
  *      no Lean formalization), and adds a legend entry for the chapter frames.
+ *   0. Sets the page language (Verso emits <html> without `lang`; screen readers need it).
  *   4. Removes the "Lean status" chip from statement headers (the stylesheet hides it; this also removes its text
  *      from the page) and the "Lean" and "VersoBlueprint" tool-provenance entries of the build line on the root page.
  *
@@ -194,6 +195,7 @@
   /* ---- Main --------------------------------------------------------------------------------- */
 
   onReady(function () {
+    if (!document.documentElement.getAttribute("lang")) document.documentElement.setAttribute("lang", "en");
     each(document.querySelectorAll(".bp_graph_fullwidth"), function (block) {
       setInitialView(block);
       addHint(block);

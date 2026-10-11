@@ -23,6 +23,8 @@
  *   .bp_code_summary_preview_panel its hover panel (appended to <body> by the page runtime)
  *   --bp-extra-code-col, --bp-extra-code-placeholder-col   grid column widths of that row
  *   .bp_build_metadata             "Compiled / Project / Lean / VersoBlueprint" line on the root page
+ *   details.bp_kind_proof_wrapper > summary.bp_heading   collapsed proof (section 5)
+ *   .katex-display, code.bp_math.display                 display maths (section 6)
  * ============================================================================================ */
 
 :root {
@@ -92,3 +94,26 @@
  * and cuts off the word "DEFINITION" in statement headers. To remove the selector (everybody then gets
  * "blueprint"), uncomment: */
 /* #bp-style-switcher { display: none !important; } */
+
+/* ---- 5. Collapsed proofs show that they can be expanded -------------------------------------------
+ * Proofs are <details> elements. Verso Blueprint makes their <summary> a flex row, which suppresses the
+ * browser's disclosure triangle (the legacy site showed one), so draw one ourselves. */
+details.bp_kind_proof_wrapper > summary.bp_heading::before {
+  content: "\25B8";            /* black right-pointing small triangle */
+  display: inline-block;
+  width: 1.1em;
+  flex: none;
+  color: #64748b;
+}
+details.bp_kind_proof_wrapper[open] > summary.bp_heading::before {
+  content: "\25BE";            /* black down-pointing small triangle */
+}
+
+/* ---- 6. Wide display formulas scroll inside their block instead of widening the page --------------
+ * On a phone a long `align*` made the whole page scroll sideways. */
+.bp_content code.bp_math.display,
+.bp_content .katex-display {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
