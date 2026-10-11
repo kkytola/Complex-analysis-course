@@ -1,0 +1,94 @@
+/* ============================================================================================
+ * Presentation overrides for the MS-C1300 course blueprint (Verso Blueprint).
+ *
+ * WHY: Verso Blueprint colours the dependency graph by *formalization status* (amber "blocked",
+ * blue "ready to formalize", green "formalized", ...) and shows a "Lean status" chip in every
+ * statement header. This project has no Lean formalization, so all of that would mislead
+ * students. This file gives all graph nodes one neutral colour and hides the Lean chip.
+ * The companion file neutral-graph.js removes the remaining wording (legend, tooltips).
+ *
+ * LOADED BY: ComplexAnalysisCourse/SiteConfig.lean: copied to <site>/assets/ and linked from the <head>
+ * of every page, after Verso's own inline stylesheets (which therefore lose ties); the `!important`s
+ * below are an extra safeguard.
+ *
+ * UPSTREAM HOOKS THIS FILE DEPENDS ON (re-check after every VersoBlueprint upgrade; look at the
+ * graph page and at a statement header and make sure no amber/blue/green and no "LEAN" chip show):
+ *   .bp_graph_fullwidth            wrapper of the graph block (also contains the group preview panel)
+ *   svg g.node                     Graphviz node groups (d3-graphviz output), containing
+ *                                  <polygon>, <ellipse>, <path>, <polyline>, <text>
+ *   .bp_graph_canvas               the drawing area (d3-graphviz renders an <svg> into it)
+ *   .bp_graph_legend_swatch        coloured square in the legend (inline style from Lean)
+ *   .bp_extras, .thm_header_extras header chip row of a statement/proof block
+ *   .bp_extra_slot_code            the "X LEAN" status chip slot in that row
+ *   .bp_code_summary_preview_panel its hover panel (appended to <body> by the page runtime)
+ *   --bp-extra-code-col, --bp-extra-code-placeholder-col   grid column widths of that row
+ *   .bp_build_metadata             "Compiled / Project / Lean / VersoBlueprint" line on the root page
+ * ============================================================================================ */
+
+:root {
+  /* The one colour of every graph node (border, fill, text). Change here to restyle the graph. */
+  --cac-node-fill: #f1f5f9;
+  --cac-node-stroke: #475569;
+  --cac-node-text: #0f172a;
+}
+
+/* ---- 1. Neutral nodes ------------------------------------------------------------------------
+ * Presentation attributes (fill="..." / stroke="...") lose against any CSS rule, so plain rules
+ * would do; `!important` is only a safeguard. Shapes (box = definition, ellipse = theorem-like,
+ * tab = chapter in "Group View"), edges and the dashed chapter frames are left untouched.
+ * `[fill]:not([fill="none"])` keeps unfilled lines (e.g. the tab line of group nodes) unfilled. */
+.bp_graph_fullwidth svg g.node :is(polygon, ellipse, path)[fill]:not([fill="none"]) {
+  fill: var(--cac-node-fill) !important;
+}
+.bp_graph_fullwidth svg g.node :is(polygon, ellipse, path, polyline)[stroke]:not([stroke="none"]) {
+  stroke: var(--cac-node-stroke) !important;
+  stroke-width: 1.5px !important;
+}
+.bp_graph_fullwidth svg g.node text {
+  fill: var(--cac-node-text) !important;
+}
+
+/* The legend swatches show a node: make them match the neutral nodes. */
+.bp_graph_legend_swatch {
+  background: var(--cac-node-fill) !important;
+  border-color: var(--cac-node-stroke) !important;
+}
+
+/* A graph canvas that is never squeezed below a legible height on small windows (Verso sets an inline
+ * min-height of at most 280px and sizes the canvas to the window; the page scrolls if it does not fit).
+ * The canvas can still be enlarged with the resize handle in its lower right corner. */
+.bp_graph_canvas {
+  min-height: 30rem !important;
+}
+
+/* Hint paragraph above the graph (inserted by neutral-graph.js). */
+.cac-graph-hint {
+  margin: 0.6rem 0 0.2rem;
+  max-width: 62rem;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+/* ---- 2. No "Lean status" chip in statement headers --------------------------------------------
+ * Hide the chip and give its grid column zero width. (No proof header has one, so nothing is lost.) */
+.bp_extras .bp_extra_slot_code,
+.bp_code_summary_preview_panel {
+  display: none !important;
+}
+.bp_extras.thm_header_extras {
+  --bp-extra-code-col: 0px;
+  --bp-extra-code-placeholder-col: 0px;
+}
+
+/* ---- 3. Optional: the build line on the root page ---------------------------------------------
+ * ("Compiled <time> / Project <commit and last commit subject> / Lean <toolchain> / VersoBlueprint <rev>").
+ * neutral-graph.js already removes the "Lean" and "VersoBlueprint" entries. To drop the whole line,
+ * uncomment: */
+/* .bp_build_metadata { display: none !important; } */
+
+/* ---- 4. Optional: the "Style" switcher ------------------------------------------------------------
+ * Every page has a small "Style: blueprint / modern / bold" selector in the lower right corner (the choice is
+ * remembered in the browser). "blueprint", the default, is the one closest to the legacy site; "bold" is garish
+ * and cuts off the word "DEFINITION" in statement headers. To remove the selector (everybody then gets
+ * "blueprint"), uncomment: */
+/* #bp-style-switcher { display: none !important; } */
