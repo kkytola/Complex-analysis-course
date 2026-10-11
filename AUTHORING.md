@@ -46,6 +46,16 @@ Each chapter is a Lean module `#doc (Manual) "Title" =>`; `# Section`, `## Subse
 markup. A new chapter: copy the header of an existing module (VS Code snippet `chapter`), `import` it in
 `Blueprint.lean` and add `{include 0 ComplexAnalysisCourse.Chapters.MyChapter}` in the right place.
 
+The chapter's page URL comes from the metadata block right after the `#doc` line (written exactly in this
+multi-line form; without it the URL is a mangled slug of the title):
+
+```lean
+#doc (Manual) "Cauchy's theorem and consequences" =>
+%%%
+file := "cauchy-theorem"
+%%%
+```
+
 ### Statements and proofs
 
 ````lean
@@ -106,6 +116,24 @@ See {bpref "thm_cauchy_theorem"}[]; a defined term looks like {term}[star-shaped
 * Text-level helpers (`\term`, `\Palka`, ...) are Verso *roles* in `Roles.lean` (a role must live in an
   imported module). Add new ones there following the existing pattern.
 
+## Site presentation (graph, pages)
+
+* **Dependency graph.** Verso Blueprint colours graph nodes by *formalization status*, which is meaningless
+  here, so `assets/neutral-graph.css` and `assets/neutral-graph.js` give all nodes one colour, remove the status
+  legend/tooltips and the Lean-status chips, start the graph in the chapter overview ("Group View") and add a
+  hint line. Open the full graph with `.../Dependency-Graph/?view=full` or one chapter with
+  `?view=parent:grp_power_series`. The full graph of all 193 statements is a very wide strip; use the zoom.
+* The files hook into upstream class names (listed at the top of each file). After every upgrade of Verso
+  Blueprint look at the graph page, a statement header and the root page: amber/blue nodes, a "Statement
+  Border" legend or a "LEAN" chip mean that a selector needs adapting.
+* `SiteConfig.lean` sets one HTML page per chapter (`htmlDepth := 1`, as in the legacy site), the source link
+  and links the assets (`assets/` is copied to `<site>/assets/`, so editing CSS/JS needs no Lean rebuild; the
+  generator must run from the repository root, as `scripts/build_site.sh` does).
+* The page style selector (blueprint/modern/bold) is Verso Blueprint's; `blueprint` is the default and the
+  closest to the legacy look. A commented line in the CSS hides the selector.
+* The graph libraries (d3, d3-graphviz) and `marked` are loaded from `cdn.jsdelivr.net`, so the graph needs
+  internet access.
+
 ## Deployment
 
 `.github/workflows/blueprint.yml` builds the project (`scripts/build_site.sh`), assembles the Jekyll home
@@ -127,5 +155,9 @@ into upstream internals: `assets/` (CSS/JS use upstream class names, listed at t
   so far). Needs per-node metadata (e.g. a lecture tag) and a small script; currently all nodes have one
   neutral colour because Verso Blueprint's built-in colours mean *formalization status*, which does not
   apply here.
-* Verso numbers the appendices 7 and 8 (legacy: A and B).
+* Verso numbers the appendices 7 and 8 (legacy: A and B): Verso's traversal overwrites every part number by
+  an integer, so lettered appendices are impossible without an upstream change.
+* In the PDF the introductory paragraphs of the root document run together (Verso core `emitTeX` joins the
+  front matter without paragraph breaks); multi-paragraph list items also run together. Upstream issue drafts
+  exist; `TeXFixes.lean` can be reduced once they are fixed.
 * Graph nodes show the label rather than number/title.
