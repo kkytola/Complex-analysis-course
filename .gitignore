@@ -10,3 +10,8 @@
 /.lake/*
 /_out
 __pycache__/
+/home_page/_site
+/home_page/.bundle
+/home_page/vendor
+/home_page/.jekyll-cache
+/home_page/.sass-cache
