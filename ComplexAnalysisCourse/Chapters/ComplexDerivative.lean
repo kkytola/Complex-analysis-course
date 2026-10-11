@@ -13,13 +13,17 @@ open Informal
 file := "complex-derivative"
 %%%
 
+:::group "grp_complex_derivative"
+Complex derivatives and analytic functions
+:::
+
 # Real linear maps versus complex linear maps
 
 The right abstract way of understanding the differential of a function is as a linear
 approximation to a function locally. The key difference between real analysis and
 complex analysis is whether one uses real linear maps or complex linear maps.
 
-:::definition "def_linear"
+:::definition "def_linear" (parent := "grp_complex_derivative")
 {nodetitle}[Linear map]
 
 Let $`\bK` be a field (for example $`\bK = \bR` or $`\bK = \bC`), and let
@@ -89,7 +93,7 @@ It also gives an explicit set of equations for the entries of
 the matrix of a real-linear map characterizing complex-linearity, which turn out to be
 very closely related to the Cauchy-Riemann equations.
 
-:::lemma_ "lem_complex_linear_vs_real_linear" (uses := "def_linear, thm_complex_number_field")
+:::lemma_ "lem_complex_linear_vs_real_linear" (parent := "grp_complex_derivative") (uses := "def_linear, thm_complex_number_field")
 {nodetitle}[Complex linear versus real linear maps of $`\bC`]
 
 Let $`L : \bC \to \bC` be a $`\bR`-linear map represented in the basis $`1,\ii` by
@@ -106,7 +110,7 @@ Clear from the above discussion.
 
 # Complex derivative
 
-:::definition "def_complex_derivative" (uses := "thm_complex_number_field, def_limit")
+:::definition "def_complex_derivative" (parent := "grp_complex_derivative") (uses := "thm_complex_number_field, def_limit")
 {nodetitle}[Complex derivative] {palka}[Sec. III.1.1]
 
 Let $`f \colon A \to \bC` be a complex-valued function defined on
@@ -126,7 +130,7 @@ at $`z_0`, if the limit on the right hand side above exists.
 and simply call $`f'(z_0)` the {term}[derivative] of $`f` at $`z_0`.)
 :::
 
-:::lemma_ "lem_local_linear_approximation" (uses := "def_complex_derivative")
+:::lemma_ "lem_local_linear_approximation" (parent := "grp_complex_derivative") (uses := "def_complex_derivative")
 {nodetitle}[Local linear approximation]
 
 If a function $`f \colon A \to \bC` has complex derivative
@@ -145,7 +149,7 @@ $`\lim_{z \to z_0} \frac{\epsilon(z)}{|z-z_0|} = 0`.
 …
 :::
 
-:::lemma_ "lem_complex_derivative_implies_continuous" (uses := "def_continuous, def_complex_derivative")
+:::lemma_ "lem_complex_derivative_implies_continuous" (parent := "grp_complex_derivative") (uses := "def_continuous, def_complex_derivative")
 {nodetitle}[Complex differentiability implies continuity] {palka}[Sec. III.1.1]
 
 If a function $`f \colon A \to \bC` has a complex derivative $`f'(z_0)`
@@ -158,7 +162,7 @@ at a point $`z_0 \in A`, then it is continuous at $`z_0`.
 
 # Cauchy-Riemann equations
 
-:::lemma_ "lem_complex_derivative_implies_differentiable" (uses := "def_complex_derivative, def_differential, lem_complex_linear_vs_real_linear")
+:::lemma_ "lem_complex_derivative_implies_differentiable" (parent := "grp_complex_derivative") (uses := "def_complex_derivative, def_differential, lem_complex_linear_vs_real_linear")
 {nodetitle}[Complex derivative implies differentiability]
 
 Let $`f \colon A \to \bC` be a function defined on a set $`A \subset \bC`,
@@ -200,7 +204,7 @@ $$`
 
 ## Differentiation rules
 
-:::lemma_ "lem_derivative_linearity" (uses := "def_complex_derivative, def_linear")
+:::lemma_ "lem_derivative_linearity" (parent := "grp_complex_derivative") (uses := "def_complex_derivative, def_linear")
 {nodetitle}[Linearity of the derivative] {palka}[Sec. III.1.2 (3.4)]
 
 If two functions $`f, g \colon A \to \bC` have complex derivatives
@@ -226,7 +230,7 @@ at $`z_0`.
 …
 :::
 
-:::lemma_ "lem_leibniz_rule" (uses := "def_complex_derivative")
+:::lemma_ "lem_leibniz_rule" (parent := "grp_complex_derivative") (uses := "def_complex_derivative")
 {nodetitle}[Leibniz rule] {palka}[Sec. III.1.2 (3.4)]
 
 If two functions $`f, g \colon A \to \bC` have complex derivatives
@@ -244,7 +248,7 @@ at $`z_0`.
 …
 :::
 
-:::lemma_ "lem_quotient_derivative" (uses := "def_complex_derivative")
+:::lemma_ "lem_quotient_derivative" (parent := "grp_complex_derivative") (uses := "def_complex_derivative")
 {nodetitle}[Derivative of a quotient] {palka}[Sec. III.1.2 (3.4)]
 
 If two functions $`f, g \colon A \to \bC` have complex derivatives
@@ -263,7 +267,7 @@ at $`z_0`.
 …
 :::
 
-:::lemma_ "lem_chain_rule" (uses := "def_complex_derivative")
+:::lemma_ "lem_chain_rule" (parent := "grp_complex_derivative") (uses := "def_complex_derivative")
 {nodetitle}[Chain rule] {palka}[Thm III.1.1]
 
 If $`f \colon A \to B \subset \bC` is differentiable at $`z_0 \in A`
@@ -281,7 +285,7 @@ $$`
 …
 :::
 
-:::lemma_ "lem_inverse_derivative" (uses := "def_complex_derivative")
+:::lemma_ "lem_inverse_derivative" (parent := "grp_complex_derivative") (uses := "def_complex_derivative")
 {nodetitle}[Derivative of inverse] {palka}[Thm III.4.1]
 
 Suppose that $`f` is a complex-valued function defined on a subset of
@@ -305,7 +309,7 @@ $$`
 
 ## Analytic functions
 
-:::definition "def_analytic_function" (uses := "def_complex_derivative, def_open_set")
+:::definition "def_analytic_function" (parent := "grp_complex_derivative") (uses := "def_complex_derivative, def_open_set")
 {nodetitle}[Analytic function] {palka}[Sec. III.1.3]
 
 A function $`f \colon U \to \bC` defined on an open set $`U \subset \bC` is
@@ -313,7 +317,7 @@ said to be {term}[analytic] (or {term}[holomorphic]) if it is complex
 differentiable at every point $`z_0 \in U`.
 :::
 
-:::theorem "thm_cauchy_riemann" (uses := "def_analytic_function")
+:::theorem "thm_cauchy_riemann" (parent := "grp_complex_derivative") (uses := "def_analytic_function")
 {nodetitle}[Cauchy-Riemann equations] {palka}[Thm III.2.2]
 
 Let $`f \colon U \to \bC` be a function defined on an open set $`U \subset \bC`,
@@ -347,7 +351,7 @@ Then the following are equivalent:
 …
 :::
 
-:::lemma_ "lem_analytic_implies_continuous" (uses := "def_analytic_function, def_continuous")
+:::lemma_ "lem_analytic_implies_continuous" (parent := "grp_complex_derivative") (uses := "def_analytic_function, def_continuous")
 {nodetitle}[Analytic functions are continuous]
 
 Every function $`f \colon U \to \bC` which is analytic on
@@ -358,7 +362,7 @@ an open set $`U \subset \bC` is also continuous on $`U`.
 …
 :::
 
-:::lemma_ "lem_polynomial_analytic" (uses := "def_polynomial, def_analytic_function")
+:::lemma_ "lem_polynomial_analytic" (parent := "grp_complex_derivative") (uses := "def_polynomial, def_analytic_function")
 {nodetitle}[Polynomials are analytic]
 
 Every polynomial function $`p \colon \bC \to \bC` is analytic.
@@ -368,7 +372,7 @@ Every polynomial function $`p \colon \bC \to \bC` is analytic.
 …
 :::
 
-:::lemma_ "lem_rational_function_analytic" (uses := "def_rational_function, def_analytic_function")
+:::lemma_ "lem_rational_function_analytic" (parent := "grp_complex_derivative") (uses := "def_rational_function, def_analytic_function")
 {nodetitle}[Rational functions are analytic]
 
 Every rational function $`f \colon U \to \bC` is analytic
@@ -379,7 +383,7 @@ on its domain of definition $`U \subset \bC`.
 …
 :::
 
-:::lemma_ "lem_exp_analytic" (uses := "def_complex_exp, def_analytic_function")
+:::lemma_ "lem_exp_analytic" (parent := "grp_complex_derivative") (uses := "def_complex_exp, def_analytic_function")
 {nodetitle}[The complex exponential is analytic]
 
 The complex exponential function $`\exp \colon \bC \to \bC` is analytic.
@@ -390,7 +394,7 @@ Its (complex) derivative at $`z \in \bC` is $`\exp'(z) = \exp(z)`.
 …
 :::
 
-:::lemma_ "lem_root_function_analytic" (uses := "def_analytic_function, def_principal_complex_nth_root")
+:::lemma_ "lem_root_function_analytic" (parent := "grp_complex_derivative") (uses := "def_analytic_function, def_principal_complex_nth_root")
 {nodetitle}[Branches of $`n`th root functions are analytic]
 
 The principal branch of the $`n`th root function
@@ -408,7 +412,7 @@ no branch of $`\sqrt[n]{z}` can be made analytic on all of $`\bC`.)
 
 ## Consequences of Cauchy-Riemann equations
 
-:::lemma_ "lem_zero_derivative_implies_constant" (uses := "def_analytic_function")
+:::lemma_ "lem_zero_derivative_implies_constant" (parent := "grp_complex_derivative") (uses := "def_analytic_function")
 {nodetitle}[Analytic functions of vanishing derivative]
 
 Suppose that $`f \colon D \to \bC` is a analytic function
@@ -421,7 +425,7 @@ Then $`f` is a constant function.
 …
 :::
 
-:::theorem "thm_constantness_criteria" (uses := "def_analytic_function")
+:::theorem "thm_constantness_criteria" (parent := "grp_complex_derivative") (uses := "def_analytic_function")
 {nodetitle}[Criteria for constantness of a analytic function]
 
 Suppose that $`f \colon D \to \bC` is a analytic function
@@ -435,7 +439,7 @@ is constant on $`D`, then $`f` is itself a constant function.
 …
 :::
 
-:::lemma_ "lem_real_and_imaginary_parts_harmonic" (uses := "def_analytic_function")
+:::lemma_ "lem_real_and_imaginary_parts_harmonic" (parent := "grp_complex_derivative") (uses := "def_analytic_function")
 {nodetitle}[Harmonicity of real and imaginary parts]
 
 Suppose that $`f \colon U \to \bC` is a analytic function
@@ -461,7 +465,7 @@ $$`
 …
 :::
 
-:::definition "def_harmonic_conjugate" (uses := "def_analytic_function, lem_real_and_imaginary_parts_harmonic")
+:::definition "def_harmonic_conjugate" (parent := "grp_complex_derivative") (uses := "def_analytic_function, lem_real_and_imaginary_parts_harmonic")
 {nodetitle}[Harmonic conjugate]
 
 Suppose that $`u \colon U \to \bR` is harmonic function
@@ -477,7 +481,7 @@ $$`
 is analytic on $`U`.
 :::
 
-:::lemma_ "lem_harmonic_conjugate_existence" (uses := "def_harmonic_conjugate, lem_real_and_imaginary_parts_harmonic")
+:::lemma_ "lem_harmonic_conjugate_existence" (parent := "grp_complex_derivative") (uses := "def_harmonic_conjugate, lem_real_and_imaginary_parts_harmonic")
 {nodetitle}[Local existence of harmonic conjugates]
 
 Let $`B = \BallRC{r}{z_0} \subset \bC` be a disk in the complex plane.

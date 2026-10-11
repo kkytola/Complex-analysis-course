@@ -13,9 +13,13 @@ open Informal
 file := "cauchy-theorem"
 %%%
 
+:::group "grp_cauchy_theorem"
+Cauchy's theorem and consequences
+:::
+
 # Convex, star-shaped, and simply connected domains
 
-:::definition "def_line_segment" (uses := "thm_complex_number_field, def_path")
+:::definition "def_line_segment" (parent := "grp_cauchy_theorem") (uses := "thm_complex_number_field, def_path")
 {nodetitle}[Line segment]
 
 Given two points $`z_1, z_2 \in \bC` in the complex plane,
@@ -38,7 +42,7 @@ $$`
 `
 :::
 
-:::definition "def_convex" (uses := "def_line_segment")
+:::definition "def_convex" (parent := "grp_cauchy_theorem") (uses := "def_line_segment")
 {nodetitle}[Convex set]
 
 A subset $`A \subset \bC` of the complex plane is called
@@ -51,7 +55,7 @@ $$`
 `
 :::
 
-:::definition "def_star_shaped" (uses := "def_line_segment")
+:::definition "def_star_shaped" (parent := "grp_cauchy_theorem") (uses := "def_line_segment")
 {nodetitle}[Star-shaped set]
 
 A subset $`A \subset \bC` of the complex plane is called
@@ -65,7 +69,7 @@ $$`
 `
 :::
 
-:::lemma_ "lem_convex_implies_star_shaped" (uses := "def_convex, def_star_shaped")
+:::lemma_ "lem_convex_implies_star_shaped" (parent := "grp_cauchy_theorem") (uses := "def_convex, def_star_shaped")
 {nodetitle}[Convex sets are star-shaped]
 
 Any nonempty convex set is star-shaped.
@@ -75,7 +79,7 @@ Any nonempty convex set is star-shaped.
 …
 :::
 
-:::lemma_ "lem_star_shaped_implies_simply_connected" (uses := "def_simply_connected, def_star_shaped, def_path_connected")
+:::lemma_ "lem_star_shaped_implies_simply_connected" (parent := "grp_cauchy_theorem") (uses := "def_simply_connected, def_star_shaped, def_path_connected")
 {nodetitle}[Star-shaped sets are path connected and simply connected]
 
 Any star-shaped set $`U \subset \bC` is path connected and simply connected.
@@ -87,7 +91,7 @@ Any star-shaped set $`U \subset \bC` is path connected and simply connected.
 
 # Cauchy's integral theorem
 
-:::lemma_ "lem_goursat" (uses := "def_analytic_function, def_contour_integral")
+:::lemma_ "lem_goursat" (parent := "grp_cauchy_theorem") (uses := "def_analytic_function, def_contour_integral")
 {nodetitle}[Goursat's lemma] {palka}[Lem V.1.1]
 
 Suppose that a function $`f \colon U \to \bC` is analytic on an open
@@ -104,7 +108,7 @@ $$`
 …
 :::
 
-:::lemma_ "lem_primitive_star_shaped" (uses := "def_primitive, def_star_shaped")
+:::lemma_ "lem_primitive_star_shaped" (parent := "grp_cauchy_theorem") (uses := "def_primitive, def_star_shaped")
 {nodetitle}[Existence of primitives in star-shaped domains]
 
 Every analytic function $`f \colon U \to \bC` on a star-shaped
@@ -115,7 +119,7 @@ domain $`U \subset \bC` has a primitive in $`U`.
 …
 :::
 
-:::theorem "thm_cauchy_theorem_star_shaped" (uses := "def_analytic_function, def_contour_integral, def_star_shaped")
+:::theorem "thm_cauchy_theorem_star_shaped" (parent := "grp_cauchy_theorem") (uses := "def_analytic_function, def_contour_integral, def_star_shaped")
 {nodetitle}[Cauchy's integral theorem for star-shaped domains] {palka}[Thm V.1.5]
 
 Suppose that a function $`f \colon U \to \bC` is analytic on a
@@ -132,7 +136,7 @@ $$`
 …
 :::
 
-:::corollary "cor_local_cauchy_theorem" (uses := "def_analytic_function, def_contour_integral, def_contractible")
+:::corollary "cor_local_cauchy_theorem" (parent := "grp_cauchy_theorem") (uses := "def_analytic_function, def_contour_integral, def_contractible")
 {nodetitle}[Local Cauchy's integral theorem] {palka}[Thm V.5.1]
 
 Suppose that a function $`f \colon U \to \bC` is analytic on a open
@@ -152,7 +156,7 @@ $$`
 
 # Cauchy's integral formula
 
-:::theorem "thm_cauchy_formula_star_shaped" (uses := "def_analytic_function, def_contour_integral")
+:::theorem "thm_cauchy_formula_star_shaped" (parent := "grp_cauchy_theorem") (uses := "def_analytic_function, def_contour_integral")
 {nodetitle}[Cauchy's integral formula for star-shaped subdomains] {palka}[Thm V.2.3]
 
 Suppose that a function $`f \colon U \to \bC` is analytic on an open
@@ -177,7 +181,7 @@ is when the contour $`\gamma` is a circle, encircling a disk
 whose closure is contained in the domain of the analytic function
 (recall that disks are convex and therefore star-shaped).
 
-:::corollary "cor_cauchy_formula_circle" (uses := "def_analytic_function, def_contour_integral")
+:::corollary "cor_cauchy_formula_circle" (parent := "grp_cauchy_theorem") (uses := "def_analytic_function, def_contour_integral")
 {nodetitle}[Cauchy's integral formula for circles]
 
 Suppose that a function $`f \colon U \to \bC` is analytic on an open
@@ -204,7 +208,7 @@ The generalizations of Cauchy's integral theorem and Cauchy's integral
 formula are based on the following homotopy invariance property of
 contour integrals (whose proof we do not do in detail in this course).
 
-:::lemma_ "lem_homotopy_invariance" (uses := "def_path_homotopy, def_contour_integral")
+:::lemma_ "lem_homotopy_invariance" (parent := "grp_cauchy_theorem") (uses := "def_path_homotopy, def_contour_integral")
 {nodetitle}[Homotopy invariance of contour integrals]
 
 Let $`f \colon U \to \bC` be an analytic function on an open
@@ -221,7 +225,7 @@ $$`
 This readily implies the following generalization of Cauchy's integral
 theorem.
 
-:::theorem "thm_cauchy_theorem" (uses := "def_analytic_function, def_contour_integral, def_contractible")
+:::theorem "thm_cauchy_theorem" (parent := "grp_cauchy_theorem") (uses := "def_analytic_function, def_contour_integral, def_contractible")
 {nodetitle}[Cauchy's integral theorem] {palka}[Thm V.5.1]
 
 Suppose that a function $`f \colon U \to \bC` is analytic on a open
@@ -251,7 +255,7 @@ The other ingredient of generalization of Cauchy's integral formula
 to arbitrary contours and points not lying on those contours is
 the winding number of a contour around a point.
 
-:::definition "def_winding_number" (uses := "def_contour_integral")
+:::definition "def_winding_number" (parent := "grp_cauchy_theorem") (uses := "def_contour_integral")
 {nodetitle}[Winding number]
 
 Let $`z \in \bC`, and let $`\gamma` be a closed contour
@@ -264,7 +268,7 @@ $$`
 `
 :::
 
-:::lemma_ "lem_winding_additivity" (uses := "def_winding_number")
+:::lemma_ "lem_winding_additivity" (parent := "grp_cauchy_theorem") (uses := "def_winding_number")
 {nodetitle}[Winding number concatenation and reversal]
 
 Let $`\gamma` and $`\eta` be closed contours in $`\bC`
@@ -290,7 +294,7 @@ $$`
 …
 :::
 
-:::lemma_ "lem_winding_number_properties" (uses := "def_winding_number")
+:::lemma_ "lem_winding_number_properties" (parent := "grp_cauchy_theorem") (uses := "def_winding_number")
 {nodetitle}[Winding number properties]
 
 Let $`\gamma` be a closed contour in $`\bC`. Then the winding
@@ -312,7 +316,7 @@ satisfy:
 …
 :::
 
-:::lemma_ "lem_winding_homotopy_invariance" (uses := "def_winding_number, def_path_homotopy")
+:::lemma_ "lem_winding_homotopy_invariance" (parent := "grp_cauchy_theorem") (uses := "def_winding_number, def_path_homotopy")
 {nodetitle}[Homotopy invariance of winding numbers]
 
 Let $`z \in \bC` be a point and let $`\gamma` and $`\eta` be two
@@ -335,7 +339,7 @@ no restrictions on the position of the point with respect to
 the contour, except that the point must not lie on the contour
 (for otherwise there is a singularity in the integrand).
 
-:::theorem "thm_CAUCHY_FORMULA" (uses := "def_analytic_function, def_contour_integral, def_winding_number")
+:::theorem "thm_CAUCHY_FORMULA" (parent := "grp_cauchy_theorem") (uses := "def_analytic_function, def_contour_integral, def_winding_number")
 {nodetitle}[Cauchy's integral formula] {palka}[Thm V.2.3]
 
 Suppose that a function $`f \colon U \to \bC` is analytic on an open
@@ -356,7 +360,7 @@ $$`
 
 # Analyticity of derivatives
 
-:::lemma_ "lem_derivative_analytic" (uses := "def_analytic_function")
+:::lemma_ "lem_derivative_analytic" (parent := "grp_cauchy_theorem") (uses := "def_analytic_function")
 {nodetitle}[Analyticity of derivatives] {palka}[Thm V.3.1]
 
 If a function $`f \colon U \to \bC` is analytic on an open set $`U \subset \bC`,
@@ -369,7 +373,7 @@ $`f \in \ContDiff{1}(U)`.
 …
 :::
 
-:::corollary "lem_higher_derivatives_analytic" (uses := "def_analytic_function")
+:::corollary "lem_higher_derivatives_analytic" (parent := "grp_cauchy_theorem") (uses := "def_analytic_function")
 {nodetitle}[Analyticity of higher derivatives] {palka}[Cor V.3.2]
 
 If a function $`f \colon U \to \bC` is analytic on an open set $`U \subset \bC`,
@@ -382,7 +386,7 @@ In particular, then $`f` is infinitely differentiable, $`f \in \Smooth(U)`.
 Straightforward induction using {bpref "lem_derivative_analytic"}[].
 :::
 
-:::theorem "thm_morera" (uses := "def_analytic_function")
+:::theorem "thm_morera" (parent := "grp_cauchy_theorem") (uses := "def_analytic_function")
 {nodetitle}[Morera's theorem] {palka}[Thm V.3.3]
 
 Let $`f \colon U \to \bC` be a continuous function on an open set $`U \subset \bC`.
@@ -399,7 +403,7 @@ for any closed triangle $`\Tri \subset U`, then $`f` is analytic on $`U`.
 …
 :::
 
-:::theorem "thm_cauchy_formula_derivative" (uses := "def_analytic_function")
+:::theorem "thm_cauchy_formula_derivative" (parent := "grp_cauchy_theorem") (uses := "def_analytic_function")
 {nodetitle}[Cauchy's integral formula for derivatives]
 
 Suppose that a function $`f \colon U \to \bC` is analytic on an open
@@ -418,7 +422,7 @@ $$`
 …
 :::
 
-:::lemma_ "lem_cauchy_derivative_estimate" (uses := "def_analytic_function")
+:::lemma_ "lem_cauchy_derivative_estimate" (parent := "grp_cauchy_theorem") (uses := "def_analytic_function")
 {nodetitle}[Cauchy's estimate for derivatives] {palka}[Thm V.3.6]
 
 Suppose that a function $`f \colon U \to \bC` is analytic on an open
@@ -446,7 +450,7 @@ $$`
 
 # Liouville's theorem
 
-:::theorem "thm_liouville" (uses := "def_analytic_function")
+:::theorem "thm_liouville" (parent := "grp_cauchy_theorem") (uses := "def_analytic_function")
 {nodetitle}[Liouville's theorem] {palka}[Thm V.3.7]
 
 If a function $`f \colon \bC \to \bC` on the entire complex plane
@@ -459,7 +463,7 @@ is analytic and bounded, then $`f` is a constant function.
 
 # The fundamental theorem of algebra
 
-:::theorem "thm_FUNDAMENTAL_THEOREM_OF_ALGEBRA" (uses := "def_polynomial")
+:::theorem "thm_FUNDAMENTAL_THEOREM_OF_ALGEBRA" (parent := "grp_cauchy_theorem") (uses := "def_polynomial")
 {nodetitle}[Fundamental theorem of algebra] {palka}[Thm V.3.8]
 
 Every non-constant polynomial function $`p \colon \bC \to \bC`
@@ -470,7 +474,7 @@ has a root, i.e., there exists a $`z_0 \in \bC` such that $`p(z_0) = 0`.
 …
 :::
 
-:::corollary "cor_complex_polynomial_factorization" (uses := "def_polynomial")
+:::corollary "cor_complex_polynomial_factorization" (parent := "grp_cauchy_theorem") (uses := "def_polynomial")
 {nodetitle}[Polynomial factorization] {palka}[Thm V.3.9]
 
 A complex-coefficient
@@ -495,7 +499,7 @@ ring of univariate polynomials, see *MS-C1081 Abstract Algebra*).
 
 # Maximum principle
 
-:::theorem "thm_maximum_principle" (uses := "def_analytic_function, def_connected")
+:::theorem "thm_maximum_principle" (parent := "grp_cauchy_theorem") (uses := "def_analytic_function, def_connected")
 {nodetitle}[Maximum principle for analytic functions] {palka}[Thm V.3.10]
 
 Let $`f \colon \Domain \to \bC` be an analytic function on a
@@ -514,7 +518,7 @@ Then $`f` is a constant function.
 …
 :::
 
-:::corollary "cor_maximum_modulus_on_boundary" (uses := "def_analytic_function, def_connected")
+:::corollary "cor_maximum_modulus_on_boundary" (parent := "grp_cauchy_theorem") (uses := "def_analytic_function, def_connected")
 {nodetitle}[Maximum principle for analytic functions continuous up to the boundary] {palka}[Cor V.3.11]
 
 Let $`\Domain \subset \bC` be a bounded connected open set.
@@ -528,7 +532,7 @@ at some point of the boundary $`\bdry \Domain`.
 …
 :::
 
-:::lemma_ "lem_schwarz_lemma" (uses := "def_analytic_function")
+:::lemma_ "lem_schwarz_lemma" (parent := "grp_cauchy_theorem") (uses := "def_analytic_function")
 {nodetitle}[Schwarz's lemma] {palka}[Thm V.3.14]
 
 Let $`f \colon \DiskRC{1}{0} \to \bC` be an analytic function
@@ -559,7 +563,7 @@ $$`
 
 # The mean value property
 
-:::theorem "thm_mean_value_property" (uses := "def_analytic_function")
+:::theorem "thm_mean_value_property" (parent := "grp_cauchy_theorem") (uses := "def_analytic_function")
 {nodetitle}[Mean value property for analytic functions]
 
 Suppose that a function $`f \colon U \to \bC` is analytic on an open

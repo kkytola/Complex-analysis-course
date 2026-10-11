@@ -13,9 +13,13 @@ open Informal
 file := "calculus-background"
 %%%
 
+:::group "grp_calculus_background"
+Preliminaries from calculus
+:::
+
 # Differentiability
 
-:::definition "def_differential" (uses := "def_limit, def_linear, def_interior")
+:::definition "def_differential" (parent := "grp_calculus_background") (uses := "def_limit, def_linear, def_interior")
 {nodetitle}[Real differentiability]
 
 Let $`m,n \in \bN`, and
@@ -43,7 +47,7 @@ is unique if $`p_0` is an interior point of $`U`;
 we then denote it by $`L = \ud f (p_0)`.
 :::
 
-:::lemma_ "lem_differentiable_implies_continuous" (uses := "def_differential, def_continuous")
+:::lemma_ "lem_differentiable_implies_continuous" (parent := "grp_calculus_background") (uses := "def_differential, def_continuous")
 {nodetitle}[Differentiability implies continuity]
 
 If a function $`f \colon U \to \bR^m`
@@ -55,7 +59,7 @@ at $`p_0 \in U`, then it is continuous at $`p_0`.
 …
 :::
 
-:::lemma_ "lem_jacobian_matrix" (uses := "def_differential")
+:::lemma_ "lem_jacobian_matrix" (parent := "grp_calculus_background") (uses := "def_differential")
 {nodetitle}[Jacobian matrix of the differential]
 
 If a function $`f \colon U \to \bR^m`
@@ -82,7 +86,7 @@ where $`f_1, \ldots, f_m \colon U \to \bR` denote component functions of $`f`.
 …
 :::
 
-:::lemma_ "lem_vanishing_partial_derivatives" (uses := "def_differential, def_open_set, def_connected")
+:::lemma_ "lem_vanishing_partial_derivatives" (parent := "grp_calculus_background") (uses := "def_differential, def_open_set, def_connected")
 {nodetitle}[Vanishing partial derivatives implies locally constant]
 
 Suppose that $`f \colon U \to \bR^m` is a function
@@ -101,13 +105,13 @@ For the purposes of this course, it suffices to know the Riemann
 integral. (Those who already know Lebesgue integration theory can
 substitute that more general notion of integral everywhere.)
 
-:::definition "def_riemann_integral"
+:::definition "def_riemann_integral" (parent := "grp_calculus_background")
 {nodetitle}[Riemann integral]
 
 …
 :::
 
-:::lemma_ "lem_continuous_implies_riemann_integrable" (uses := "def_riemann_integral")
+:::lemma_ "lem_continuous_implies_riemann_integrable" (parent := "grp_calculus_background") (uses := "def_riemann_integral")
 {nodetitle}[Riemann integrability of continuous functions]
 
 Any continuous function $`f \colon [a,b] \to \bR` is Riemann
@@ -120,7 +124,7 @@ See {metSpCourse}[].
 
 # Trigonometry
 
-:::lemma_ "lem_trigonometric_angle_sum"
+:::lemma_ "lem_trigonometric_angle_sum" (parent := "grp_calculus_background")
 {nodetitle}[Trigonometric angle sum identities]
 
 Let $`\alpha, \beta \in \bR`. Then we have
@@ -138,7 +142,7 @@ $$`
 
 # Supremum, infimum, limit superior, and limit inferior
 
-:::definition "def_supremum"
+:::definition "def_supremum" (parent := "grp_calculus_background")
 {nodetitle}[Supremum]
 
 The {term}[supremum], or the {term}[least upper bound], of a set $`A \subset \bR`
@@ -170,7 +174,7 @@ $$`
 `
 :::
 
-:::definition "def_infimum"
+:::definition "def_infimum" (parent := "grp_calculus_background")
 {nodetitle}[Infimum]
 
 The {term}[infimum], or the {term}[greatest lower bound], of a set $`A \subset \bR`
@@ -189,7 +193,7 @@ notation for infimums of function values or sequence
 values, similarly as with supremums.
 :::
 
-:::definition "def_limsup" (uses := "def_supremum")
+:::definition "def_limsup" (parent := "grp_calculus_background") (uses := "def_supremum")
 {nodetitle}[Limit superior]
 
 Let $`(x_n)_{n \in \bN}` be a sequence of real numbers.
@@ -214,7 +218,7 @@ or it is not bounded from below and we set
 $`\limsup_{n \to \infty} x_n \, = \, \inf_{m \in \bN} \big( \sup_{n \ge m} x_n \big) = -\infty`.
 :::
 
-:::definition "def_liminf" (uses := "def_infimum")
+:::definition "def_liminf" (parent := "grp_calculus_background") (uses := "def_infimum")
 {nodetitle}[Limit inferior]
 
 Let $`(x_n)_{n \in \bN}` be a sequence of real numbers.
@@ -239,7 +243,7 @@ or it is not bounded from above and we set
 $`\liminf_{n \to \infty} x_n \, = \, \sup_{m \in \bN} \big( \inf_{n \ge m} x_n \big) = +\infty`.
 :::
 
-:::lemma_ "lem_limit_with_limsup_liminf" (uses := "def_limsup, def_liminf, def_limit")
+:::lemma_ "lem_limit_with_limsup_liminf" (parent := "grp_calculus_background") (uses := "def_limsup, def_liminf, def_limit")
 {nodetitle}[Limit with limsup and liminf]
 
 Let $`(x_n)_{n \in \bN}` be a sequence of real numbers, and let $`x \in \bR`.

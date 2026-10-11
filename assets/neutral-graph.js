@@ -7,6 +7,9 @@
  *      reached from a through other arrows (the legacy leanblueprint page did the same with Graphviz `tred`;
  *      Verso Blueprint draws every dependency). Only the drawing changes: the "uses" / "used by" lists of
  *      the statements still show every dependency.
+ *   1b. Offers only the "Full Graph" view (chapter frames around the statements of each chapter, all
+ *      dependencies): Verso Blueprint's "Group View" and per-chapter views would hide the dependencies
+ *      across chapters, so they are removed (variants and view selector).
  *   2. Adds a short hint paragraph above the graph.
  *   3. Removes formalization-status wording from the legend and from node tooltips (the project has
  *      no Lean formalization).
@@ -41,14 +44,15 @@
   var BANNED = /status|blocked|ready|formali[sz]|\bLean\b|Mathlib|sorry|colou?rs?\b|warning|incomplete|declaration/i;
 
   var HINT =
-    "Arrows point from a result to the statements that use it. An arrow is left out when the same dependency " +
-    "already follows from other arrows (every dependency is listed in the statement headers). Click a " +
-    "statement to read it; zoom with the mouse wheel and pan by dragging.";
+    "Each dashed frame is one chapter. Arrows point from a result to the statements that use it, across " +
+    "chapters as well; an arrow is left out when the same dependency already follows from other arrows (every " +
+    "dependency is listed in the statement headers). Click a statement to read it; zoom with the mouse wheel " +
+    "and pan by dragging.";
 
   var FULL_NOTE =
-    "Boxes are definitions; ellipses are theorems, lemmas and corollaries. The line style of an arrow tells " +
-    "whether the dependency occurs in the statement itself or only in its proof. Arrows that follow from " +
-    "other arrows are not drawn.";
+    "Boxes are definitions; ellipses are theorems, lemmas and corollaries. A dashed frame groups the " +
+    "statements of one chapter. The line style of an arrow tells whether the dependency occurs in the " +
+    "statement itself or only in its proof. Arrows that follow from other arrows are not drawn.";
 
   /* ---- Helpers ------------------------------------------------------------------------------ */
 
@@ -123,11 +127,26 @@
       var data;
       try { data = JSON.parse(script.textContent); } catch (_err) { return; }
       if (!data || !Array.isArray(data.variants)) return;
+      // Only the full graph shows every dependency; the group overview and the per-chapter views do not.
+      var full = data.variants.filter(function (variant) { return variant.key === "full"; });
+      if (full.length === 1) data.variants = full;
       data.variants.forEach(function (variant) {
         if (typeof variant.dot === "string") variant.dot = reduceDot(variant.dot);
       });
       script.textContent = JSON.stringify(data);
       script.setAttribute("data-cac-reduced", "1");
+    });
+  }
+
+  // The view selector (static HTML) lists the removed views: keep "full" and hide the control.
+  function hideViewSelector(block) {
+    each(block.querySelectorAll("select.bp_graph_view_select"), function (select) {
+      each(Array.prototype.slice.call(select.options), function (option) {
+        if (option.value !== "full") remove(option);
+      });
+      select.value = "full";
+      select.hidden = true;
+      each(block.querySelectorAll('label[for="' + select.id + '"]'), function (label) { label.hidden = true; });
     });
   }
 
@@ -142,6 +161,17 @@
   }
 
   /* ---- 3. Legend and tooltips --------------------------------------------------------------- */
+
+  function legendItem(group, label, swatchStyle) {
+    var item = document.createElement("span");
+    item.className = "bp_graph_legend_item";
+    var swatch = document.createElement("span");
+    swatch.className = "bp_graph_legend_swatch";
+    swatch.setAttribute("style", swatchStyle);
+    item.appendChild(swatch);
+    item.appendChild(document.createTextNode(label));
+    group.querySelector(".bp_graph_legend_items").appendChild(item);
+  }
 
   function neutraliseLegend(block) {
     each(block.querySelectorAll(".bp_graph_legend"), function (legend) {
@@ -159,6 +189,18 @@
         var empty = !group.querySelector(".bp_graph_legend_item");
         if (empty || (title && BANNED.test(title.textContent))) remove(group);
       });
+      // Chapter frames (clusters): add the missing legend entry.
+      var shapes = legend.querySelector(".bp_graph_legend_group");
+      if (shapes) {
+        var frames = shapes.cloneNode(true);
+        frames.querySelector(".bp_graph_legend_group_title").textContent = "Frames";
+        var summary2 = frames.querySelector(".bp_graph_legend_group_summary");
+        if (summary2) summary2.textContent = "Statements are grouped by chapter.";
+        each(frames.querySelectorAll(".bp_graph_legend_item"), remove);
+        legend.insertBefore(frames, shapes.nextSibling);
+        legendItem(frames, "Chapter",
+          "background: transparent; border-color: #cbd5e1; border-style: dashed; border-radius: 0.4rem");
+      }
     });
   }
 
@@ -211,6 +253,7 @@
     if (!document.documentElement.getAttribute("lang")) document.documentElement.setAttribute("lang", "en");
     reduceGraphData();
     each(document.querySelectorAll(".bp_graph_fullwidth"), function (block) {
+      hideViewSelector(block);
       addHint(block);
       neutraliseLegend(block);
       watchTitles(block);
