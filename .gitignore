@@ -9,3 +9,4 @@
 /.lake
 /.lake/*
 /_out
+__pycache__/
