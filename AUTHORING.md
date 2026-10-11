@@ -165,7 +165,7 @@ newest `vX.Y.Z`, copy its `lean-toolchain`, run `lake update`, rebuild, and re-c
 into upstream internals: `assets/` (CSS/JS use upstream class names, listed at the top of each file),
 `TeXFixes.lean` (may become unnecessary once upstream fixes the paragraph breaks) and `SiteConfig.lean`.
 
-## Backlog
+## Known limitations and ideas
 
 * Colour the dependency graph by **course progress** (so that students see which parts have been covered
   so far). Needs per-node metadata (e.g. a lecture tag) and a small script; currently all nodes have one
@@ -177,5 +177,5 @@ into upstream internals: `assets/` (CSS/JS use upstream class names, listed at t
   `:::frontIntro` directive work around three other PDF problems of Verso Blueprint (paragraph breaks in node
   bodies, the introduction of the root document, stranded headings); they use TeX/LaTeX internals and Verso
   Blueprint's extension table, so re-check the PDF (title pages, a node page, section starts) after upgrades, and
-  drop the parts that upstream has fixed. Upstream issue drafts were prepared but not filed.
+  drop the parts that upstream has fixed.
 * Graph nodes show the label rather than number/title.
