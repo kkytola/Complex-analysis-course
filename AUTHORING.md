@@ -90,7 +90,10 @@ See {bpref "thm_cauchy_theorem"}[]; a defined term looks like {term}[star-shaped
 * **Titles and references.** Verso node headers have no title slot, so the first line of the body holds
   `{nodetitle}[Title]` and, for the textbook, `{palka}[Thm V.1.5]` (shows `[Palka1991, Thm V.1.5]`).
 * **Groups.** Each chapter declares `:::group "grp_chapter"` + its title at the top, and all of its statements
-  carry `(parent := "grp_chapter")`; the dependency graph draws a dashed frame per chapter. Verso Blueprint also
+  carry `(parent := "grp_chapter")`; the dependency graph draws a dashed frame per chapter. The two appendices
+  (prerequisites) share one frame, `grp_preliminaries` ("Preliminaries (topology and calculus)"): it is declared in
+  `TopologyBackground.lean`, and `CalculusBackground.lean` imports that module to use it (a group can be used in
+  any module that imports its declaration). Verso Blueprint also
   offers a group overview and one view per chapter, but those only show the dependencies *inside* a chapter (or
   aggregated arrows), hiding the dependencies across chapters, so `assets/neutral-graph.js` removes them and the
   page offers only the full graph.
