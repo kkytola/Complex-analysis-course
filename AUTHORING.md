@@ -16,7 +16,7 @@ version simply follows the release line of VersoBlueprint (`lean-toolchain`, `la
 | `ComplexAnalysisCourse/Chapters/*.lean` | one module per chapter (6 chapters, 2 appendices) |
 | `ComplexAnalysisCourse/Blueprint.lean` | the top-level document: title, intro text, chapter list, dependency graph |
 | `ComplexAnalysisCourse/Macros.lean` | **all LaTeX math macros** (see below) |
-| `ComplexAnalysisCourse/Roles.lean` | text-level macros: `{term}`, `{palka}`, `{nodetitle}`, `{metSpCourse}` |
+| `ComplexAnalysisCourse/Roles.lean` | text-level macros: `{term}`, `{palka}`, `{nodetitle}`, `{metSpCourse}`; the directive `:::frontIntro` (wraps the introduction in `Blueprint.lean` so that the PDF shows it as separate paragraphs before the table of contents; keep the intro inside it) |
 | `ComplexAnalysisCourse/MacroGallery.lean` | generated; uses every macro once so that `lake build` lints them |
 | `ComplexAnalysisCourse/SiteConfig.lean`, `assets/` | site configuration, graph styling (CSS/JS) |
 | `ComplexAnalysisCourse/TeXFixes.lean` | workaround for a PDF paragraph-break bug of VersoBlueprint |
@@ -162,7 +162,9 @@ into upstream internals: `assets/` (CSS/JS use upstream class names, listed at t
   apply here.
 * Verso numbers the appendices 7 and 8 (legacy: A and B): Verso's traversal overwrites every part number by
   an integer, so lettered appendices are impossible without an upstream change.
-* In the PDF the introductory paragraphs of the root document run together (Verso core `emitTeX` joins the
-  front matter without paragraph breaks); multi-paragraph list items also run together. Upstream issue drafts
-  exist; `TeXFixes.lean` can be reduced once they are fixed.
+* In the PDF, multi-paragraph list items and block quotes run together (Verso core). `TeXFixes.lean` and the
+  `:::frontIntro` directive work around three other PDF problems of Verso Blueprint (paragraph breaks in node
+  bodies, the introduction of the root document, stranded headings); they use TeX/LaTeX internals and Verso
+  Blueprint's extension table, so re-check the PDF (title pages, a node page, section starts) after upgrades, and
+  drop the parts that upstream has fixed. Upstream issue drafts were prepared but not filed.
 * Graph nodes show the label rather than number/title.

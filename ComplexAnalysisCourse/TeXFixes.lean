@@ -29,11 +29,20 @@ before display equations; see `separateBodyBlocks` and `tightenDisplayMath`.)
 The workaround becomes redundant (and harmless apart from a few extra blank lines) once upstream
 `Block.informal.toTeX` separates its body blocks itself; it can then simply be dropped.
 
-Known limitations: blocks nested *inside* a list item or a block quote are still rendered by
-Verso's own `Block.toTeX`, which concatenates them without separators, so a list item consisting of
-two paragraphs prints them run together. The introductory paragraphs of the document root are
-joined by `emitTeX` with single newlines and also run together. Both are Verso core issues and
-cannot be repaired from here.
+Node headings: a bold node heading directly after a sectioning command would otherwise be
+separated from the section heading by the `\Needspace` (a legal page break), stranding the section
+heading at the bottom of a page. `nodePrefix` therefore emits nothing in that situation (LaTeX's
+`\if@nobreak`), and `keepHeadingWithBody` (memoir's `\noprelistbreak`) keeps the node heading
+together with the first lines of its body.
+
+Known limitations (Verso core, not repairable from here):
+* Blocks nested *inside* a list item or a block quote are rendered by Verso's own `Block.toTeX`,
+  which concatenates them without separators, so a list item consisting of two paragraphs prints
+  them run together.
+* The paragraphs before the first chapter of the root document are "front matter" for
+  `emitTeX`, which joins them with single newlines and places them behind the table of contents
+  (with the running head "CONTENTS"). The course works around this with the directive
+  `:::frontIntro` of `Roles.lean`, which does not belong to this module.
 
 ## 2. Page layout and links: `withPdfLayout`
 
@@ -46,6 +55,10 @@ Verso offers to extensions through `BlockDescr.preamble`/`InlineDescr.preamble`)
 * `\setstocksize`/`\settrimmedsize`/`\settypeblocksize`/... (memoir): A4 paper and a type block
   of `PdfLayout.typeblockWidth` x `PdfLayout.typeblockHeight`, centred on the page;
 * `\hypersetup{colorlinks=true, ...}` for the link colours;
+* `\emergencystretch=3em`: a last-resort amount of extra interword stretch, which removes the
+  overfull lines caused by long inline formulas (15 overfull boxes of up to 68pt in the course
+  document drop to the single one that is inside a display equation) without touching the
+  mathematics;
 * PDF `Title`/`Author` metadata, taken at `\begin{document}` from the document's own `\title` and
   `\author` (so nothing about this course is hard-coded), unless `PdfLayout.title`/`author` are set.
 
@@ -70,25 +83,57 @@ namespace ComplexAnalysisCourse.TeXFixes
 vertical gap. Inside the `quote` environment that Blueprint wraps around the body, `\parindent` and
 `\parskip` are both zero, so a bare paragraph break would be visible only through the short last
 line of the preceding paragraph. `\addvspace` merges with the skips that list and display-math
-environments add themselves, so it never stacks on top of them. -/
-private def blockSeparator (spacing : Bool) : Output.TeX :=
+environments add themselves, so it never stacks on top of them.
+
+After the *first* body block (typically the one-line title lead-in `Title [Palka1991, ...]`) a page
+break is discouraged (`\penalty3000`, a soft keep-with-next: TeX may still break there if nothing
+better exists), so that the node heading and its lead-in are not left alone at the bottom of a
+page. -/
+private def blockSeparator (spacing first : Bool) : Output.TeX :=
   if spacing then
-    .seq #[.paragraphBreak, .raw "\\addvspace{\\smallskipamount}\n"]
+    .seq #[.paragraphBreak, .raw (if first then "\\penalty3000\n" else ""),
+      .raw "\\addvspace{\\smallskipamount}\n"]
   else
     .paragraphBreak
 
-/-- Run `render` and terminate the rendered block with a block separator. -/
-private def withSeparator {m : Type → Type} [Monad m] (spacing : Bool)
-    (render : Doc.Block Manual → m Output.TeX) (b : Doc.Block Manual) : m Output.TeX := do
-  pure <| .seq #[← render b, blockSeparator spacing]
+/-- Run `render` and terminate the rendered block with a block separator; `first` tells whether
+the block is the first one rendered through this renderer. -/
+private def withSeparator {m : Type → Type} [Monad m] [MonadLiftT BaseIO m] (spacing : Bool)
+    (isFirst : IO.Ref Bool) (render : Doc.Block Manual → m Output.TeX) (b : Doc.Block Manual) :
+    m Output.TeX := do
+  let out ← render b
+  let first ← (isFirst.modifyGet fun f => (f, false) : BaseIO Bool)
+  pure <| .seq #[out, blockSeparator spacing first]
+
+/-- The TeX that goes before a node: a little vertical space above the bold heading and a
+`\Needspace` (memoir) so that the heading is not stranded at the bottom of a page.
+
+Directly after a sectioning command (`\section`, `\chapter`, ...) LaTeX's `\if@nobreak` is true
+until the first paragraph starts: the heading is then kept together with what follows. A
+`\Needspace` there would be a legal page break *between the section heading and the node* and
+strand the section heading at the bottom of the page. In that case emit nothing (see
+`keepHeadingWithBody` for the heading of the node itself). -/
+private def nodePrefix : Output.TeX :=
+  .raw ("\\makeatletter\\if@nobreak\\else\\par\\addvspace{\\medskipamount}" ++
+    "\\Needspace{4\\baselineskip}\\fi\\makeatother\n")
+
+/-- Keep the bold node heading (`Informal.TeX.boldHeading`: `\par\noindent\textbf{..}\par`
+followed by the body environment) on the same page as the first lines of the body: memoir's
+`\noprelistbreak` suppresses the page break that LaTeX would otherwise allow before the `quote`
+list. Output of any other shape is returned unchanged. -/
+private def keepHeadingWithBody (out : Output.TeX) : Output.TeX :=
+  match out with
+  | .seq #[pre@(.raw "\\par\\noindent"), head, post@(.raw "\\par\n"), body] =>
+    .seq #[pre, head, post, .raw "\\noprelistbreak\n", body]
+  | _ => out
 
 /-- Make the `toTeX` of the block extension `name` separate its body blocks by paragraph breaks.
 Does nothing if the extension (or its TeX renderer) is not registered.
 
 With `spacing := true`, additionally put a little vertical space above the bold node heading
-(`Definition 1.1`) and keep it together with the first lines of the body (`\Needspace`, from memoir).
-The Blueprint renderer does neither: a node otherwise sits flush against the preceding paragraph and
-its heading can be stranded at the bottom of a page. -/
+(`Definition 1.1`) and keep it together with the first lines of the body (`nodePrefix`,
+`keepHeadingWithBody`). The Blueprint renderer does neither: a node otherwise sits flush against the
+preceding paragraph and its heading can be stranded at the bottom of a page. -/
 def separateBodyBlocks (name : Lean.Name) (spacing : Bool := true) (impls : ExtensionImpls) :
     ExtensionImpls :=
   match impls.getBlock? name with
@@ -100,10 +145,10 @@ def separateBodyBlocks (name : Lean.Name) (spacing : Bool := true) (impls : Exte
       impls.insertBlock name
         { descr with
           toTeX := some fun goI goB id data blocks => do
-            let out ← original goI (withSeparator spacing goB) id data blocks
+            let isFirst ← IO.mkRef true
+            let out ← original goI (withSeparator spacing isFirst goB) id data blocks
             if spacing then
-              pure <| .seq
-                #[.raw "\\par\\addvspace{\\medskipamount}\\Needspace{4\\baselineskip}\n", out]
+              pure <| .seq #[nodePrefix, keepHeadingWithBody out]
             else
               pure out }
 
@@ -177,6 +222,9 @@ def PdfLayout.preambleItem (l : PdfLayout) : String :=
     "\\setlrmargins{*}{*}{1}",
     s!"\\setulmargins\{*}\{*}\{{l.upperLowerRatio}}",
     "\\checkandfixthelayout",
+    -- Allow looser spacing as a last resort before a line (typically one with a long inline
+    -- formula) sticks out into the margin.
+    "\\setlength{\\emergencystretch}{3em}",
     s!"\\hypersetup\{colorlinks=true,linkcolor={l.linkColor},urlcolor={l.urlColor},citecolor={l.citeColor}}",
     "\\makeatletter",
     s!"\\AtBeginDocument\{\\hypersetup\{pdftitle=\{{title}},pdfauthor=\{{author}}}}",

@@ -22,6 +22,7 @@ open Informal
 authors := ["Kalle Kytölä"]
 %%%
 
+:::frontIntro
 This document is a skeleton of the theoretical content of
 the Fall 2024 course MS-C1300 Complex Analysis at Aalto University.
 The skeleton includes statements of results and their
@@ -44,6 +45,7 @@ This skeleton is work in progress. It is guaranteed to contain mistakes,
 the number and severity of which will be reduced with updates
 during the course. Please inform the lecturer Kalle Kytölä of
 errors that you notice!
+:::
 
 {include 0 ComplexAnalysisCourse.Chapters.ComplexNumbers}
 
