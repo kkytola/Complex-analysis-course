@@ -24,7 +24,7 @@ authors := ["Kalle Kytölä"]
 
 :::frontIntro
 This document is a skeleton of the theoretical content of
-the Fall 2024 course MS-C1300 Complex Analysis at Aalto University.
+the Fall 2026 course MS-C1300 Complex Analysis at Aalto University.
 The skeleton includes statements of results and their
 logical interdependencies, but no proofs, no examples, and no
 visualizations.

@@ -123,7 +123,7 @@ an analytic function $`f : U \to \bC`.
 Then the following conditions are equivalent:
 
 * *(P-1)* The singularity of $`f` at $`z_0` is a pole (i.e.,
-  finitely many Laurent series coefficients of $`f` near $`z_0` are nonzero).
+  a finite positive number of negative-index Laurent series coefficients of $`f` near $`z_0` are nonzero).
 * *(P-2)* There exists an $`m \in \bN = \set{1,2,\ldots}`
   such that $`z \mapsto (z-z_0)^m \, f(z)` has a removable singularity
   and a nonzero limit as $`z \to z_0`.
@@ -142,7 +142,7 @@ an analytic function $`f : U \to \bC`.
 Then the following conditions are equivalent:
 
 * *(E-1)* The singularity of $`f` at $`z_0` is essential (i.e.,
-  infinitely many Laurent series coefficients of $`f` near $`z_0` are nonzero).
+  infinitely many negative-index Laurent series coefficients of $`f` near $`z_0` are nonzero).
 * *(E-2)* For any small $`\delta > 0`, the image
   $`f \big[ \BallRC{\delta}{z_0} \setminus \set{z_0} \big]` is dense in $`\bC`.
 * *(E-3)* The limit $`\lim_{z \to z_0} f(z)` does not exist
