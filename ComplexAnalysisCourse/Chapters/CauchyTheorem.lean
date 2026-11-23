@@ -575,7 +575,7 @@ $$`
   \, = \; & \frac{1}{2 \pi r} \int_{\bdry \DiskRC{r}{z}}
           f(\zeta)\, |\ud \zeta|
   \, = \, \frac{1}{2 \pi} \int_{0}^{2\pi}
-          f(r + r e^{\ii \theta}) \, \ud \theta .
+          f(z + r e^{\ii \theta}) \, \ud \theta .
 \end{align*}
 `
 :::
